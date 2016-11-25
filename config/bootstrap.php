@@ -224,3 +224,4 @@ if (Configure::read('debug')) {
 
 Plugin::load('Migrations');
 Plugin::load('Acl', ['bootstrap' => true]);
+Plugin::load('Dashboard', ['bootstrap' => false, 'routes' => true]);
