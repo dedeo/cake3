@@ -1,5 +1,5 @@
 {
-    "name": "your-name-here/Dashboard",
+    "name": "dodo/Dashboard",
     "description": "Dashboard plugin for CakePHP",
     "type": "cakephp-plugin",
     "require": {
