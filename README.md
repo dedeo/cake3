@@ -1,3 +1,12 @@
+## Cara install
+
+1. git clone git@github.com:dedeo/cake3.git
+2. composer install
+3. chmod -R 775 logs/ tmp/
+4. setup database connection in config/app.php
+
+
+
 # CakePHP Application Skeleton
 
 [![Build Status](https://img.shields.io/travis/cakephp/app/master.svg?style=flat-square)](https://travis-ci.org/cakephp/app)
@@ -23,3 +32,13 @@ You should now be able to visit the path to where you installed the app and see 
 
 Read and edit `config/app.php` and setup the 'Datasources' and any other
 configuration relevant for your application.
+
+------------------------------------------------------------
+5. install CakePHP Acl Plugin
+	composer require cakephp/acl
+
+6. load the acl plugin in your config/bootstrap.php
+	Plugin::load('Acl', ['bootstrap' => true]);
+
+7. create ACL realted table by running this command:
+	bin/cake migrations migrate -p Acl
