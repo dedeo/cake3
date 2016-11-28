@@ -1,0 +1,36 @@
+/* Home Styling*/
+
+
+/*Slider*/
+.home-slider {
+	width: 60%;
+	display: inline-block;
+	float: left;
+	padding-left: 25px;
+}
+
+.home-slider .slider-list {
+	position: relative;
+}
+
+.home-slider .owl-custom-next,  .home-slider .owl-custom-prev {
+	width: 40px;
+	height: 40px;
+	background: #f76e5d;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.home-slider .owl-custom-next {
+	position: absolute;
+	top: 9px;
+	right: -1px;
+    padding: 5px 14px;
+}
+
+.home-slider .owl-custom-prev {
+	position: absolute;
+	top: 9px;
+	left: -1px;
+	padding: 5px 10px;
+}

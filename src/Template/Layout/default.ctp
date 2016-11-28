@@ -13,7 +13,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$cakeDescription = 'Bintang Timur: Bus untuk anda semua';
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,37 +21,111 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <?= $cakeDescription ?>:
-        <?= $this->fetch('title') ?>
+        Bintang Timur
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('cake.css') ?>
+    <?= $this->Html->css('bootstrap.min.css') ?>
+    <?= $this->Html->css('bootstrap-select.min.css') ?>
+    <?= $this->Html->css('global.css') ?>
+    <?= $this->Html->css('home.css') ?>
+    <?= $this->Html->css('font-awesome.min.css') ?>
+    <?= $this->Html->css('owl.carousel.css') ?>
+    <?= $this->Html->css('owl.theme.default.css') ?>
+    <?= $this->Html->css('jquery-ui.min.css') ?>
+    
+
+    
+
+    <?= $this->Html->script('jquery-1.11.3');?>
+    <?= $this->Html->script('jquery-3.1.1.min');?>
+    <?= $this->Html->script('owl.carousel');?>
+    <?= $this->Html->script('appjquery');?>
+    <?= $this->Html->script('bootstrap.min');?>
+    <?= $this->Html->script('bootstrap-select.min');?>
+    <?= $this->Html->script('jquery-ui.min');?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="top-bar expanded" data-topbar role="navigation">
-        <ul class="title-area large-3 medium-4 columns">
-            <li class="name">
-                <h1><a href=""><?= $this->fetch('title') ?></a></h1>
-            </li>
-        </ul>
-        <div class="top-bar-section">
-            <ul class="right">
-                <li><a target="_blank" href="http://book.cakephp.org/3.0/">Documentation</a></li>
-                <li><a target="_blank" href="http://api.cakephp.org/3.0/">API</a></li>
+    <!-- Header -->
+    <div id="header">
+        <div id="header-container">
+            <a href="/pages/home" class="logo-header">
+                <?= $this->Html->image('logo.png', ['alt' => 'Bintang Timur']);?>
+            </a>
+            <ul class="menu-list">
+                <li class="check-ticket">
+                    <a href="#"><i class="fa fa-book" aria-hidden="true"></i> Cek Ticket</a>
+                </li>
+                <li class="contact-us">
+                    <a href="#"><i class="fa fa-phone" aria-hidden="true"></i> Kontak Kami</a>
+                </li>
+                <li class="login-menu">
+                    <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Login</a>
+                </li>
             </ul>
         </div>
-    </nav>
+    </div>
+    <!-- End Header -->
+
     <?= $this->Flash->render() ?>
-    <div class="container clearfix">
+    <div id="main-container">
         <?= $this->fetch('content') ?>
     </div>
-    <footer>
-    </footer>
+    
+    <!-- Footer -->
+    <div id="footer">
+        <div id="footer-container">
+            <div class="bantuan-footer">
+                <h1>Bantuan</h1>
+                <?= $this->Html->link(
+                    'Cara Pemesanan',
+                    '/pages/home',
+                    ['class' => 'cara-pemesanan']
+                );?>
+                <?= $this->Html->link(
+                    'Kontak Kami',
+                    '/pages/home',
+                    ['class' => 'contact-us']
+                );?>
+                <?= $this->Html->link(
+                    'Tentang Bintang Timur',
+                    '/pages/home',
+                    ['class' => 'about-us']
+                );?>
+            </div>
+            <div class="media-sosial">
+                <h1>Media Sosial</h1>
+                <ul>
+                    <li class="medsos-twitter"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a></li>
+                    <li class="medsos-fb"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a></li>
+                </ul>
+            </div>
+            <div class="rute-footer">
+                <h1>Rute yang Tersedia</h1>
+                <ul class="rute-list">
+                    <li>Makassar - Palopo</li>
+                    <li>Makassar - Palopo</li>
+                    <li>Makassar - Palopo</li>
+                    <li>Makassar - Palopo</li>
+                    <li>Makassar - Palopo</li>
+                    <li>Makassar - Palopo</li>
+                    <li>Makassar - Palopo</li>
+                    <li>Makassar - Palopo</li>
+                    <li>Makassar - Palopo</li>
+                    <li>Makassar - Palopo</li>
+                    <li>Makassar - Palopo</li>
+                    <li>Makassar - Palopo</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copy-right">
+            Copyright @2016 Kenyok, Inc. All rights reserved.
+        </div>
+    </div>
+    <!-- End footer -->
 </body>
 </html>
