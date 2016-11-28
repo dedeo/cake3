@@ -78,8 +78,15 @@ class AppController extends Controller
                 'element' => 'error'
             ]
         ]);
+        $this->Auth->allow();
+        
     }
+    // public function initialize()
+    // {
+    //     parent::initialize();
 
+    //     $this->Auth->allow();
+    // }   
 
     /**
      * Before render callback.
