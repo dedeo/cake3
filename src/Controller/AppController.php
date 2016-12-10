@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -12,6 +13,7 @@
  * @since     0.2.9
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\Controller;
 
 use Cake\Controller\Controller;
@@ -25,14 +27,18 @@ use Cake\Event\Event;
  *
  * @link http://book.cakephp.org/3.0/en/controllers.html#the-app-controller
  */
-class AppController extends Controller
-{
+class AppController extends Controller {
 
     public $components = [
         'Acl' => [
             'className' => 'Acl.Acl'
         ]
     ];
+
+    public static $AclActionsExclude = [
+        'isAuthorized'
+    ];
+    
     /**
      * Initialization hook method.
      *
@@ -42,64 +48,94 @@ class AppController extends Controller
      *
      * @return void
      */
-    public function initialize()
-    {
+    public function initialize() {
         parent::initialize();
+
+        // $this->loadHelper('MyDate');
+
+        // $this->loadHelper()
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        
         $this->loadComponent('Auth', [
             'authorize' => [
                 'Acl.Actions' => ['actionPath' => 'controllers/']
             ],
             'loginAction' => [
                 'plugin' => false,
-                'controller' => 'Users',
+                'controller' => 'Customers',
                 'action' => 'login'
             ],
             'loginRedirect' => [
                 'plugin' => false,
-                'controller' => 'Posts',
-                'action' => 'index'
+                'controller' => 'Customers',
+                'action' => 'profile'
             ],
             'logoutRedirect' => [
                 'plugin' => false,
-                'controller' => 'Users',
-                'action' => 'login'
+                'controller' => 'Page',
+                'action' => 'home'
             ],
             'unauthorizedRedirect' => [
-                'controller' => 'Users',
-                'action' => 'login',
+                'controller' => 'Pages',
+                'action' => 'home',
                 'prefix' => false
+                // 'plugin' => false
             ],
             'authError' => 'You are not authorized to access that location.',
             'flash' => [
                 'element' => 'error'
             ]
         ]);
-        $this->Auth->allow();
         
+        // Only for ACL setup
+        // $this->Auth->allow();
     }
-    // public function initialize()
-    // {
-    //     parent::initialize();
 
-    //     $this->Auth->allow();
-    // }   
+    /**
+     * Before filter callback.
+     *
+     * @param \Cake\Event\Event $event The beforeFilter event.
+     * @return void
+     */
+    public function beforeFilter(Event $event) {
+        parent::beforeFilter($event);
+
+        $this->Auth->allow('display');
+    }
 
     /**
      * Before render callback.
      *
      * @param \Cake\Event\Event $event The beforeRender event.
-     * @return \Cake\Network\Response|null|void
+     * @return void
      */
-    public function beforeRender(Event $event)
-    {
+    public function beforeRender(Event $event) {
+        parent::beforeRender($event);
+
         if (!array_key_exists('_serialize', $this->viewVars) &&
-            in_array($this->response->type(), ['application/json', 'application/xml'])
+                in_array($this->response->type(), ['application/json', 'application/xml'])
         ) {
             $this->set('_serialize', true);
         }
     }
+
+    /**
+     * isAuthorized.
+     *
+     * @param array $user user logged.
+     * @return void
+     */
+    public function isAuthorized($user) {
+        // return true;
+        
+        // Admin can access every action
+        if (isset($user['role_id']) && $user['role_id'] === 1) {
+            return true;
+        }
+
+        // Default deny
+        return false;
+    }
+
 }

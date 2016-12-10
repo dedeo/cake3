@@ -48,9 +48,13 @@ class RoutesController extends AppController
      */
     public function add()
     {
+        $this->set('title', 'Tambah Rute Baru');
+
         $route = $this->Routes->newEntity();
         if ($this->request->is('post')) {
-            $route = $this->Routes->patchEntity($route, $this->request->data);
+            $data = $this->request->data;
+            $data['create_at'] = date('Y-m-d H:i:s');
+            $route = $this->Routes->patchEntity($route, $data);
             if ($this->Routes->save($route)) {
                 $this->Flash->success(__('The route has been saved.'));
 
@@ -72,23 +76,23 @@ class RoutesController extends AppController
      */
     public function edit($id = null)
     {
-        if($id == 'new'){
-            $route = $this->Routes->newEntity();
-            if ($this->request->is('post')) {
-                $route = $this->Routes->patchEntity($route, $this->request->data);
-                if ($this->Routes->save($route)) {
-                    $this->Flash->success(__('The route has been saved.'));
+        // if($id == 'new'){
+        //     $route = $this->Routes->newEntity();
+        //     if ($this->request->is('post')) {
+        //         $route = $this->Routes->patchEntity($route, $this->request->data);
+        //         if ($this->Routes->save($route)) {
+        //             $this->Flash->success(__('The route has been saved.'));
 
-                    return $this->redirect(['action' => 'index']);
-                } else {
-                    $this->Flash->error(__('The route could not be saved. Please, try again.'));
-                }
-            }
+        //             return $this->redirect(['action' => 'index']);
+        //         } else {
+        //             $this->Flash->error(__('The route could not be saved. Please, try again.'));
+        //         }
+        //     }
 
-            $this->set('title', 'Armada Baru');
-            $this->set(compact('route'));
-            $this->set('_serialize', ['route']);
-        }else{
+        //     $this->set('title', 'Armada Baru');
+        //     $this->set(compact('route'));
+        //     $this->set('_serialize', ['route']);
+        // }else{
             $route = $this->Routes->get($id, [
                 'contain' => []
             ]);
@@ -105,7 +109,7 @@ class RoutesController extends AppController
             $this->set('title', $route['name']);
             $this->set(compact('route'));
             $this->set('_serialize', ['route']);            
-        }
+        // }
 
 
         // $route = $this->Routes->get($id, [

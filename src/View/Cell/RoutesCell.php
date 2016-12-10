@@ -1,0 +1,31 @@
+<?php
+namespace App\View\Cell;
+
+use Cake\View\Cell;
+
+/**
+ * Routes cell
+ */
+class RoutesCell extends Cell
+{
+
+    /**
+     * List of valid options that can be passed into this
+     * cell's constructor.
+     *
+     * @var array
+     */
+    protected $_validCellOptions = [];
+
+    /**
+     * Default display method.
+     *
+     * @return void
+     */
+    public function display()
+    {
+        $this->loadModel('Routes');
+        $routes = $this->Routes->find('list');
+        $this->set('routes',$routes->toArray());        
+    }
+}

@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Buses Model
  *
+ * @property \Cake\ORM\Association\HasMany $Schedules
+ *
  * @method \Dashboard\Model\Entity\Bus get($primaryKey, $options = [])
  * @method \Dashboard\Model\Entity\Bus newEntity($data = null, array $options = [])
  * @method \Dashboard\Model\Entity\Bus[] newEntities(array $data, array $options = [])
@@ -33,6 +35,11 @@ class BusesTable extends Table
         $this->table('buses');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->hasMany('Schedules', [
+            'foreignKey' => 'bus_id',
+            'className' => 'Dashboard.Schedules'
+        ]);
     }
 
     /**
@@ -52,14 +59,18 @@ class BusesTable extends Table
             ->notEmpty('name');
 
         $validator
-            ->integer('capacity')
-            ->requirePresence('capacity', 'create')
-            ->notEmpty('capacity');
+            ->requirePresence('plat_no', 'create')
+            ->notEmpty('plat_no');
 
         $validator
-            ->integer('status')
-            ->requirePresence('status', 'create')
-            ->notEmpty('status');
+            ->allowEmpty('facilities');
+
+        $validator
+            ->integer('capacity')
+            ->allowEmpty('capacity');
+
+        $validator
+            ->allowEmpty('status');
 
         return $validator;
     }

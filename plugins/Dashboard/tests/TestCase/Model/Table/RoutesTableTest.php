@@ -24,7 +24,8 @@ class RoutesTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'plugin.dashboard.routes'
+        'plugin.dashboard.routes',
+        'plugin.dashboard.schedules'
     ];
 
     /**

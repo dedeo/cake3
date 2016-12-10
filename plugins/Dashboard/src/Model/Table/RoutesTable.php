@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Routes Model
  *
+ * @property \Cake\ORM\Association\HasMany $Schedules
+ *
  * @method \Dashboard\Model\Entity\Route get($primaryKey, $options = [])
  * @method \Dashboard\Model\Entity\Route newEntity($data = null, array $options = [])
  * @method \Dashboard\Model\Entity\Route[] newEntities(array $data, array $options = [])
@@ -31,21 +33,13 @@ class RoutesTable extends Table
         parent::initialize($config);
 
         $this->table('routes');
-        $this->displayField('id');
+        $this->displayField('name');
         $this->primaryKey('id');
 
-        $this->belongsTo('Cities',[
-                'className' => 'Cities',
-                'foreignKey' => 'destination',
-                'propertyName' => 'city'
-            ]);
-
-        // $this->belongsTo('Cities',[
-        //         'className' => 'Cities',
-        //         'foreignKey' => ['destination'],
-        //         'propertyName' => 'city'
-        //     ]);
-
+        $this->hasMany('Schedules', [
+            'foreignKey' => 'route_id',
+            'className' => 'Dashboard.Schedules'
+        ]);
     }
 
     /**
@@ -59,6 +53,10 @@ class RoutesTable extends Table
         $validator
             ->integer('id')
             ->allowEmpty('id', 'create');
+
+        $validator
+            ->requirePresence('name', 'create')
+            ->notEmpty('name');
 
         $validator
             ->requirePresence('source', 'create')

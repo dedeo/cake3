@@ -11,12 +11,6 @@ use Dashboard\Controller\AppController;
 class BusesController extends AppController
 {
 
-    public function initialize()
-    {
-        parent::initialize();
-
-        $this->Auth->allow();
-    }   
     /**
      * Index method
      *
@@ -40,7 +34,7 @@ class BusesController extends AppController
     public function view($id = null)
     {
         $bus = $this->Buses->get($id, [
-            'contain' => []
+            'contain' => ['Schedules']
         ]);
 
         $this->set('bus', $bus);
@@ -111,8 +105,7 @@ class BusesController extends AppController
             $this->set('title', $bus['name']);
             $this->set(compact('bus'));
             $this->set('_serialize', ['bus']);            
-        }
-    }
+        }    }
 
     /**
      * Delete method

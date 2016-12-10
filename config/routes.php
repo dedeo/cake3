@@ -21,7 +21,6 @@
 use Cake\Core\Plugin;
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
-use Cake\Routing\Route\DashedRoute;
 
 /**
  * The default class to use for all routes
@@ -41,7 +40,7 @@ use Cake\Routing\Route\DashedRoute;
  * `:action` markers.
  *
  */
-Router::defaultRouteClass(DashedRoute::class);
+Router::defaultRouteClass('DashedRoute');
 
 Router::scope('/', function (RouteBuilder $routes) {
     /**
@@ -55,7 +54,13 @@ Router::scope('/', function (RouteBuilder $routes) {
      * ...and connect the rest of 'Pages' controller's URLs.
      */
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
-
+    // $routes->connect('/dashboard/acl/*', ['plugin'=>'AclManager','controller' => 'Acl', 'action' => 'index']);
+    $routes->connect(
+        '/:userShortcut',
+        ['plugin' => 'Documents','controller' => 'Documents'],
+        ['userShortcut' => '(?i:documents)']
+    );
+    
     /**
      * Connect catchall routes for all controllers.
      *
@@ -72,7 +77,7 @@ Router::scope('/', function (RouteBuilder $routes) {
      * You can remove these routes once you've connected the
      * routes you want in your application.
      */
-    $routes->fallbacks(DashedRoute::class);
+    $routes->fallbacks('DashedRoute');
 });
 
 /**
