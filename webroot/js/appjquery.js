@@ -33,8 +33,29 @@ $(document).ready(function(){
 
 	/*Date picker search*/
 	$( "#tanggal-berangkat" ).datepicker({
-            minDate: 0,
-            maxDate: 31
-        });
+      minDate: 0,
+      maxDate: 31
+  });
+
+  /*top menu toggle*/
+  $('.toogle-menu-a').click(function(){
+    $('.search-form.search-top').slideToggle();
+  });
+
+  /*Pilih kursi */
+  $('.kursi-list a').not('.ordered').click(function(){
+    $(this).toggleClass('chosen');
+  });
+
+  /*Bantuan Tab*/
+  var url = document.location.toString();
+  if (url.match('#')) {
+      $('.bantuan-menu .nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+  } 
+
+  // Change hash for page-reload
+  $('.bantuan-menu .nav-tabs a').on('shown.bs.tab', function (e) {
+      window.location.hash = e.target.hash;
+  })
 
 });

@@ -83,17 +83,17 @@ $cakeDescription = 'Bintang Timur: Bus untuk anda semua';
                 <h1>Bantuan</h1>
                 <?= $this->Html->link(
                     'Cara Pemesanan',
-                    '/pages/home',
+                    '/pages/bantuan#cara_pesan',
                     ['class' => 'cara-pemesanan']
                 );?>
                 <?= $this->Html->link(
                     'Kontak Kami',
-                    '/pages/home',
+                    '/pages/bantuan#contact_us',
                     ['class' => 'contact-us']
                 );?>
                 <?= $this->Html->link(
                     'Tentang Bintang Timur',
-                    '/pages/home',
+                    '/pages/bantuan#about_us',
                     ['class' => 'about-us']
                 );?>
             </div>
