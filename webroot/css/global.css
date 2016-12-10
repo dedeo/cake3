@@ -596,14 +596,14 @@ td.search-order .order-button {
 	text-transform: capitalize;
 }
 
-.data-penumpang .buttom-wrapper {
+.data-penumpang .buttom-wrapper, .pembayaran .buttom-wrapper {
 	display: inline-block;
 	width: 100%;
 	text-align: right;
 	margin-top: 20px;
 }
 
-.data-penumpang .buttom-wrapper .batal-btn, .data-penumpang .buttom-wrapper .lanjut-btn {
+.data-penumpang .buttom-wrapper .batal-btn, .data-penumpang .buttom-wrapper .lanjut-btn, .pembayaran .buttom-wrapper .batal-btn, .pembayaran .buttom-wrapper .finish-btn {
 	min-width: 200px;
 	display: inline-block;
 	padding: 10px;
@@ -611,15 +611,88 @@ td.search-order .order-button {
 	text-align: center;
 }
 
-.data-penumpang .buttom-wrapper .batal-btn {
+.data-penumpang .buttom-wrapper .batal-btn, .pembayaran .buttom-wrapper .batal-btn {
 	color: #000;
 	border: 1px solid #000;
 }
 
-.data-penumpang .buttom-wrapper .lanjut-btn { 
+.data-penumpang .buttom-wrapper .lanjut-btn, .pembayaran .buttom-wrapper .finish-btn { 
 	color: #fff;
 	border: 1px solid #f76e5d;
 	background: #f76e5d;
+}
+
+/*Pembayaran*/
+.total-price-wrapper {
+	width: 25%;
+	float: left;
+	display: inline-block;
+    -webkit-box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
+    text-align: center;
+}
+
+.total-price-wrapper .total-price {
+    background: #f5f5f5;
+    padding: 20px 0px;
+    margin-top: 5px;
+    font-size: 20px;
+    color: #ff1c00;
+    font-weight: bold;
+}
+
+.detail-order {
+	width: 75%;
+	display: inline-block;
+	float: left;
+	padding-left: 15px;
+}
+
+.total-price-wrapper h1, .detail-order h1 {
+	margin: 0px;
+	background: #f76e5d;
+	padding: 10px 15px;
+	color: #fff;
+	text-transform: capitalize;
+}
+
+.detail-list {
+	background: #fff;
+	padding-bottom: 20px;
+}
+
+.detail-list li {
+	width: 100%;
+	display: inline-block;
+}
+
+.detail-list li h2 {
+    padding: 8px 15px;
+    background: #5bc0de;
+    color: #fff;
+    font-size: 15px;
+    text-transform: capitalize;
+    margin-top: 5px;
+}
+
+.detail-list li table {
+	width: 100%;
+	font-size: 14px;
+    margin: 10px 0px 15px;
+}
+
+.detail-list li table td, .detail-list li table th {
+	padding: 3px 15px;
+}
+
+.detail-list li table th {
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.detail-list .detail-ticket td {
+	width: 50%;
 }
 
 
