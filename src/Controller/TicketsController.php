@@ -14,13 +14,15 @@ class TicketsController extends AppController
     public function initialize(){
         parent::initialize();
 
-        $this->Auth->allow('search');
+        $this->Auth->allow(['search','order']);
     }
 
 
     public function search($param = array()){
 
         $jadwal = TableRegistry::get('Schedules');
+
+        $results = null;
 
         if ($this->request->is('post')) {
 
@@ -33,13 +35,27 @@ class TicketsController extends AppController
                              ])
                         ->contain(['Routes','Buses']);
 
-            if ($results->count()){
-                $this->set(compact('results'));
-                // $this->set('_serialize', ['results']);      
-            } else {
+            if ($results->count()<1){
                 $this->Flash->error(__('Tiket tidak ditemukan'));
             }
+            
+            $this->set(compact('results','formData'));
         }
+    }
+
+    public function order(){
+        if($this->request->is('post')){
+            $formData = $this->request->data();
+
+            $id = $formData['id'];
+
+            $schedules = TableRegistry::get('Schedules');
+            $jadwal = $schedules->get($id, [
+                'contain' => ['Routes','Buses']
+            ]);
+            
+            $this->set(compact('jadwal','formData'));
+        }   
     }
 
     /**

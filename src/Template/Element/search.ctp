@@ -1,22 +1,15 @@
-<form>
+<form action="<?php echo $this->Url->build(['controller'=>'Tickets','action'=>'search'])?>" method="POST">
     <div class="input-list">
         <label for="rute-perjalanan"><i class="fa fa-map-marker" aria-hidden="true"></i> Rute Perjalanan</label>
-        <select class="selectpicker" id="rute-perjalanan" title="Pilih rute perjalanan">
-            <option>Makassar - Palopo</option>
-            <option>Makassar - Palopo</option>
-            <option>Makassar - Palopo</option>
-            <option>Makassar - Palopo</option>
-            <option>Makassar - Palopo</option>
-            <option>Makassar - Palopo</option>
-          </select>
+        <?php echo $this->cell('Routes'); ?>
     </div>
      <div class="input-list">
         <label for="tanggal-berangkat"><i class="fa fa-calendar" aria-hidden="true"></i> Tanggal Keberangkatan</label>
-        <input type="text" id="tanggal-berangkat" placeholder="Pilih tanggal keberangkatan">
+        <input name="tglKeberangkatan" type="text" id="tanggal-berangkat" placeholder="Pilih tanggal keberangkatan">
     </div>
     <div class="input-list">
         <label for="jumlah-penumpang"><i class="fa fa-user-plus" aria-hidden="true"></i> Jumlah Penumpang</label>
-        <select class="selectpicker" id="jumlah-penumpang" title="Pilih jumlah penumpang">
+        <select class="selectpicker" id="jumlah-penumpang" title="Pilih jumlah penumpang" name="jmlPenumpang">
             <option>1</option>
             <option>2</option>
             <option>3</option>
