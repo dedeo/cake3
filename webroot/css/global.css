@@ -21,11 +21,15 @@
     font-style: normal;
 }
 
+.row {
+	margin: 0px;
+}
+
 body {
 	font-family: "Roboto", sans-serif;
-	background: #cfced3;
+	background: #f9f9f9;
 	width: 100%;
-	font-size: 15px;
+	font-size: 13px;
 }
 
 ul {
@@ -52,7 +56,7 @@ a:hover {
 h1 {
 	color: inherit;
 	font-family: inherit;
-	font-size: 25px;
+	font-size: 20px;
 	text-transform: uppercase;
 	margin: 0px 0px 15px;
 	line-height: normal;
@@ -61,7 +65,7 @@ h1 {
 h2 {
 	color: inherit;
 	font-family: inherit;
-	font-size: 20px;
+	font-size: 18px;
 	text-transform: capitalize;
 	margin: 0px;
 	line-height: normal;
@@ -84,6 +88,10 @@ h1.title {
 	margin: 0px;
 }
 
+a:focus, a:hover {
+	text-decoration: none;
+}
+
 img {
 	width: 100%;
 }
@@ -92,6 +100,7 @@ input {
 	width: 100%;
 	height: 34px;
 	padding: 0px 10px;
+	border: 1px solid #b1b1b1;
 }
 
 /*Header*/
@@ -106,8 +115,8 @@ input {
 
 #header-container {
 	width: 100%;
-	height: 70px;
-	max-width: 1500px;
+	height: 55px;
+	max-width: 1024px;
 	padding: 0px 25px;
 	margin: 0 auto;
 }
@@ -118,15 +127,21 @@ input {
     padding-top: 10px;
 }
 
+.logo-header img {
+	max-width: 100%;
+	width: 190px;
+}
+
 .menu-list {
 	display: inline-block;
 	float: right;
-	margin-top: 22px;
+	margin-top: 16px;
 }
 
 .menu-list li a {
-	font-size: 17px;
-	color: #000;
+    font-size: 15px;
+    color: #000;
+    text-transform: capitalize;
 }
 
 .menu-list li a .fa {
@@ -149,8 +164,8 @@ input {
 
 /* Main */
 #main-container {
-    max-width: 1500px;
-    padding: 80px 25px 0px;
+    max-width: 1024px;
+    padding: 65px 25px 0px;
     margin: 0 auto;
 }
 
@@ -177,7 +192,7 @@ input {
 
 #footer-container {
 	width: 100%;
-	max-width: 1500px;
+	max-width: 1024px;
 	padding: 25px;
 	margin: 0 auto;
 	display: inline-block;
@@ -266,6 +281,64 @@ input {
 	margin-right: 8px;
 }
 
+/*Search Top*/
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+	max-width: 100%;
+	width: 100%;
+}
+
+.toogle-menu .toogle-menu-a {
+    display: inline-block;
+    width: 100%;
+    background: #fff;
+    text-align: center;
+    color: #000;
+    padding: 10px;
+    position: relative;
+    border: 1px solid #b1b1b1;
+}
+
+.toogle-menu .toogle-menu-a h1 {
+	margin: 0px;
+	font-size: 20px;
+	text-transform: capitalize;
+}
+
+.toogle-menu .toogle-menu-a .fa {
+	position: absolute;
+	right: 15px;
+	top: 13px;
+}
+
+.search-form.search-top {
+	display: none;
+	padding: 20px;
+    border: 1px solid #b1b1b1;
+    border-top: 0px;
+}
+
+.search-form.search-top form {
+	display: inline-block;
+}
+
+.search-form.search-top .input-list,  .search-form.search-top .btn.btn-search {
+	width: 25%;
+	float: left;
+	display: inline-block;
+}
+
+.search-form.search-top .input-list {
+	padding: 0px 10px;
+	margin: 0px;
+}
+
+.search-form.search-top .btn.btn-search { 
+	font-size: 15px;
+	padding: 0px;
+	height: 35px;
+	margin-top: 25px;
+}
+
 div.ui-datepicker {
  	font-size: 20px;
 }
@@ -297,4 +370,329 @@ div.ui-datepicker table.ui-datepicker-calendar {
 .search-form .btn.btn-search:hover {
 	opacity: 0.8;
 }
+
+
+/*Search Result*/
+
+.hasil-pencarian-content {
+	margin-top: 10px;
+}
+
+.top-info {
+    background: #f76e5d;
+    padding: 15px 0px;
+    margin-bottom: 5px;
+    color: #fff;
+    font-size: 15px;
+    text-transform: capitalize;
+}
+
+.date-info .fa {
+	margin-right: 10px;
+}
+
+.result-search th {
+	background: #5bc0de;
+	color: #fff;
+    padding: 6px 10px;
+    font-size: 15px;
+}
+
+.result-search th:first-child {
+	padding: 6px 20px;
+}
+
+.result-search td {
+	width: 16.66%;
+	vertical-align: top;
+	padding: 10px;
+	border-bottom: 1px solid #5bc0de;
+	color: #666;
+	font-size: 14px;
+}
+
+.result-search td:first-child {
+	padding: 10px 20px;
+}
+
+td.search-tipe span, td.search-time span {
+	color: #000;
+	font-weight: bold;
+	margin-bottom: 5px;
+	display: inline-block;
+	width: 100%;
+	font-size: 15px;
+}
+
+td.search-capacity span {
+	color: #000;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+td.search-price span {
+	color: #000;
+	font-weight: bold;
+	margin-bottom: 5px;
+	display: inline-block;
+	width: 100%;
+	font-size: 20px;
+}
+
+td.search-order .order-button {
+	max-width: 100%;
+	border: 2px solid #ff1c00;
+	color: #ff1c00;
+	padding: 5px 20px;
+	display: inline-block;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+/*Data Penumpang */
+.kursi-wrapper {
+	width: 100%;
+	display: inline-block;
+	float: left;
+	background: #f5f5f5;
+    -webkit-box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
+    text-align: center;
+    padding: 15px;
+}
+.kursi-list {
+	width: 245px;
+	display: inline-block;
+    padding: 0px;
+}
+.kursi-list ul {
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+}
+.kursi-list ul li {
+	display: inline-block;
+	margin-right: 3px;
+	margin-bottom: 3px;
+}
+.kursi-list ul li:nth-child(2) {
+	margin-right: 20px;
+}
+.kursi-list a {
+	display: inline-block;
+	width: 45px;
+	height: 40px;
+	text-align: center;
+	border: 1px solid #000;
+	padding: 10px 0px;
+}
+.kursi-list a:hover {
+	opacity: 1;
+}
+
+.kursi-wrapper .bus-info {
+    display: inline-block;
+    font-size: 17px;
+    width: 245px;
+    padding: 0px 15px;
+    margin-bottom: 10px;
+}
+.bus-info .plat-no {
+	display: inline-block;
+	float: left;
+}
+
+.bus-info .fa {
+	float: right;
+	font-size: 20px;
+}
+
+.pilih-kursi {
+	width: 30%;
+	float: left;
+}
+
+.pilih-kursi h1 {
+	margin: 0px;
+	background: #f76e5d;
+	padding: 10px;
+	text-align: center;
+	color: #fff;
+	text-transform: capitalize;
+}
+
+.penumpang-content {
+	width: 70%;
+	float: left;
+	padding-left: 15px;
+}
+
+.penumpang-content h1 {
+	margin: 0px;
+	background: #f76e5d;
+	padding: 10px 15px;
+	color: #fff;
+	text-transform: capitalize;
+}
+
+.penumpang-content h1 .jumlah-ticket {
+	float: right;
+}
+
+.penumpang-kelamin label {
+	font-size: 14px;
+	color: #000;
+}
+
+.penumpang-list {
+	margin-top: 5px;
+}
+
+.penumpang-list li h2 {
+	padding: 10px 15px;
+	background: #5bc0de;
+	color: #fff;
+}
+.penumpang-list li {
+	display: inline-block;
+	width: 100%;
+	background: #fff;
+}
+.penumpang-list .penumpang-name, .penumpang-list .penumpang-kelamin {
+	width: 50%;
+	float: left;
+	padding: 10px 15px;
+}
+
+.penumpang-list .penumpang-name label, .penumpang-list .penumpang-kelamin h3 {
+	font-size: 15px;
+	color: #000;
+	font-weight: bold;
+}
+
+.penumpang-list .penumpang-kelamin .radio input[type=radio] {
+	margin-top: -7px;
+}
+
+.penumpang-contact {
+	display: inline-block;
+	width: 100%;
+	background: #fff;
+}
+
+.penumpang-contact > div {
+	width: 50%;
+	float: left;
+	display: inline-block;
+    padding: 10px 15px;
+}
+
+.penumpang-contact h2 {
+	margin: 0px;
+	background: #2196f3;
+	padding: 10px 15px;
+	color: #fff;
+	text-transform: capitalize;
+}
+
+.data-penumpang .buttom-wrapper, .pembayaran .buttom-wrapper {
+	display: inline-block;
+	width: 100%;
+	text-align: right;
+	margin-top: 20px;
+}
+
+.data-penumpang .buttom-wrapper .batal-btn, .data-penumpang .buttom-wrapper .lanjut-btn, .pembayaran .buttom-wrapper .batal-btn, .pembayaran .buttom-wrapper .finish-btn {
+	min-width: 200px;
+	display: inline-block;
+	padding: 10px;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.data-penumpang .buttom-wrapper .batal-btn, .pembayaran .buttom-wrapper .batal-btn {
+	color: #000;
+	border: 1px solid #000;
+}
+
+.data-penumpang .buttom-wrapper .lanjut-btn, .pembayaran .buttom-wrapper .finish-btn { 
+	color: #fff;
+	border: 1px solid #f76e5d;
+	background: #f76e5d;
+}
+
+/*Pembayaran*/
+.total-price-wrapper {
+	width: 25%;
+	float: left;
+	display: inline-block;
+    -webkit-box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
+    text-align: center;
+}
+
+.total-price-wrapper .total-price {
+    background: #f5f5f5;
+    padding: 20px 0px;
+    margin-top: 5px;
+    font-size: 20px;
+    color: #ff1c00;
+    font-weight: bold;
+}
+
+.detail-order {
+	width: 75%;
+	display: inline-block;
+	float: left;
+	padding-left: 15px;
+}
+
+.total-price-wrapper h1, .detail-order h1 {
+	margin: 0px;
+	background: #f76e5d;
+	padding: 10px 15px;
+	color: #fff;
+	text-transform: capitalize;
+}
+
+.detail-list {
+	background: #fff;
+	padding-bottom: 20px;
+}
+
+.detail-list li {
+	width: 100%;
+	display: inline-block;
+}
+
+.detail-list li h2 {
+    padding: 8px 15px;
+    background: #5bc0de;
+    color: #fff;
+    font-size: 15px;
+    text-transform: capitalize;
+    margin-top: 5px;
+}
+
+.detail-list li table {
+	width: 100%;
+	font-size: 14px;
+    margin: 10px 0px 15px;
+}
+
+.detail-list li table td, .detail-list li table th {
+	padding: 3px 15px;
+}
+
+.detail-list li table th {
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.detail-list .detail-ticket td {
+	width: 50%;
+}
+
 
