@@ -8,8 +8,12 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $name
+ * @property string $plat_no
+ * @property string $facilities
  * @property int $capacity
- * @property int $status
+ * @property string $status
+ *
+ * @property \Dashboard\Model\Entity\Schedule[] $schedules
  */
 class Bus extends Entity
 {

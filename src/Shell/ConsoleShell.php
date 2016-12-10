@@ -42,7 +42,6 @@ class ConsoleShell extends Shell
             $this->err('');
             $this->err('<info>$ php composer.phar require --dev psy/psysh</info>');
             $this->err('');
-
             return self::CODE_ERROR;
         }
 
@@ -75,7 +74,6 @@ class ConsoleShell extends Shell
             "\n\n" .
             'You will need to have psysh installed for this Shell to work.'
         );
-
         return $parser;
     }
 }

@@ -7,11 +7,14 @@ use Cake\ORM\Entity;
  * Route Entity
  *
  * @property int $id
+ * @property string $name
  * @property string $source
  * @property string $destination
  * @property int $distance
  * @property int $fare
  * @property \Cake\I18n\Time $create_at
+ *
+ * @property \Dashboard\Model\Entity\Schedule[] $schedules
  */
 class Route extends Entity
 {

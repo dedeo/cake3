@@ -34,5 +34,8 @@ endif;
 <h2><?= h($message) ?></h2>
 <p class="error">
     <strong><?= __d('cake', 'Error') ?>: </strong>
-    <?= __d('cake', 'The requested address {0} was not found on this server.', "<strong>'{$url}'</strong>") ?>
+    <?= sprintf(
+        __d('cake', 'The requested address %s was not found on this server.'),
+        "<strong>'{$url}'</strong>"
+    ) ?>
 </p>

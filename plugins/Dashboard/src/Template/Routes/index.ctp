@@ -10,7 +10,7 @@ $this->assign('title', 'Rute Bus');
 	<div class="x_panel">
 	  <div class="x_content">
 		  <div class="x_title">
-	      	<a href=<?= $this->Url->build(['controller'=>'Routes','action'=>'edit','new'])?> class="btn btn-warning btn-sm pull-right"> Tambah Rute Bus</a>
+	      	<a href=<?= $this->Url->build(['controller'=>'Routes','action'=>'add'])?> class="btn btn-warning btn-sm pull-right"> Tambah Rute Bus</a>
 		    <div class="clearfix"></div>
 		  </div>
 
@@ -19,6 +19,7 @@ $this->assign('title', 'Rute Bus');
 			<thead>
 			  <tr class="headings">
 				<th class="column-title"><?= $this->Paginator->sort('id','Id') ?> </th>
+				<th class="column-title"><?= $this->Paginator->sort('name','Nama') ?> </th>
 				<th class="column-title"><?= $this->Paginator->sort('source','Kota Asal') ?> </th>
 				<th class="column-title"><?= $this->Paginator->sort('destination','Kota Tujuan') ?> </th>
 				<th class="column-title"><?= $this->Paginator->sort('distance','Jarak') ?> </th>
@@ -31,6 +32,7 @@ $this->assign('title', 'Rute Bus');
 				<?php foreach ($routes as $route): ?>
 				<tr>
 					<td><?= $this->Number->format($route->id) ?></td>
+					<td><?= $route->name ?></td>
 					<td><?= $this->Html->link(h($route->source),(['controller'=>'Routes','action'=>'edit',$route->id])) ?></td>
 					<td><?= $route->destination ?></td>
 					<td><?= $route->distance ?> Km</td>

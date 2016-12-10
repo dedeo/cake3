@@ -15,7 +15,7 @@ class MainController extends AppController
     {
         parent::initialize();
 
-        $this->Auth->allow();
+        // $this->Auth->allow();
     }    
 
     /**
