@@ -9,7 +9,7 @@
     </div>
     <div class="input-list">
         <label for="jumlah-penumpang"><i class="fa fa-user-plus" aria-hidden="true"></i> Jumlah Penumpang</label>
-        <select class="selectpicker" id="jumlah-penumpang" title="Pilih jumlah penumpang">
+        <select class="selectpicker" id="jumlah-penumpang" title="Pilih jumlah penumpang" name="jmlPenumpang">
             <option>1</option>
             <option>2</option>
             <option>3</option>

@@ -14,7 +14,7 @@ class TicketsController extends AppController
     public function initialize(){
         parent::initialize();
 
-        $this->Auth->allow('search');
+        $this->Auth->allow(['search','order']);
     }
 
 
@@ -39,8 +39,23 @@ class TicketsController extends AppController
                 $this->Flash->error(__('Tiket tidak ditemukan'));
             }
             
-            $this->set(compact('results'));
+            $this->set(compact('results','formData'));
         }
+    }
+
+    public function order(){
+        if($this->request->is('post')){
+            $formData = $this->request->data();
+
+            $id = $formData['id'];
+
+            $schedules = TableRegistry::get('Schedules');
+            $jadwal = $schedules->get($id, [
+                'contain' => ['Routes','Buses']
+            ]);
+            
+            $this->set(compact('jadwal','formData'));
+        }   
     }
 
     /**
