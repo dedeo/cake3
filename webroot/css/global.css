@@ -103,6 +103,61 @@ input {
 	border: 1px solid #b1b1b1;
 }
 
+p.red-text {
+	color: #ff1c00;
+}
+
+.button-grup {
+	width: 100%;
+	display: inline-block;
+	text-align: right;
+	float: none;
+	margin-top: 20px;
+}
+
+.button-red {
+    color: #fff;
+    border: 1px solid #f76e5d;
+    background: #f76e5d;
+    min-width: 200px;
+    display: inline-block;
+    padding: 10px;
+    text-transform: uppercase;
+    text-align: center;
+    float: none;
+}
+
+.block-header {
+    position: relative;
+    height: 21px;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 0px;
+}
+
+.block-header hr {
+    position: relative;
+    width: 100%;
+    top: 11px;
+    border: 1px solid #9e9e9e;
+    border-bottom: 0;
+    margin: 0px;
+}
+
+.block-header h1 {
+    font-weight: 400;
+    font-size: 23px;
+    position: relative;
+    background-color: #f9f9f9;
+    font-family: Helvetica, "Helvetica-Normal", Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0 auto;
+    line-height: 1;
+    padding: 0 20px;
+    display: inline-block !important;
+    color: #000000;
+    max-width: 80%;
+}
+
 /*Header*/
 #header {
 	width: 100%;
@@ -477,9 +532,12 @@ td.search-order .order-button {
 	margin-bottom: 3px;
 }
 .kursi-list ul li:nth-child(2) {
-	margin-right: 20px;
+	margin-left: 20px;
 }
-.kursi-list a {
+.kursi-list .checkbox {
+	margin: 0px;
+}
+.kursi-list .checkbox label{
 	display: inline-block;
 	width: 45px;
 	height: 40px;
@@ -487,7 +545,18 @@ td.search-order .order-button {
 	border: 1px solid #000;
 	padding: 10px 0px;
 }
-.kursi-list a:hover {
+.kursi-list .checkbox input {
+	display: none;
+}
+.kursi-list .checkbox.active label{
+	background: #5bc0de;
+	color: #fff;
+}
+.kursi-list .checkbox.sold label {
+	background: #ff1c00;
+	color: #fff;
+}
+.kursi-list .checkbox:hover label{
 	opacity: 1;
 }
 
@@ -693,6 +762,92 @@ td.search-order .order-button {
 
 .detail-list .detail-ticket td {
 	width: 50%;
+}
+
+/*Bantuan*/
+.bantuan-menu {
+	width: 30%;
+	float: left;
+	display: inline-block;
+    -webkit-box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
+}
+
+.bantuan-menu h2 {
+	margin: 0px;
+    background: #f76e5d;
+    padding: 10px 15px;
+    color: #fff;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.bantuan-menu .nav-tabs>li {
+	width: 100%;
+}
+
+.bantuan-menu .nav-tabs>li>a {
+	padding: 0px;
+    border: 0px;
+    line-height: normal;
+    margin-bottom: 10px;
+    margin-right: 0px;
+}
+
+.bantuan-menu .nav-tabs>li>a:hover {
+	border: 0px;
+	background: transparent;
+}
+
+.bantuan-menu .nav-tabs>li.active>a, .bantuan-menu .nav-tabs>li.active>a:focus, .bantuan-menu .nav-tabs>li.active>a:hover {
+	background: transparent;
+	border: 0px;
+	font-style: italic;
+}
+
+.bantuan-menu .nav-tabs {
+    border: 0px;
+    padding: 15px;
+    font-size: 15px;
+}
+
+.bantuan-content {
+	width: 70%;
+	display: inline-block;
+	padding-left: 15px;
+}
+
+.contact-wrapper h2 {
+	margin-bottom: 7px;
+}
+
+.contact-wrapper .perwakilan-head, .contact-wrapper .perwakilan-phone {
+	width: 50%;
+	display: inline-block;
+	float: left;
+	padding-left: 15px;
+}
+
+/*User login*/
+.users {
+	margin-top: 20px;
+	margin-bottom: 50px;
+}
+
+.users-content {
+	margin: 0 auto;
+    float: none;
+    clear: both;
+}
+
+.users div.input {
+	margin-bottom: 15px;
+}
+
+.users label {
+	color: #000;
+	font-size: 15px;
 }
 
 
