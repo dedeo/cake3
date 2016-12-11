@@ -14,7 +14,7 @@ class TicketsController extends AppController
     public function initialize(){
         parent::initialize();
 
-        $this->Auth->allow(['search','order']);
+        $this->Auth->allow(['search','order','orderSummary']);
     }
 
 
@@ -55,6 +55,48 @@ class TicketsController extends AppController
             ]);
             
             $this->set(compact('jadwal','formData'));
+        }   
+    }
+
+    public function orderSummary(){
+        if($this->request->is('post')){
+            $formData = $this->request->data();
+
+            $scheduleId = $formData['scheduleId'];
+ 
+            debug($formData);
+
+            foreach ($formData as $key => $value) {
+                $split = explode('_', $key);
+                $data[$split[0]][$split[1]] = $value;
+            }
+
+            debug($data);
+            
+            foreach ($data as $key => $value) {
+                if($key!='customer' && $key!='scheduleId'){
+                    $passeger[]=$value;
+                }
+            }
+            
+            //debug($passeger);
+            $scheduleId = 5;
+            $customer = ['name' => 'nama1','phone' => '8111122233','email' => 'hallo@gmail.com'];
+            $passeger = [['name' => 'nama1','gender' => 'female','seet_number'=>'1'],
+                            ['name' => 'nama2','gender' => 'male','seet_number'=>'2'],
+                            ['name' => 'nama3','gender' => 'male','seet_number'=>'3'],
+                            ['name' => 'nama4','gender' => 'male','seet_number'=>'4']
+                        ];            
+            die();
+
+            // $id = $formData['id'];
+
+            // $schedules = TableRegistry::get('Schedules');
+            // $jadwal = $schedules->get($id, [
+            //     'contain' => ['Routes','Buses']
+            // ]);
+            
+            // $this->set(compact('jadwal','formData'));
         }   
     }
 
