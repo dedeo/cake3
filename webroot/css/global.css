@@ -502,6 +502,7 @@ td.search-order .order-button {
 	display: inline-block;
 	text-align: center;
 	text-transform: uppercase;
+	background: transparent;
 }
 
 /*Data Penumpang */
@@ -531,8 +532,14 @@ td.search-order .order-button {
 	margin-right: 3px;
 	margin-bottom: 3px;
 }
-.kursi-list ul li:nth-child(2) {
+.kursi-list .total-kursi-18 ul li:nth-child(2) {
 	margin-left: 20px;
+}
+.kursi-list .total-kursi-21 ul li:nth-child(2) {
+	margin-left: 20px;
+}
+.kursi-list .total-kursi-28 ul li:nth-child(2) {
+	margin-right: 20px;
 }
 .kursi-list .checkbox {
 	margin: 0px;
@@ -801,9 +808,10 @@ td.search-order .order-button {
 }
 
 .bantuan-menu .nav-tabs>li.active>a, .bantuan-menu .nav-tabs>li.active>a:focus, .bantuan-menu .nav-tabs>li.active>a:hover {
-	background: transparent;
-	border: 0px;
-	font-style: italic;
+    background: transparent;
+    border: 0px;
+    font-style: normal;
+    text-decoration: underline;
 }
 
 .bantuan-menu .nav-tabs {
@@ -829,6 +837,17 @@ td.search-order .order-button {
 	padding-left: 15px;
 }
 
+/*Check ticket*/
+.check-wrapper {
+	margin-top: 20px;
+	margin-bottom: 50px;
+}
+
+.check-wrapper .check-content {
+	margin: 0 auto;
+    float: none;
+    clear: both;
+}
 /*User login*/
 .users {
 	margin-top: 20px;
