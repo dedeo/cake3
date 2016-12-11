@@ -12,10 +12,17 @@
 			<div class="kursi-list">
 				<!-- List kursi seperti ular tangga -->
 				<?php 
-					$total_kursi = 21; 
+					$total_kursi = 18; 
 					$i = 1;
-					($total_kursi==28)?$kolom=4:$kolom=3;
-					
+					if($total_kursi==28){
+						$kolom=4;
+					}elseif($total_kursi==21){
+						$kolom=3;
+					}else{
+						/*utk total new 8 kursi*/
+						$kolom=2;
+					}
+				?><div class="total-kursi-<?php echo $total_kursi ?>"><?php
 					$tampung = '';
 					$arah = 'ka';
 					$sold = [4,3,20];
@@ -60,6 +67,7 @@
 						$i++;
 					}
 				?>
+				</div>
 			</div>
 		</div>
 	</div>
