@@ -13,13 +13,14 @@
 		</ul>
 	</div>
 	<div class="bantuan-content tab-content">
-		<div id="cara_pesan">
-			fasdfsdfdff edit
+		<div class="tab-pane active"  id="cara_pesan">
+			1. caranya gini
+			2. caranya gitu
 		</div>
-		<div id="contact_us">
-			asdfsdf dl
+		<div class="tab-pane" id="contact_us">
+			<?= $this->element('contact_us'); ?>
 		</div>
-		<div id="about_us">
+		<div class="tab-pane" id="about_us">
 			fasdfsdfdff edit
 		</div>
 	</div>

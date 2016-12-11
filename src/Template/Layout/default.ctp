@@ -61,10 +61,10 @@ $cakeDescription = 'Bintang Timur: Bus untuk anda semua';
                     <a href="#"><i class="fa fa-book" aria-hidden="true"></i> Cek Ticket</a>
                 </li>
                 <li class="contact-us">
-                    <a href="#"><i class="fa fa-phone" aria-hidden="true"></i> Kontak Kami</a>
+                    <a href="/pages/bantuan#contact_us"><i class="fa fa-phone" aria-hidden="true"></i> Kontak Kami</a>
                 </li>
                 <li class="login-menu">
-                    <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Login</a>
+                    <a href="/customers/login"><i class="fa fa-user" aria-hidden="true"></i> Login</a>
                 </li>
             </ul>
         </div>

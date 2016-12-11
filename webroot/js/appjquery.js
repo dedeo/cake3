@@ -42,16 +42,16 @@ $(document).ready(function(){
     $('.search-form.search-top').slideToggle();
   });
 
-  /*Pilih kursi */
-  $('.kursi-list a').not('.ordered').click(function(){
-    $(this).toggleClass('chosen');
-  });
-
   /*Bantuan Tab*/
   var url = document.location.toString();
   if (url.match('#')) {
       $('.bantuan-menu .nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
   } 
+
+  /*Footer bantuan click reload*/
+  $(".bantuan-footer a, .contact-us a").click(function(){
+    javascript:window.location.reload();
+  });
 
   // Change hash for page-reload
   $('.bantuan-menu .nav-tabs a').on('shown.bs.tab', function (e) {
