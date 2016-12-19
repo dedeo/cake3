@@ -16,9 +16,10 @@
 .home-slider .owl-custom-next,  .home-slider .owl-custom-prev {
 	width: 40px;
 	height: 40px;
-	background: #f76e5d;
+	background: #5bc0de;
     font-size: 20px;
     cursor: pointer;
+    color: #fff;
 }
 
 .home-slider .owl-custom-next {

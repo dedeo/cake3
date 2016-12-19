@@ -16,11 +16,8 @@
 					$i = 1;
 					if($total_kursi==28){
 						$kolom=4;
-					}elseif($total_kursi==21){
-						$kolom=3;
 					}else{
-						/*utk total new 8 kursi*/
-						$kolom=2;
+						$kolom=3;
 					}
 				?><div class="total-kursi-<?php echo $total_kursi ?>"><?php
 					$tampung = '';
