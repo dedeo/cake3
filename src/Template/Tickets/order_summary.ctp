@@ -1,5 +1,4 @@
 <body class="ticket-summary">
-<?php debug($ticket) ?>
 <?php if (!empty($ticket)) { ?>
 	<div class="ticket-print" id='ticket-content'>
 		<h1><?=$ticket->ticket_code ?></h1>

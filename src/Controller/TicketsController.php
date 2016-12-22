@@ -38,7 +38,7 @@ class TicketsController extends AppController
                         ->where(['Schedules.route_id' => $formData['rute'],
                                  'Schedules.day' => $day
                              ])
-                        ->contain(['Routes','Buses']);
+                        ->contain(['Routes','Buses','TicketOrders']);
 
             if ($results->count()<1){
                 $this->Flash->error(__('Tiket tidak ditemukan'));

@@ -27,7 +27,7 @@
 						<th>Bus</th>
 						<th>Tipe</th>
 						<th>Berangkat</th>
-						<th>Kapasitas</th>
+						<th>Tersedia/Kapasitas</th>
 						<th colspan="2">Tarif</th>
 					</tr>
 				</thead>
@@ -55,7 +55,8 @@
 								<?= $duration->h.' jam, '.$duration->i.' menit'; ?>
 							</td>
 							<td class="search-capacity">
-								<span>12/</span>28
+								<span><?=$ticket->bus->capacity?></span>
+								<!-- <span>12/</span>28 -->
 							</td>
 							<td class="search-price">
 								<span><?= $this->Number->currency($ticket->route->fare,'IDR'); ?></span>

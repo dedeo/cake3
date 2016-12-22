@@ -11,6 +11,7 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsTo $Routes
  * @property \Cake\ORM\Association\BelongsTo $Buses
+ * @property \Cake\ORM\Association\HasMany $TicketOrders
  *
  * @method \App\Model\Entity\Schedule get($primaryKey, $options = [])
  * @method \App\Model\Entity\Schedule newEntity($data = null, array $options = [])
@@ -44,6 +45,9 @@ class SchedulesTable extends Table
         $this->belongsTo('Buses', [
             'foreignKey' => 'bus_id',
             'joinType' => 'INNER'
+        ]);
+        $this->hasMany('TicketOrders', [
+            'foreignKey' => 'schedule_id'
         ]);
     }
 
