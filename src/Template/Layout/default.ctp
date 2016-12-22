@@ -111,20 +111,27 @@ $cakeDescription = 'Bintang Timur: Bus untuk anda semua';
                 </ul>
             </div>
             <div class="rute-footer">
-                <h1>Rute yang Tersedia</h1>
+                <h1>Rute yang Tersedia (Dari/Ke Makassar)</h1>
                 <ul class="rute-list">
-                    <li>Makassar - Palopo</li>
-                    <li>Makassar - Palopo</li>
-                    <li>Makassar - Palopo</li>
-                    <li>Makassar - Palopo</li>
-                    <li>Makassar - Palopo</li>
-                    <li>Makassar - Palopo</li>
-                    <li>Makassar - Palopo</li>
-                    <li>Makassar - Palopo</li>
-                    <li>Makassar - Palopo</li>
-                    <li>Makassar - Palopo</li>
-                    <li>Makassar - Palopo</li>
-                    <li>Makassar - Palopo</li>
+                    <li>Sorowako</li>
+                    <li>Wawondula</li>
+                    <li>Wasuponda</li>
+                    <li>Malili</li>
+                    <li>Mangkutana</li>
+                    <li>Kalaena Kiri</li>
+                    <li>Bone Bone</li>
+                    <li>Sukamaju</li>
+                    <li>Masamba</li>
+                    <li>Tolada</li>
+                    <li>Seriti</li>
+                    <li>Lamasi</li>
+                    <li>Batusitanduk</li>
+                    <li>Rantaidamai</li>
+                    <li>Palopo</li>
+                    <li>Belopa</li>
+                    <li>Bajo</li>
+                    <li>Toraja</li>
+                    <li>Mamuju</li>
                 </ul>
             </div>
         </div>
