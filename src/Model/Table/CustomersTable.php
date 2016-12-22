@@ -9,7 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Customers Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Avatars
+ * @property \Cake\ORM\Association\BelongsTo $Users
+ * @property \Cake\ORM\Association\HasMany $TicketOrders
  *
  * @method \App\Model\Entity\Customer get($primaryKey, $options = [])
  * @method \App\Model\Entity\Customer newEntity($data = null, array $options = [])
@@ -36,8 +37,11 @@ class CustomersTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('Avatars', [
-            'foreignKey' => 'avatar_id'
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id'
+        ]);
+        $this->hasMany('TicketOrders', [
+            'foreignKey' => 'customer_id'
         ]);
     }
 
@@ -54,12 +58,11 @@ class CustomersTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('username', 'create')
-            ->notEmpty('username');
+            ->requirePresence('name', 'create')
+            ->notEmpty('name');
 
         $validator
-            ->requirePresence('firstname', 'create')
-            ->notEmpty('firstname');
+            ->allowEmpty('firstname');
 
         $validator
             ->allowEmpty('lastname');
@@ -70,8 +73,7 @@ class CustomersTable extends Table
             ->notEmpty('email');
 
         $validator
-            ->requirePresence('password', 'create')
-            ->notEmpty('password');
+            ->allowEmpty('password');
 
         $validator
             ->allowEmpty('no_tlp');
@@ -91,9 +93,8 @@ class CustomersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['username']));
-        $rules->add($rules->isUnique(['email']));
-        $rules->add($rules->existsIn(['avatar_id'], 'Avatars'));
+        // $rules->add($rules->isUnique(['email']));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
     }

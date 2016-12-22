@@ -63,8 +63,7 @@ class TicketPassengersTable extends Table
             ->notEmpty('gender');
 
         $validator
-            ->requirePresence('seet_number', 'create')
-            ->notEmpty('seet_number');
+            ->allowEmpty('seet_number');
 
         return $validator;
     }

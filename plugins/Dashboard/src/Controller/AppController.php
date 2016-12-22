@@ -30,42 +30,42 @@ class AppController extends BaseController
      * @return void
      */
     public function initialize() {
-        // parent::initialize();
+        parent::initialize();
         $this->viewBuilder()->layout('dashboard');
 
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        $this->loadComponent('Auth', [
-            'authorize' => [
-                'Acl.Actions' => ['actionPath' => 'controllers/']
-            ],
-            'loginAction' => [
-                // 'plugin' => true,
-                'controller' => 'Users',
-                'action' => 'login'
-            ],
-            'loginRedirect' => [
-                // 'plugin' => true,
-                'controller' => 'Users',
-                'action' => 'dashboard'
-            ],
-            'logoutRedirect' => [
-                // 'plugin' => true,
-                'controller' => 'Users',
-                'action' => 'login'
-            ],
-            'unauthorizedRedirect' => [
-                'controller' => 'Users',
-                'action' => 'login',
-                'prefix' => false,
-                // 'plugin' => true
-            ],
-            'authError' => 'You are not authorized to access that location.',
-            'flash' => [
-                'element' => 'error'
-            ]
-        ]);
+        // $this->loadComponent('Auth', [
+        //     'authorize' => [
+        //         'Acl.Actions' => ['actionPath' => 'controllers/']
+        //     ],
+        //     'loginAction' => [
+        //         // 'plugin' => true,
+        //         'controller' => 'Users',
+        //         'action' => 'login'
+        //     ],
+        //     'loginRedirect' => [
+        //         // 'plugin' => true,
+        //         'controller' => 'Users',
+        //         'action' => 'dashboard'
+        //     ],
+        //     'logoutRedirect' => [
+        //         // 'plugin' => true,
+        //         'controller' => 'Users',
+        //         'action' => 'login'
+        //     ],
+        //     'unauthorizedRedirect' => [
+        //         'controller' => 'Users',
+        //         'action' => 'login',
+        //         'prefix' => false,
+        //         // 'plugin' => true
+        //     ],
+        //     'authError' => 'You are not authorized to access that location.',
+        //     'flash' => [
+        //         'element' => 'error'
+        //     ]
+        // ]);
         
         // Only for ACL setup
         // $this->Auth->allow();
@@ -78,7 +78,7 @@ class AppController extends BaseController
      * @return void
      */
     public function beforeFilter(Event $event) {
-        // parent::beforeFilter($event);
+        parent::beforeFilter($event);
 
         $this->Auth->allow('display');
     }

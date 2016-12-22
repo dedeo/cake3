@@ -12,6 +12,12 @@ use Cake\Event\Event;
  */
 class UsersController extends AppController {
 
+    // public function initialize(){
+    //     parent::initialize();
+
+    //     $this->Auth->allow([]);
+    // }
+
     /**
      * Index method
      *

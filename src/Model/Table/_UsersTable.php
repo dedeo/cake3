@@ -11,8 +11,6 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsTo $Groups
  * @property \Cake\ORM\Association\BelongsTo $Roles
- * @property \Cake\ORM\Association\HasMany $Customers
- * @property \Cake\ORM\Association\HasMany $Documents
  *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
  * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
@@ -24,8 +22,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class UsersTable extends Table
-{
+class UsersTable extends Table {
 
     /**
      * Initialize method
@@ -33,16 +30,15 @@ class UsersTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config) {
         parent::initialize($config);
 
         $this->table('users');
-        $this->displayField('id');
+        $this->displayField('username');
         $this->primaryKey('id');
 
-        $this->addBehavior('Timestamp');
         $this->addBehavior('Acl.Acl', ['type' => 'requester']);
+        $this->addBehavior('Timestamp');
 
         $this->belongsTo('Groups', [
             'foreignKey' => 'group_id',
@@ -52,12 +48,6 @@ class UsersTable extends Table
             'foreignKey' => 'role_id',
             'joinType' => 'INNER'
         ]);
-        $this->hasMany('Customers', [
-            'foreignKey' => 'user_id'
-        ]);
-        $this->hasMany('Documents', [
-            'foreignKey' => 'user_id'
-        ]);
     }
 
     /**
@@ -66,30 +56,25 @@ class UsersTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
+    public function validationDefault(Validator $validator) {
         $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
-
-        // $validator
-        //     ->requirePresence('name', 'create')
-        //     ->notEmpty('name');
+                ->integer('id')
+                ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('username', 'create')
-            ->notEmpty('username')
-            ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+                ->requirePresence('username', 'create')
+                ->notEmpty('username')
+                ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
-            ->requirePresence('password', 'create')
-            ->notEmpty('password');
+                ->requirePresence('password', 'create')
+                ->notEmpty('password');
 
         $validator
-            ->email('email')
-            ->requirePresence('email', 'create')
-            ->notEmpty('email')
-            ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+                ->email('email')
+                ->requirePresence('email', 'create')
+                ->notEmpty('email')
+                ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         return $validator;
     }
@@ -101,13 +86,12 @@ class UsersTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
-    {
+    public function buildRules(RulesChecker $rules) {
         $rules->add($rules->isUnique(['username']));
         $rules->add($rules->isUnique(['email']));
         $rules->add($rules->existsIn(['group_id'], 'Groups'));
         $rules->add($rules->existsIn(['role_id'], 'Roles'));
-
         return $rules;
     }
+
 }

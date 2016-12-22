@@ -64,7 +64,13 @@ $cakeDescription = 'Bintang Timur: Bus untuk anda semua';
                     <a href="/pages/bantuan#contact_us"><i class="fa fa-phone" aria-hidden="true"></i> Kontak Kami</a>
                 </li>
                 <li class="login-menu">
-                    <a href="/customers/login"><i class="fa fa-user" aria-hidden="true"></i> Login</a>
+                    <?php $user = $this->request->session()->read('Auth.User'); ?>
+                    <?php //debug($user) ?>
+                    <?php if($user){ ?>
+                        <a href="/users/logout"><i class="fa fa-user" aria-hidden="true"></i> Logout</a>
+                    <?php }else{ ?>
+                        <a href="/users/login"><i class="fa fa-user" aria-hidden="true"></i> Login</a>
+                    <?php } ?>
                 </li>
             </ul>
         </div>

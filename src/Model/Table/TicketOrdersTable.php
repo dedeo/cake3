@@ -11,6 +11,7 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $Schedules
+ * @property \Cake\ORM\Association\HasMany $TicketPassengers
  *
  * @method \App\Model\Entity\TicketOrder get($primaryKey, $options = [])
  * @method \App\Model\Entity\TicketOrder newEntity($data = null, array $options = [])
@@ -45,6 +46,9 @@ class TicketOrdersTable extends Table
             'foreignKey' => 'schedule_id',
             'joinType' => 'INNER'
         ]);
+        $this->hasMany('TicketPassengers', [
+            'foreignKey' => 'ticket_order_id'
+        ]);
     }
 
     /**
@@ -60,17 +64,30 @@ class TicketOrdersTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->integer('seet_number')
-            ->requirePresence('seet_number', 'create')
-            ->notEmpty('seet_number');
+            ->dateTime('create_at')
+            ->requirePresence('create_at', 'create')
+            ->notEmpty('create_at');
 
         $validator
-            ->dateTime('create_at')
-            ->allowEmpty('create_at');
+            ->time('departure_time')
+            ->requirePresence('departure_time', 'create')
+            ->notEmpty('departure_time');
+
+        $validator
+            ->date('departure_date')
+            ->requirePresence('departure_date', 'create')
+            ->notEmpty('departure_date');
 
         $validator
             ->requirePresence('fare', 'create')
             ->notEmpty('fare');
+
+        $validator
+            ->integer('passegers')
+            ->allowEmpty('passegers');
+
+        $validator
+            ->allowEmpty('total');
 
         return $validator;
     }

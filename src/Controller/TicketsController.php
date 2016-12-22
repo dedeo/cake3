@@ -3,6 +3,11 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use Cake\Network\Exception\NotFoundException;
+
+use Cake\I18n\Time;
+use Cake\Database\Type;
+use Cake\Datasource\ConnectionManager;
 /**
  * Customers Controller
  *
@@ -14,9 +19,8 @@ class TicketsController extends AppController
     public function initialize(){
         parent::initialize();
 
-        $this->Auth->allow(['search','order','orderSummary']);
+        $this->Auth->allow(['search','order','pembayaran', 'saveOrder']);
     }
-
 
     public function search($param = array()){
 
@@ -25,8 +29,9 @@ class TicketsController extends AppController
         $results = null;
 
         if ($this->request->is('post')) {
-
             $formData = $this->request->data;
+            $this->request->session()->write('Ticket.search', $formData);
+
             $day = date('N', strtotime($formData['tglKeberangkatan']));
 
             $results = $jadwal->find('all')
@@ -38,7 +43,6 @@ class TicketsController extends AppController
             if ($results->count()<1){
                 $this->Flash->error(__('Tiket tidak ditemukan'));
             }
-            
             $this->set(compact('results','formData'));
         }
     }
@@ -54,50 +58,224 @@ class TicketsController extends AppController
                 'contain' => ['Routes','Buses']
             ]);
             
+            $this->request->session()->write('Ticket.order', $jadwal);
             $this->set(compact('jadwal','formData'));
         }   
     }
 
-    public function orderSummary(){
+    public function payment(){
         if($this->request->is('post')){
             $formData = $this->request->data();
+            $detail = [];
 
             $scheduleId = $formData['scheduleId'];
+
+            $data['penumpang'] = $formData['penumpang'];
+            $data['customer'] = $formData['customer'];
+
+            // debug($formData);
+
+            $schedules = TableRegistry::get('Schedules');
+            $jadwal = $schedules->get($scheduleId, [
+                'contain' => ['Routes','Buses']
+            ]);
+
+            // $jadwal = $jadwal->toArray();
+
+            // debug($this->request->session()->read);
+            // die();
+            $session = $this->request->session()->read('Ticket.search');
+
+            $data['rute'] = $jadwal->route->name;
+            $data['dari'] = $jadwal->route->source;
+            $data['tujuan'] = $jadwal->route->destination;
+            $data['tanggal'] = $session['tglKeberangkatan'];
+            $data['jam_keberangkatan'] = $jadwal->departure_time;
+            $data['jam_kedatangan'] = $jadwal->arival_time;
+            // $data['distance'] = $jadwal->route->distance;
+            $data['jumlah_penumpang'] = count($formData['penumpang']);
+            $data['harga'] = $jadwal->route->fare;
+            $data['total'] = $jadwal->route->fare * count($formData['penumpang']);
+            $data['bus']['tipe'] = $jadwal->bus->name;
+            $data['bus']['nopol'] = $jadwal->bus->plat_no;
+
+            $this->request->session()->write('Ticket.detail', $data);
+
+
+            // var_dump($data);
+            // die();
+
+            $this->set(compact('jadwal','formData'));
+
+            // debug($jadwal);
+            // die();
+
+
+        }
+    }
+
+    public function saveOrder(){
+        $orderData = $this->request->session()->read('Ticket.detail');
+        $orderData1 = $this->request->session()->read('Ticket.order');
+        $formData = $this->request->data();
+
+        // var_dump($formData);
+
+        if(empty($orderData)){
+            $this->Flash->error(__('Data tiket tidak ditemukan'));
+        }
+
+        //
+        // save customer first, and get customer id;
+        //
+        $customerData = $orderData['customer'];
+        $customerTable = TableRegistry::get('Customers');
+        $customer = $customerTable->newEntity();
+        $customer = $customerTable->patchEntity($customer, $customerData);
+        $customer = $customerTable->newEntity($customerData);
+
+        if($customerTable->save($customer)){
+            $customerId = $customer->id;
+        }else{
+            $this->Flash->error(__('Data kustomer tidak dapat disimpan!'));
+        }
+
+        //
+        // then save the ordered ticket detail
+        // get ordered ticket id
+
+        $orderTable = TableRegistry::get('TicketOrders');
+        // $lastId = $orderTable->getID();
+        // $code = sprintf("%'.6d\n",$lastId);
+        // debug($this->_getNextId());
+        // die();
+
+
+        $ticketData = [
+            'customer_id' => $customerId,
+            'schedule_id' => $orderData1->id,
+            'ticket_code' => 'BT0'.substr(number_format(time() * rand(),0,'',''),0,6),
+            'create_at' => date('Y-m-d H:m:s'),
+            'departure_time' => $orderData['jam_keberangkatan']->i18nFormat('HH:mm:ss'),
+            'departure_date' => date('Y-m-d',strtotime($orderData['tanggal'])),
+            'arival_time' => $orderData['jam_kedatangan']->i18nFormat('HH:mm:ss'),
+            'arival_date' => date('Y-m-d',strtotime($orderData['tanggal'])),
+            'passegers'  => $orderData['jumlah_penumpang'],
+            'fare' => $orderData['harga'],
+            'total' => $orderData['total'],
+            ];
+
+        // var_dump($ticketData);
+        // die();
+
+        $order = $orderTable->newEntity();
+
+        // echo 'aaaaa'.$order->id;
+        // die();
+
+        $order = $orderTable->patchEntity($order, $ticketData);
+        $order = $orderTable->newEntity($ticketData);
+
+        if($aneh = $orderTable->save($order)){
+            $orderId = $order->id;
+        }else{
+            $this->Flash->error(__('Order tiket tidak dapat disimpan!'));
+        }
+
+        // debug($aneh);
+
+        $penumpangData = $orderData['penumpang'];
+
+        $passegerTable = TableRegistry::get('TicketPassengers');
+        foreach ($penumpangData as $dat) {
+            $data = ['name' => $dat['name'], 'gender'=> $dat['gender'], 'ticket_order_id'=> $orderId];
+            $penumpang = $passegerTable->newEntity();
+            $penumpang = $passegerTable->patchEntity($penumpang, $data);
+            $penumpang = $passegerTable->newEntity($data);
+            
+            $save = $passegerTable->save($penumpang);
+
+            // debug($save);
+        }
+
+        $this->request->session()->write('MyTicket',$order);
+        // $this->set('orderId',$orderId);
+        return $this->redirect(['action' => 'orderSummary']);
+    }
+
+    // public function 
+
+    public function orderSummary(){
+
+        $_ticket = $this->request->session()->read('MyTicket');
+        $ticket = null;
+
+        if(!empty($_ticket)){
+            $ticketOrderTable = TableRegistry::get('TicketOrders');
+            $ticket = $ticketOrderTable->find('all',[
+                'conditions' => ['TicketOrders.id' => $_ticket->id],
+                'contain' => ['TicketPassengers','Customers','Schedules'=>['Routes','Buses']]
+            ]);
+
+            $ticket = $ticket->first();
+
+            $this->set('ticket', $ticket);
+            $this->set(compact($ticket));
+            
+        }else{
+            $this->Flash->error(__('Ticket summary kosong!.'));
+        }
+
+
+        // if($this->request->is('post')){
+        //     $formData = $this->request->data();
+
+        //     $scheduleId = $formData['scheduleId'];
  
-            debug($formData);
+        //     // debug($formData);
 
-            foreach ($formData as $key => $value) {
-                $split = explode('_', $key);
-                $data[$split[0]][$split[1]] = $value;
-            }
+        //     // foreach ($formData as $key => $value) {
+        //     //     $split = explode('_', $key);
+        //     //     $data[$split[0]][$split[1]] = $value;
+        //     // }
 
-            debug($data);
+        //     // debug($data);
             
-            foreach ($data as $key => $value) {
-                if($key!='customer' && $key!='scheduleId'){
-                    $passeger[]=$value;
-                }
-            }
+        //     foreach ($data as $key => $value) {
+        //         if($key!='customer' && $key!='scheduleId'){
+        //             $passeger[]=$value;
+        //         }
+        //     }
             
-            //debug($passeger);
-            $scheduleId = 5;
-            $customer = ['name' => 'nama1','phone' => '8111122233','email' => 'hallo@gmail.com'];
-            $passeger = [['name' => 'nama1','gender' => 'female','seet_number'=>'1'],
-                            ['name' => 'nama2','gender' => 'male','seet_number'=>'2'],
-                            ['name' => 'nama3','gender' => 'male','seet_number'=>'3'],
-                            ['name' => 'nama4','gender' => 'male','seet_number'=>'4']
-                        ];            
-            die();
+        //     //debug($passeger);
+        //     $scheduleId = 5;
+        //     $customer = ['name' => 'nama1','phone' => '8111122233','email' => 'hallo@gmail.com'];
+        //     $passeger = [['name' => 'nama1','gender' => 'female','seet_number'=>'1'],
+        //                     ['name' => 'nama2','gender' => 'male','seet_number'=>'2'],
+        //                     ['name' => 'nama3','gender' => 'male','seet_number'=>'3'],
+        //                     ['name' => 'nama4','gender' => 'male','seet_number'=>'4']
+        //                 ];            
+        //     // die();
 
-            // $id = $formData['id'];
+        //     // $id = $formData['id'];
 
-            // $schedules = TableRegistry::get('Schedules');
-            // $jadwal = $schedules->get($id, [
-            //     'contain' => ['Routes','Buses']
-            // ]);
+        //     // $schedules = TableRegistry::get('Schedules');
+        //     // $jadwal = $schedules->get($id, [
+        //     //     'contain' => ['Routes','Buses']
+        //     // ]);
             
-            // $this->set(compact('jadwal','formData'));
-        }   
+        //     // $this->set(compact('jadwal','formData'));
+        // }   
+    }
+
+    private function _getNextId(){
+        $dataSourceObject = ConnectionManager::get('default'); // $connectionName can be 'default'        
+        $dbname = $dataSourceObject->config()['database'];
+
+        $orderTable = TableRegistry::get('TicketOrders');
+        $result = $orderTable->query("SELECT `AUTO_INCREMENT` FROM `information_schema`.`TABLES` AS NextId  WHERE TABLE_NAME='ticket_orders' AND TABLE_SCHEMA='$dbname'");
+        // return $result[0]['NextId']['Auto_increment'];        
+        return $result->toArray();        
     }
 
     /**
@@ -165,20 +343,20 @@ class TicketsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function login() {
-        if ($this->request->is('post')) {
-            $user = $this->Auth->identify();
-            if ($user) {
-                $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
-            }
-            $this->Flash->error(__('Invalid username or password, try again'));
-        }
-    }
+    // public function login() {
+    //     if ($this->request->is('post')) {
+    //         $user = $this->Auth->identify();
+    //         if ($user) {
+    //             $this->Auth->setUser($user);
+    //             return $this->redirect($this->Auth->redirectUrl());
+    //         }
+    //         $this->Flash->error(__('Invalid username or password, try again'));
+    //     }
+    // }
 
-    public function logout() {
-        return $this->redirect($this->Auth->logout());
-    }
+    // public function logout() {
+    //     return $this->redirect($this->Auth->logout());
+    // }
 
 
 }

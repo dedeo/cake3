@@ -18,6 +18,12 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\I18n\Time;
+use Cake\Database\Type;
+
+// Time::$defaultLocale = 'es-ES';
+Time::setToStringFormat('dd-MM-YYYY');
+Type::build('datetime')->useLocaleParser();
 
 /**
  * Application Controller
@@ -63,17 +69,17 @@ class AppController extends Controller {
             ],
             'loginAction' => [
                 'plugin' => false,
-                'controller' => 'Customers',
+                'controller' => 'Users',
                 'action' => 'login'
             ],
             'loginRedirect' => [
                 'plugin' => false,
-                'controller' => 'Customers',
-                'action' => 'profile'
+                'controller' => 'Pages',
+                'action' => 'home'
             ],
             'logoutRedirect' => [
                 'plugin' => false,
-                'controller' => 'Page',
+                'controller' => 'Pages',
                 'action' => 'home'
             ],
             'unauthorizedRedirect' => [
@@ -101,7 +107,7 @@ class AppController extends Controller {
     public function beforeFilter(Event $event) {
         parent::beforeFilter($event);
 
-        $this->Auth->allow('display');
+        $this->Auth->allow(['display','login','logout']);
     }
 
     /**

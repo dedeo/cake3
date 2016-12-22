@@ -7,7 +7,9 @@
 	<div class="toogle-menu">
 		<a href="#" class="toogle-menu-a"><h1>Ganti Pencarian Ticket <i class="fa fa-caret-down" aria-hidden="true"></i></h1></a>
 		<div class="search-form search-top">
+		<?php echo $this->Form->create('ticket'); ?>
 			<?= $this->element('search'); ?>
+		<?php echo $this->Form->end(); ?>
 		</div>
 	</div>
 	<div class="hasil-pencarian-content row">
