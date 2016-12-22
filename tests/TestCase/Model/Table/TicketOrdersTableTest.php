@@ -26,6 +26,13 @@ class TicketOrdersTableTest extends TestCase
     public $fixtures = [
         'app.ticket_orders',
         'app.customers',
+        'app.users',
+        'app.aros',
+        'app.acos',
+        'app.permissions',
+        'app.groups',
+        'app.roles',
+        'app.documents',
         'app.avatars',
         'app.schedules',
         'app.routes',

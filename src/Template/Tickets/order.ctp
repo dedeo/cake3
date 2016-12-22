@@ -2,17 +2,19 @@
 // debug($jadwal);
 ?>
 <body class="data-penumpang">
+<form action="<?=$this->Url->build(['controller'=>'Tickets','action'=>'payment']) ?>" method="POST">
 	<div class="pilih-kursi">
 		<h1>Pilih Kursi</h1>
 		<div class="kursi-wrapper">
 			<div class="bus-info">
 				<div class="plat-no"><?= $jadwal->bus->plat_no?></div>
+				<?= $this->Form->hidden('scheduleId',['value'=>$jadwal->id]) ?>
 				<i class="fa fa-bus" aria-hidden="true"></i>
 			</div>
 			<div class="kursi-list">
 				<!-- List kursi seperti ular tangga -->
 				<?php 
-					$total_kursi = 18; 
+					$total_kursi = 28; 
 					$i = 1;
 					if($total_kursi==28){
 						$kolom=4;
@@ -72,7 +74,7 @@
 	<div class="penumpang-content">
 		<h1>
 			<span>Data Penumpang</span>
-			<span class="jumlah-ticket">Jumlah Tiket: 2</span>
+			<span class="jumlah-ticket">Jumlah Tiket: <?=$formData['jmlPenumpang']  ?></span>
 		</h1>
 		<ul class="penumpang-list">
 			<?php for($n = 1; $n<=$formData['jmlPenumpang']; $n++ ) { ?>
@@ -80,16 +82,16 @@
 					<h2><?php echo "Penumpang #".$n ?> </h2>
 					<div class="penumpang-name">
 						<label for="nama-penumpang-1">Nama</label>
-						<input type="text" name="name" placeholder="Input nama penumpang" id="nama-penumpang-1">
+						<input type="text" name="penumpang[<?=$n?>][name]" placeholder="Input nama penumpang" id="nama-penumpang-<?=$n?>">
 					</div>
 					<div class="penumpang-kelamin">
 						<h3>Jenis Kelamin</h3>
 
 						<div class="radio">
-						  <label><input type="radio" name="gender" value="male"> Laki-laki</label>
+						  <label><input type="radio" name="penumpang[<?=$n?>][gender]" value="male"> Laki-laki</label>
 						</div>
 						<div class="radio">
-						  <label><input type="radio" name="gender" value="female"> Perempuan</label>
+						  <label><input type="radio" name="penumpang[<?=$n?>][gender]" value="female"> Perempuan</label>
 						</div>
 					</div>
 				</li>
@@ -100,22 +102,22 @@
 			<h2>Kontak yang bisa dihubungi</h2>
 			<div class="penumpang-kontak">
 				<label for="penumpang-kontak">Nama</label>
-				<input type="text" name="name" placeholder="Input nama yang bisa dihubungi" id="penumpang-kontak">
+				<input type="text" name="customer[name]" placeholder="Input nama yang bisa dihubungi" id="penumpang-kontak">
 			</div>
 			<div class="penumpang-phone">
 				<label for="penumpang-phone">Nomor Telepon</label>
-				<input type="text" name="name" placeholder="Input nomor telepon" id="penumpang-phone">
+				<input type="text" name="customer[no_tlp]" placeholder="Input nomor telepon" id="penumpang-phone">
 			</div>
 			<div class="penumpang-email">
 				<label for="penumpang-email">Email (Opsional)</label>
-				<input type="text" name="name" placeholder="Input email" id="penumpang-email">
+				<input type="text" name="customer[email]" placeholder="Input email" id="penumpang-email">
 			</div>
 		</div>
 	</div>
 	
 	<div class="buttom-wrapper">
 		<a href="#" class="batal-btn">Batalkan</a>
-		<a href="#" class="lanjut-btn">Lanjutkan</a>
+		<button type="submit" class="lanjut-btn">Lanjutkan</button>
 	</div>
 </body>
 

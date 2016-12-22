@@ -7,16 +7,18 @@ use Cake\ORM\Entity;
  * Customer Entity
  *
  * @property int $id
- * @property string $username
+ * @property int $user_id
+ * @property string $name
  * @property string $firstname
  * @property string $lastname
  * @property string $email
  * @property string $password
  * @property string $no_tlp
  * @property string $address
- * @property string $avatar_id
  *
+ * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Avatar $avatar
+ * @property \App\Model\Entity\TicketOrder[] $ticket_orders
  */
 class Customer extends Entity
 {

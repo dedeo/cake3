@@ -1,14 +1,13 @@
 <?php
-
 namespace App\Model\Entity;
 
-use Cake\Auth\DefaultPasswordHasher;
 use Cake\ORM\Entity;
 
 /**
  * User Entity
  *
  * @property int $id
+ * @property string $name
  * @property int $group_id
  * @property int $role_id
  * @property string $username
@@ -17,10 +16,10 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
  *
- * @property \App\Model\Entity\Group $group
- * @property \App\Model\Entity\Role $role
+ * @property \Dashboard\Model\Entity\Group $group
  */
-class User extends Entity {
+class User extends Entity
+{
 
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -44,11 +43,7 @@ class User extends Entity {
     protected $_hidden = [
         'password'
     ];
-
-    protected function _setPassword($password) {
-        return (new DefaultPasswordHasher)->hash($password);
-    }
-
+    
     public function parentNode() {
         if (!$this->id) {
             return null;
@@ -64,6 +59,5 @@ class User extends Entity {
             return null;
         }
         return ['Roles' => ['id' => $roleId]];
-    }
-
+    }    
 }
