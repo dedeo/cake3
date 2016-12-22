@@ -83,7 +83,7 @@ h3 {
 h1.title {
 	text-align: center;
 	color: #fff;
-	background: #5bc0de;
+	background: #fe9901;
 	padding: 10px 0px;
 	margin: 0px;
 	text-transform: capitalize;
@@ -140,7 +140,7 @@ p.red-text {
     position: relative;
     width: 100%;
     top: 11px;
-    border: 1px solid #9e9e9e;
+    border: 1px solid #fe9901;
     border-bottom: 0;
     margin: 0px;
 }
@@ -149,7 +149,7 @@ p.red-text {
     font-weight: 400;
     font-size: 23px;
     position: relative;
-    background-color: #f9f9f9;
+    background-color: #fff;
     font-family: Helvetica, "Helvetica-Normal", Verdana, Geneva, Tahoma, sans-serif;
     margin: 0 auto;
     line-height: 1;
@@ -162,11 +162,12 @@ p.red-text {
 /*Header*/
 #header {
 	width: 100%;
-	display: block;
-	background: #fe9901;
-	position: fixed;
-	top: 0px;
-	z-index: 1000;
+    display: block;
+    background: #fff;
+    position: fixed;
+    top: 0px;
+    z-index: 1000;
+    border-bottom: 3px solid #fe9901;
 }
 
 #header-container {
@@ -196,7 +197,7 @@ p.red-text {
 
 .menu-list li a {
     font-size: 15px;
-    color: #fff;
+    color: #fe9901;
     text-transform: capitalize;
 }
 
@@ -226,7 +227,8 @@ p.red-text {
 /* Main */
 #main-container {
     max-width: 1024px;
-    padding: 65px 25px 0px;
+    min-height: 500px;
+    padding: 70px 25px 0px;
     margin: 0 auto;
 }
 
@@ -260,6 +262,10 @@ p.red-text {
 	text-align: left;
 }
 
+#footer-container  h1 {
+	font-size: 15px;
+}
+
 .bantuan-footer {
 	width: 30%;
 	float: left;
@@ -269,7 +275,7 @@ p.red-text {
 .bantuan-footer a {
 	width: 100%;
 	display: inline-block;
-	font-size: 15px;
+	font-size: 13px;
 	color: #fff;
 }
 
@@ -277,11 +283,11 @@ p.red-text {
 	width: 20%;
 	float: left;
 	display: inline-block;
-	font-size: 15px;
+	font-size: 13px;
 }
 
 .media-sosial li {
-	font-size: 15px;
+	font-size: 13px;
 }
 
 .media-sosial .fa {
@@ -298,19 +304,18 @@ p.red-text {
 	-webkit-column-count: 3;
     -moz-column-count: 3;
     column-count: 3;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 
 
 /*Ticket search*/
 .ticket-search {
-	width: 40%;
+	width: 350px;
+	max-width: 30%;
+	padding-left: 20px;
 	display: inline-block;
-	float: left;
-	-webkit-box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
-	-moz-box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
-	box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
+	float: right;
 }
 
 .ticket-search label { 
@@ -328,9 +333,9 @@ p.red-text {
 }
 
 .search-form {
-	background: #f5f5f5;
-	width: 100%;
-	padding: 20px 40px 40px;
+    background: #f5f5f5;
+    width: 100%;
+    padding: 20px;
 }
 
 .search-form .input-list {
@@ -419,7 +424,7 @@ div.ui-datepicker table.ui-datepicker-calendar {
 .search-form .btn.btn-search {
 	width: 100%;
 	border-radius: 0px;
-	background: #ff1c00;
+	background: #5bc0de;
 	color: #fff;
 	text-align: center;
 	font-size: 16px;
@@ -805,6 +810,12 @@ td.search-order .order-button {
     margin-right: 0px;
 }
 
+.bantuan-content.tab-content>.active {
+	display: inline-block;
+	margin-top: -285px; 
+  	padding-top: 285px;
+}
+
 .bantuan-menu .nav-tabs>li>a:hover {
 	border: 0px;
 	background: transparent;
@@ -833,11 +844,24 @@ td.search-order .order-button {
 	margin-bottom: 7px;
 }
 
+.contact-wrapper .perwakilan-head {
+	width: 40%;
+}
+
+.contact-wrapper .perwakilan-phone {
+	width: 60%;
+}
+
 .contact-wrapper .perwakilan-head, .contact-wrapper .perwakilan-phone {
-	width: 50%;
 	display: inline-block;
 	float: left;
 	padding-left: 15px;
+}
+
+.contact-wrapper .perwakilan-phone li span {
+	width: 90px;
+	display: inline-block;
+	float: left;
 }
 
 /*Check ticket*/

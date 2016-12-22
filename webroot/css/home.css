@@ -1,12 +1,20 @@
 /* Home Styling*/
 
+.top-home {
+	position: relative;
+}
 
 /*Slider*/
 .home-slider {
-	width: 60%;
+	width: 70%;
 	display: inline-block;
 	float: left;
-	padding-left: 25px;
+	padding: 0px;
+	height: 370px;
+	overflow: hidden;
+	-webkit-box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
+	-moz-box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
+	box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
 }
 
 .home-slider .slider-list {
@@ -16,22 +24,67 @@
 .home-slider .owl-custom-next,  .home-slider .owl-custom-prev {
 	width: 40px;
 	height: 40px;
-	background: #5bc0de;
-    font-size: 20px;
+    font-size: 25px;
     cursor: pointer;
-    color: #fff;
+    color: #fe9901;
 }
 
 .home-slider .owl-custom-next {
 	position: absolute;
-	top: 9px;
+	top: 170px;
 	right: -1px;
     padding: 5px 14px;
 }
 
 .home-slider .owl-custom-prev {
 	position: absolute;
-	top: 9px;
+	top: 170px;
 	left: -1px;
 	padding: 5px 10px;
 }
+
+/*Cara Pemesanan*/
+.cara-pemesanan-desc {
+	display: inline-block;
+	width: 100%;
+	margin-top: 35px;
+	padding-top: 35px;
+}
+
+.bantuan-page .cara-pemesanan-desc {
+	margin-top: 0px;
+	padding-top: 0px;
+}
+
+.cara-pemesanan-desc h1 {
+	text-align: center;
+}
+
+.cara-pemesanan-desc li {
+	width: 20%;
+	float: left;
+	display: inline-block;
+	text-align: center;
+	padding: 0px 20px;
+}
+
+.cara-pemesanan-desc .fa {
+	font-size: 35px;
+	border: 1px solid #fe9901;
+	text-align: center;
+	width: 100%;
+	margin: 20px 0px;
+	padding: 30px 0px;
+	color: #fe9901;
+}
+
+.cara-pemesanan-desc .info {
+    font-size: 15px;
+    color: #6c6d6c;
+    line-height: 1.3;
+}
+
+
+
+
+

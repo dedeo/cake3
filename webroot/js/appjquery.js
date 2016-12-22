@@ -50,12 +50,14 @@ $(document).ready(function(){
 
   /*Footer bantuan click reload*/
   $(".bantuan-footer a, .contact-us a").click(function(){
-    javascript:window.location.reload();
+    window.location.reload(true);
+    $(document).scrollTop(0);
   });
 
   // Change hash for page-reload
   $('.bantuan-menu .nav-tabs a').on('shown.bs.tab', function (e) {
-      window.location.hash = e.target.hash;
+    window.top.location.hash = e.target.hash;
+    $(document).scrollTop(0);
   })
 
 });
