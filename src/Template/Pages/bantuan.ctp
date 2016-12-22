@@ -14,8 +14,7 @@
 	</div>
 	<div class="bantuan-content tab-content">
 		<div class="tab-pane active"  id="cara_pesan">
-			1. caranya gini
-			2. caranya gitu
+			<?= $this->element('cara_pemesanan'); ?>
 		</div>
 		<div class="tab-pane" id="contact_us">
 			<?= $this->element('contact_us'); ?>
