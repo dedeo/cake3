@@ -7,6 +7,7 @@ use Cake\Network\Exception\NotFoundException;
 
 use Cake\I18n\Time;
 use Cake\Database\Type;
+use Cake\Datasource\ConnectionManager;
 /**
  * Customers Controller
  *
@@ -143,9 +144,17 @@ class TicketsController extends AppController
         // then save the ordered ticket detail
         // get ordered ticket id
 
+        $orderTable = TableRegistry::get('TicketOrders');
+        // $lastId = $orderTable->getID();
+        // $code = sprintf("%'.6d\n",$lastId);
+        // debug($this->_getNextId());
+        // die();
+
+
         $ticketData = [
             'customer_id' => $customerId,
             'schedule_id' => $orderData1->id,
+            'ticket_code' => 'BT0'.substr(number_format(time() * rand(),0,'',''),0,6),
             'create_at' => date('Y-m-d H:m:s'),
             'departure_time' => $orderData['jam_keberangkatan']->i18nFormat('HH:mm:ss'),
             'departure_date' => date('Y-m-d',strtotime($orderData['tanggal'])),
@@ -159,8 +168,11 @@ class TicketsController extends AppController
         // var_dump($ticketData);
         // die();
 
-        $orderTable = TableRegistry::get('TicketOrders');
         $order = $orderTable->newEntity();
+
+        // echo 'aaaaa'.$order->id;
+        // die();
+
         $order = $orderTable->patchEntity($order, $ticketData);
         $order = $orderTable->newEntity($ticketData);
 
@@ -186,27 +198,32 @@ class TicketsController extends AppController
             // debug($save);
         }
 
-        // $this->request->session()->destroy('Ticket');
+        $this->request->session()->write('MyTicket',$order);
         // $this->set('orderId',$orderId);
         return $this->redirect(['action' => 'orderSummary']);
-
     }
 
     // public function 
 
-    public function orderSummary($orderId = null){
+    public function orderSummary(){
 
-        // debug($orderId);
-        // die();
+        $_ticket = $this->request->session()->read('MyTicket');
+        $ticket = null;
 
-        if (!empty($orderId)) {
-            $tiket = $this->TicketOrders->find('all',[
-                'conditions' => ['TicketOrders.id' => $orderId],
-                'contain' => ['TicketPassengers','Customers','Schedules']
+        if(!empty($_ticket)){
+            $ticketOrderTable = TableRegistry::get('TicketOrders');
+            $ticket = $ticketOrderTable->find('all',[
+                'conditions' => ['TicketOrders.id' => $_ticket->id],
+                'contain' => ['TicketPassengers','Customers','Schedules'=>['Routes','Buses']]
             ]);
 
-            $this->set('tiket', $tiket);
-            $this->set('_serialize', ['tiket']);
+            $ticket = $ticket->first();
+
+            $this->set('ticket', $ticket);
+            $this->set(compact($ticket));
+            
+        }else{
+            $this->Flash->error(__('Ticket summary kosong!.'));
         }
 
 
@@ -249,6 +266,16 @@ class TicketsController extends AppController
             
         //     // $this->set(compact('jadwal','formData'));
         // }   
+    }
+
+    private function _getNextId(){
+        $dataSourceObject = ConnectionManager::get('default'); // $connectionName can be 'default'        
+        $dbname = $dataSourceObject->config()['database'];
+
+        $orderTable = TableRegistry::get('TicketOrders');
+        $result = $orderTable->query("SELECT `AUTO_INCREMENT` FROM `information_schema`.`TABLES` AS NextId  WHERE TABLE_NAME='ticket_orders' AND TABLE_SCHEMA='$dbname'");
+        // return $result[0]['NextId']['Auto_increment'];        
+        return $result->toArray();        
     }
 
     /**
