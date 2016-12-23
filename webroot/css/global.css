@@ -909,6 +909,11 @@ td.search-order .order-button {
 	font-size: 15px !important;
 }
 
+#ticketpri-wrapper .perhatian-info {
+	font-size: 13px !important;
+	padding: 15px 20px !important
+}
+
 .print-ticket {
     width: 100%;
     border-radius: 0px;
