@@ -30,28 +30,43 @@
                     ['controller'=>'Main','action'=>'index'],
                     ['escape'=>false])
                     ?></li>
+                  <li><a><i class="fa fa-bus"></i> Tiket <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><?= $this->Html->link(' Daftar Tiket',['controller'=>'Tickets','action'=>'index'])?></li>
+                      <li><?= $this->Html->link(' Penjualan Tiket',['controller'=>'Buses','action'=>'index'])?></li>
+                      <li><?= $this->Html->link(' Tambah Tiket Baru',['controller'=>'Tickets','action'=>'add'])?></li>
+                    </ul>
+                  </li>
                   <li><?= $this->Html->link(
-                    $this->Html->tag('i','',['class'=>'fa fa-bus']).' Schedule',
+                    $this->Html->tag('i','',['class'=>'fa fa-bus']).' Jadwal keberangkatan',
                     ['controller'=>'Schedules','action'=>'index'],
                     ['escape'=>false])
                     ?></li>
                   <li><?= $this->Html->link(
+                    $this->Html->tag('i','',['class'=>'fa fa-bus']).' Rute Perjalanan',
+                    ['controller'=>'Routes','action'=>'index'],
+                    ['escape'=>false])
+                    ?></li>
+                  
+                  <li><a><i class="fa fa-bus"></i> Bus/Armada <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><?= $this->Html->link(' Daftar Bus',['controller'=>'Buses','action'=>'index'])?></li>
+                      <!-- <li><?= $this->Html->link(' Rute Bus',['controller'=>'Routes','action'=>'index'])?></li> -->
+                      <li><?= $this->Html->link(' Tambah Bus',['controller'=>'Buses','action'=>'add'])?></li>
+                    </ul>
+                  </li>
+<!--                   <li><?= $this->Html->link(
                     $this->Html->tag('i','',['class'=>'fa fa-bus']).' Buses',
                     ['controller'=>'Buses','action'=>'index'],
                     ['escape'=>false])
                     ?></li>
-                  <!-- 
+ -->                  <!-- 
                   <li><a><i class="fa fa-edit"></i> Bus/Armada <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><?= $this->Html->link('Daftar Bus',['controller'=>'Buses','action'=>'index'])?></li>
                       <li><?= $this->Html->link('Tambah Bus',['controller'=>'Buses','action'=>'add'])?></li>
                     </ul>
                   </li> -->
-                  <li><?= $this->Html->link(
-                    $this->Html->tag('i','',['class'=>'fa fa-bus']).' Rute Bus',
-                    ['controller'=>'Routes','action'=>'index'],
-                    ['escape'=>false])
-                    ?></li>
                   <li><?= $this->Html->link(
                     $this->Html->tag('i','',['class'=>'fa fa-user']).' User',
                     ['controller'=>'Users','action'=>'index'],

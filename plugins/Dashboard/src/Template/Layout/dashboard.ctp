@@ -49,6 +49,8 @@
               </div> 
           </div>
           <div class="clearfix"></div>
+          <?php echo $this->Flash->render() ?>
+
         <?php
         // echo $this->Html->getCrumbs(' > ', [
         //     'text' => 'Home',

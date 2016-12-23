@@ -1,7 +1,7 @@
 <body class="ticket-summary">
-<?php if (!empty($ticket)) { ?>
+<?php //if (!empty($ticket)) { ?>
 	<div class="ticket-print" id='ticket-content'>
-		<h1><?=$ticket->ticket_code ?></h1>
+		<h1>BT0981234</h1>
 		<h4>Detail Tiket</h4>
 		<table class="table">
 			<thead>
@@ -10,16 +10,16 @@
 				<tbody>
 				<tr>
 					<td>
-						<?=$ticket->schedule->route->name; ?><br>
-						<?=$ticket->schedule->bus->plat_no; ?>
+						WAONDULA - MAKASAR<br>
+						DP 7879 GM
 					</td>
 					<td>
-						Keberangkatan: <?=$ticket->departure_date->i18nFormat('d MMM Y') ?><br>
-						<?=$ticket->departure_time->i18nFormat('HH:mm:ss') ?>
+						Keberangkatan: 1 Jan 1970<br>
+						02:00:00
 					</td>
 				<td>
-					Tiba: <?=$ticket->arival_date->i18nFormat('d MMM Y') ?><br>
-					<?=$ticket->arival_time->i18nFormat('HH:mm:ss') ?>
+					Tiba: 1 Jan 1970<br>
+					03:00:00
 				</td>
 				</tr>
 			</tbody>
@@ -29,20 +29,17 @@
 				<th>Penumpang</th>
 			</thead>
 			<tbody>
-			<?php $penumpang = $ticket->ticket_passengers ?>
-			<?php foreach ($penumpang as $data) { ?>
 				<tr>
 				<td>
-					<?=$data->name; ?><br>
+				Nama Kamu
 				</td>
 				<td>
-					<?=$data->gender; ?>
+				Female
 				</td>
 				<td>
-					Nomor Kursi: #<?=$data->seet_number; ?>
+					Nomor Kursi: #14
 				</td>
 				</tr>
-			<?php } ?>
 			</tbody>
 		</table>
 		<table class="table">
@@ -51,15 +48,16 @@
 			</thead>
 			<tbody>
 				<tr>
-				<td>
-					<?=$ticket->customer->name; ?><br>
+				<td>Tony Stark<br>
 				</td>
-				<td>
-					<?=$ticket->customer->email; ?>
+				<td>tony@gmail.com</td>
+				<td>08123123123</td>
+				</tr>
+				<tr>
+				<td>Tony Stark<br>
 				</td>
-				<td>
-					<?=$ticket->customer->no_tlp; ?>
-				</td>
+				<td>tony@gmail.com</td>
+				<td>08123123123</td>
 				</tr>
 			</tbody>
 		</table>
@@ -69,19 +67,16 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>Harga tiket:</td><td><?=$ticket->fare ?></td>
+					<td>Harga tiket: 400000</td>
 				</tr>
 				<tr>
-					<td>Harga Total:</td><td><?=$ticket->total ?></td>
+					<td>Harga Total:</td><td>400000</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 	<button onclick="ticketPrint()">Print</button>
 	<iframe id="ifmcontentstoprint" style="height: 0px; width: 0px; position: absolute"></iframe>
-<?php }else{ ?>
-	Data order tiket kosong, klik <a href="/">disini</a> untuk melakukan pemesanan
-<?php } ?>
 </body>
 <script type="text/javascript">
 	function ticketPrint(){
