@@ -83,7 +83,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<div style="font-size:10px;background:#d9dfe9;padding:5px;margin-top:10px">
+		<div class="perhatian-info" style="font-size:10px;background:#d9dfe9;padding:10px 15px;margin-top:10px">
 			PERHATIAN</br>
 			1.	Barang-barang Penumpang diluar tanggungjawab kami,kecuali barang kiriman</br>
 			2.	Dilarang merokok diatas bus</br>
@@ -91,9 +91,8 @@
 			4.	Penumpang yang ketinggalan bus tiketnya tidak berlaku lagi</br>
 			5.	Pemberangkatan bus sewaktu-waktu dapat berubah</br>
 			6.	Cek ulang tanggal yang tertulis pada tiket anda</br>
-			</br>
 		</div>
-		<div style="font-size:10px;background:#d9dfe9;padding:5px;margin-top:10px">
+		<div class="perhatian-info" style="font-size:10px;background:#d9dfe9;padding:10px 15px;margin-top:10px">
 			KETENTUAN PERATURAN TIKET</br>
 			1.	Tanggal keberangkatan yang berlaku adalah yang TERTULIS SESUAI pada lembaran tiket</br>
 			2.	Tiket TIDAK DAPAT dialihkan pemakaiannya dari daerah atau dari kota lain</br>
