@@ -896,4 +896,31 @@ td.search-order .order-button {
 	font-size: 15px;
 }
 
+/*Print ticket*/
+#ticketpri-wrapper .header h1 {
+	font-size: 20px !important;
+}
+
+#ticket-content .table, #ticket-content .table th, #ticket-content .table td {
+	font-size: 13px !important;
+}
+
+#ticket-content h2 {
+	font-size: 15px !important;
+}
+
+.print-ticket {
+    width: 100%;
+    border-radius: 0px;
+    background: #5bc0de;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-top: 15px;
+    padding: 8px 0px;
+    border-style: none;
+    max-width: 300px;
+    display: inline-block !important;
+}
 
