@@ -10,7 +10,7 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
 	<div class="x_panel">
 	  <div class="x_content">
 		  <div class="x_title">
-	      	<a href=<?= $this->Url->build(['controller'=>'Schedules','action'=>'add','new'])?> class="btn btn-warning btn-sm pull-right"> Tambah Jadwal Baru</a>
+	      	<a href=<?= $this->Url->build(['controller'=>'Schedules','action'=>'add'])?> class="btn btn-warning btn-sm pull-right"> Tambah Jadwal Baru</a>
 		    <div class="clearfix"></div>
 		  </div>
 
@@ -35,8 +35,8 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
 	            <tr>
 	                <td><?= $this->Number->format($schedule->id) ?></td>
 	                <td><?= $this->MyDate->getLabel($schedule->day) ?></td>
-	                <td><?= $schedule->has('route') ? $this->Html->link($schedule->route->name, ['controller' => 'Routes', 'action' => 'view', $schedule->route->id]) : '' ?></td>
-	                <td><?= $schedule->has('bus') ? $this->Html->link($schedule->bus->name, ['controller' => 'Buses', 'action' => 'view', $schedule->bus->id]) : '' ?></td>
+	                <td><?= $schedule->has('route') ? $this->Html->link($schedule->route->name, ['controller' => 'Routes', 'action' => 'edit', $schedule->route->id]) : '' ?></td>
+	                <td><?= $schedule->has('bus') ? $this->Html->link($schedule->bus->name, ['controller' => 'Buses', 'action' => 'edit', $schedule->bus->id]) : '' ?></td>
 	                <!-- <td><?= $this->Number->format($schedule->fare) ?></td> -->
 	                <!-- <td><?= $this->Number->format($schedule->create_at) ?></td> -->
 	                <td><?= $this->Time->format($schedule->departure_time,'HH:mm') ?></td>

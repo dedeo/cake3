@@ -33,7 +33,6 @@ class AppController extends BaseController
         parent::initialize();
         $this->viewBuilder()->layout('dashboard');
 
-
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         // $this->loadComponent('Auth', [

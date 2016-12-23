@@ -15,6 +15,7 @@ use Cake\Datasource\ConnectionManager;
  */
 class TicketsController extends AppController
 {
+    public $helpers = array('Bus');
 
     public function initialize(){
         parent::initialize();
@@ -38,13 +39,13 @@ class TicketsController extends AppController
                         ->where(['Schedules.route_id' => $formData['rute'],
                                  'Schedules.day' => $day
                              ])
-                        ->contain(['Routes','Buses']);
+                        ->contain(['Routes','Buses','TicketOrders']);
 
             if ($results->count()<1){
                 $this->Flash->error(__('Tiket tidak ditemukan'));
             }
-            $this->set(compact('results','formData'));
         }
+        $this->set(compact('results','formData'));
     }
 
     public function order(){

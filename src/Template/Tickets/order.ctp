@@ -14,7 +14,7 @@
 			<div class="kursi-list">
 				<!-- List kursi seperti ular tangga -->
 				<?php 
-					$total_kursi = 28; 
+					$total_kursi = $jadwal->bus->capacity;
 					$i = 1;
 					if($total_kursi==28){
 						$kolom=4;

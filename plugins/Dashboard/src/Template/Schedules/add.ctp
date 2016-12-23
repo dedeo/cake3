@@ -7,7 +7,7 @@ $this->assign('title', $title);
 		<div class="x_panel">
 			<div class="x_title">
 				<a href='#' class="btn btn-warning btn-sm pull-right" id="saveBtn">Simpan</a>
-\				<a href=<?= $this->Url->build(['controller'=>'Schedules','action'=>'index'])?> class="btn btn-general btn-sm pull-right"><i class="fa fa-arrow-left"></i> Kembali</a>
+				<a href=<?= $this->Url->build(['controller'=>'Schedules','action'=>'index'])?> class="btn btn-general btn-sm pull-right"><i class="fa fa-arrow-left"></i> Kembali</a>
 				<div class="clearfix"></div>
 			</div>
 			<div class="x_content">
@@ -19,15 +19,23 @@ $this->assign('title', $title);
 					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Hari Keberangkatan <span class="required">*</span>
 						</label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
-							<?php echo $this->Form->input(
-								'day',
-								[
-									'empty'=>'- Pulih Hari Keberangkatan -',
-									'options' => $this->MyDate->toOptionsArray(),
-									'label' => false,
-									'class'=>'form-control col-md-7 col-xs-12',
-									'required'=>'required'
-								]); ?>
+							<?php 
+								// echo $this->Form->input(
+								// 'day',
+								// [
+								// 	'empty'=>'- Pulih Hari Keberangkatan -',
+								// 	'options' => $this->MyDate->toOptionsArray(),
+								// 	'label' => false,
+								// 	'class'=>'form-control col-md-7 col-xs-12',
+								// 	'required'=>'required'
+								// ]); 
+	                            echo $this->Form->select(
+	                                'day',
+	                                $this->MyDate->toOptionsArray(), [
+	                                    'multiple' => 'checkbox',
+	                                    'required'=>'required'
+	                                ]);
+								?>
 
 							<!-- <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12"> -->
 						</div>

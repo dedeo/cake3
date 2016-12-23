@@ -1,5 +1,5 @@
 <?php
-namespace App\Model\Table;
+namespace Dashboard\Model\Table;
 
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
@@ -7,21 +7,20 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Schedules Model
+ * Tickets Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Routes
+ * @property \Cake\ORM\Association\BelongsTo $Schedules
  * @property \Cake\ORM\Association\BelongsTo $Buses
- * @property \Cake\ORM\Association\HasMany $TicketOrders
  *
- * @method \App\Model\Entity\Schedule get($primaryKey, $options = [])
- * @method \App\Model\Entity\Schedule newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\Schedule[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Schedule|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Schedule patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Schedule[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Schedule findOrCreate($search, callable $callback = null)
+ * @method \Dashboard\Model\Entity\Ticket get($primaryKey, $options = [])
+ * @method \Dashboard\Model\Entity\Ticket newEntity($data = null, array $options = [])
+ * @method \Dashboard\Model\Entity\Ticket[] newEntities(array $data, array $options = [])
+ * @method \Dashboard\Model\Entity\Ticket|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Dashboard\Model\Entity\Ticket patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \Dashboard\Model\Entity\Ticket[] patchEntities($entities, array $data, array $options = [])
+ * @method \Dashboard\Model\Entity\Ticket findOrCreate($search, callable $callback = null)
  */
-class SchedulesTable extends Table
+class TicketsTable extends Table
 {
 
     /**
@@ -34,20 +33,19 @@ class SchedulesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('schedules');
+        $this->table('tickets');
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('Routes', [
-            'foreignKey' => 'route_id',
-            'joinType' => 'INNER'
+        $this->belongsTo('Schedules', [
+            'foreignKey' => 'schedule_id',
+            'joinType' => 'INNER',
+            'className' => 'Dashboard.Schedules'
         ]);
         $this->belongsTo('Buses', [
             'foreignKey' => 'bus_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->hasMany('TicketOrders', [
-            'foreignKey' => 'schedule_id'
+            'joinType' => 'INNER',
+            'className' => 'Dashboard.Buses'
         ]);
     }
 
@@ -64,9 +62,8 @@ class SchedulesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->integer('day')
-            ->requirePresence('day', 'create')
-            ->notEmpty('day');
+            ->dateTime('create_at')
+            ->allowEmpty('create_at');
 
         $validator
             ->time('departure_time')
@@ -74,13 +71,26 @@ class SchedulesTable extends Table
             ->notEmpty('departure_time');
 
         $validator
+            ->date('date')
+            ->requirePresence('date', 'create')
+            ->notEmpty('date');
+
+        $validator
             ->time('arival_time')
             ->requirePresence('arival_time', 'create')
             ->notEmpty('arival_time');
 
         $validator
-            ->dateTime('create_at')
-            ->allowEmpty('create_at');
+            ->requirePresence('fare', 'create')
+            ->notEmpty('fare');
+
+        $validator
+            ->requirePresence('stock', 'create')
+            ->notEmpty('stock');
+
+        $validator
+            ->integer('passegers')
+            ->allowEmpty('passegers');
 
         return $validator;
     }
@@ -94,7 +104,7 @@ class SchedulesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['route_id'], 'Routes'));
+        $rules->add($rules->existsIn(['schedule_id'], 'Schedules'));
         $rules->add($rules->existsIn(['bus_id'], 'Buses'));
 
         return $rules;

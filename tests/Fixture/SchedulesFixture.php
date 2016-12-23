@@ -45,9 +45,9 @@ class SchedulesFixture extends TestFixture
             'day' => 1,
             'route_id' => 1,
             'bus_id' => 1,
-            'departure_time' => '11:24:29',
-            'arival_time' => '11:24:29',
-            'create_at' => '2016-12-10 11:24:29'
+            'departure_time' => '17:00:36',
+            'arival_time' => '17:00:36',
+            'create_at' => '2016-12-22 17:00:36'
         ],
     ];
 }

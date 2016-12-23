@@ -7,7 +7,6 @@ $this->assign('title', $title);
 		<div class="x_panel">
 			<div class="x_title">
 				<a href='#' class="btn btn-warning btn-sm pull-right" id="saveBtn">Simpan</a>
-				<a href='<?= $this->Url->build(['controller'=>'Tickets','action'=>'create',$schedule->id])?>' class="btn btn-general btn-sm pull-right" id="createTicket">Buat Tiket</a>
 				<a href=<?= $this->Url->build(['controller'=>'Schedules','action'=>'index'])?> class="btn btn-general btn-sm pull-right"><i class="fa fa-arrow-left"></i> Kembali</a>
 				<div class="clearfix"></div>
 			</div>
@@ -92,36 +91,3 @@ $this->assign('title', $title);
 		</div>
 	</div>
 </div>
-<div class="row">
-	<div class="col-md-12 col-sm-12 col-xs-12">
-	<?php echo $this->Form->checkbox('aaa') ?>
-	Buat tiket untuk jadwal keberangkatan : <?= $routes->toArray()[$schedule->route_id];//$schedule->route_id;?>
-	</div>
-</div>
-<?php 
-$this->Html->scriptStart(['block'=>true]); ?>
-	$( "#saveBtn" ).click(function() {
-	  $( "#scheduleForm" ).submit();
-	});
-	$( "#saveNewBtn" ).click(function(e) {
-	  // $( "form" ).submit();
-	  var data = $("form").serialize();
-	  // alert( "Data Loaded: " + data );
-	  e.preventDefault();
-	  $('#scheduleForm').attr('action',"/dashboard/schedules/edit/new");
-	  $( "#scheduleForm" ).submit();
-	});
-
-<?php $this->Html->scriptEnd();
-// $this->Html->script(
-//  [
-//      'jquery.min.js',
-//      'bootstrap.min.js',
-//      'fastclick.js',
-//      'nprogress.js',
-//      'icheck.min.js',
-//      'custom.min.js',
-//  ],
-//  ['block'=>true]
-// );
-?>

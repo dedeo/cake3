@@ -56,23 +56,29 @@ class SchedulesController extends AppController
         if ($this->request->is('post')) {
             $dataForm = $this->request->data;
 
-            // if(count($dataForm['day'])>0){
-            //     $data = $dataForm;
-            //     foreach ($dataForm['day'] as $day => $label) {
-            //         $data['day'] = $day;  
-                    $schedule = $this->Schedules->patchEntity($schedule, $dataForm);
-                    if ($this->Schedules->save($schedule)) {
-                        $this->Flash->success(__('The schedule has been saved.'));
+            // debug($dataForm);
 
-                    } else {
-                        $this->Flash->error(__('The schedule could not be saved. Please, try again.'));
-                    }
-                    // debug($data);
-                // }                
+            foreach ($dataForm['day'] as $day => $label) {
+                $datas[]= [
+                            'day' => $label,
+                            'route_id' => $dataForm['route_id'],
+                            'bus_id' => $dataForm['bus_id'],
+                            'departure_time' => $dataForm['departure_time'],
+                            'arival_time' => $dataForm['arival_time'],
+                            // 'create_at' => date('Y-m-d H:m:s'),
+                            ];
+            }
 
-                // die();
+            $schedules = $this->Schedules->newEntities($datas);
 
-                return $this->redirect(['action' => 'index']);
+            foreach ($schedules as $schedule) {
+                if($query = $this->Schedules->save($schedule)){
+                    $this->Flash->success(__('Jadwal baru behasil disimpan.'));
+                }else{
+                    $this->Flash->error(__('Jadwal baru gagal disimpan.'));
+                }
+            }
+            return $this->redirect(['action' => 'index']);
         }
         // debug($data);
         // die();
@@ -108,7 +114,7 @@ class SchedulesController extends AppController
         $buses = $this->Schedules->Buses->find('list', ['limit' => 200]);
         $this->set(compact('schedule', 'routes', 'buses'));
         $this->set('_serialize', ['schedule']);
-        $this->set('title', 'Edit Rute');
+        $this->set('title', 'Edit/Lihat Jadwal Keberangkatan');
     }
 
     /**

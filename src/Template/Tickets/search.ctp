@@ -1,7 +1,9 @@
 <?php
-	$dataResult = $results->toArray();
+	if(!empty($results)){
+		$dataResult = $results->toArray();
+	}
 
-	//debug($results->getData());
+	// debug($dataResult);
 ?>
 <body class="hasil-pencarian">
 	<div class="toogle-menu">
@@ -14,7 +16,7 @@
 	</div>
 	<div class="hasil-pencarian-content row">
 		<div class="top-info col-sm-12 row">
-			<div class="rute-info col-sm-8">Hasil Pencarian: <?php //$results->route->name ?></div>
+			<div class="rute-info col-sm-8">Hasil Pencarian: <?php //echo $dataResult['route']['name'] ?></div>
 			<div class="date-info col-sm-4">
 				<i class="fa fa-calendar" aria-hidden="true"></i><?= $this->Time->format($formData['tglKeberangkatan'],'dd MMM Y') ?>
 				</div>
@@ -27,7 +29,7 @@
 						<th>Bus</th>
 						<th>Tipe</th>
 						<th>Berangkat</th>
-						<th>Kapasitas</th>
+						<th>Tersedia/Kapasitas</th>
 						<th colspan="2">Tarif</th>
 					</tr>
 				</thead>
@@ -41,7 +43,7 @@
 								<?= $this->Html->image('slider-img/slider1.jpg', ['alt' => 'search-img']);?>
 							</td>
 							<td class="search-tipe">
-								<span>Hight Class Bus</span>
+								<span><?=$this->Bus->getLabel($ticket->bus->class)?></span>
 								Fasilitas<br>
 								<?php $fasilitas = unserialize($ticket->bus->facilities); ?>
 								<?php foreach ($fasilitas as $item) { ?>
@@ -55,7 +57,8 @@
 								<?= $duration->h.' jam, '.$duration->i.' menit'; ?>
 							</td>
 							<td class="search-capacity">
-								<span>12/</span>28
+								<span><?=$ticket->bus->capacity?></span>
+								<!-- <span>12/</span>28 -->
 							</td>
 							<td class="search-price">
 								<span><?= $this->Number->currency($ticket->route->fare,'IDR'); ?></span>
@@ -69,7 +72,7 @@
 				</tbody>
 			</table>
 			<?php }else{ ?>
-			<p>Tiket tidak ditemukan</p>
+			<!-- <p>Tiket tidak ditemukan</p> -->
 			<?php } ?>
 		</div>
 	</div>
