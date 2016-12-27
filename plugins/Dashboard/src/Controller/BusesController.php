@@ -2,6 +2,7 @@
 namespace Dashboard\Controller;
 
 use Dashboard\Controller\AppController;
+use App\View\Helper\BusHelper;
 
 /**
  * Buses Controller
@@ -50,7 +51,12 @@ class BusesController extends AppController
     {
         $bus = $this->Buses->newEntity();
         if ($this->request->is('post')) {
-            $bus = $this->Buses->patchEntity($bus, $this->request->data);
+            $formData = $this->request->data;
+            $formData['name'] = str_replace(' ', '-',$formData['plat_no']);
+            $formData['capacity'] = $formData['capacity'];
+            $formData['facilities'] = 'a:3:{i:0;s:2:"Ac";i:1;s:7:"Selimut";i:2;s:6:"Bantal";}';
+
+            $bus = $this->Buses->patchEntity($bus, $formData);
             if ($this->Buses->save($bus)) {
                 $this->Flash->success(__('The bus has been saved.'));
 

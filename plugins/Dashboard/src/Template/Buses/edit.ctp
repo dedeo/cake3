@@ -33,17 +33,16 @@ $this->assign('title', $title);
 						<label class="control-label col-md-3 col-sm-3 col-xs-12" >Tipe <span class="required">*</span>
 						</label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
-						<?php $options = ['hight_class'=>'Hight Class Bus',
-												'big_top'=>'Big Top',
-												'bisnis'=>'Bisnis'
-												] ?>
 							<?php echo $this->Form->select(
-								'class', $options,
+								'class',
+								$this->Bus->toOptionsArray(),
 								[
 									'label' => false,
 									'class'=>'form-control col-md-7 col-xs-12',
-									'required'=>'required'
+									'required'=>'required',
+									'onchange'=>'getCapacity(this)'
 								]); ?>
+								<?= $this->Form->hidden('capacity',['id'=>'capacity'])?>
 						</div>
 					</div>
 					<div class="form-group">
@@ -66,6 +65,16 @@ $this->assign('title', $title);
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	function getCapacity(elm){
+		var capacityArray = <?php echo json_encode($this->Bus->getCapacity()) ?>;
+		var busClass = elm.options[elm.selectedIndex].value;
+
+		// alert(busClass);
+		document.getElementById('capacity').value = capacityArray[busClass];
+	}
+	
+</script>
 <?php 
 $this->Html->scriptStart(['block'=>true]); ?>
 	$( "#saveBtn" ).click(function() {

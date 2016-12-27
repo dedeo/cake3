@@ -56,7 +56,7 @@ class SchedulesController extends AppController
         if ($this->request->is('post')) {
             $dataForm = $this->request->data;
 
-            debug($dataForm);
+            // debug($dataForm);
 
             foreach ($dataForm['day'] as $day => $label) {
                 $datas[]= [
