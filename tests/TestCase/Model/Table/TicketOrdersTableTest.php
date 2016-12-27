@@ -33,10 +33,11 @@ class TicketOrdersTableTest extends TestCase
         'app.groups',
         'app.roles',
         'app.documents',
-        'app.avatars',
+        'app.tickets',
         'app.schedules',
         'app.routes',
-        'app.buses'
+        'app.buses',
+        'app.ticket_passengers'
     ];
 
     /**

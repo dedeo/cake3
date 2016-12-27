@@ -55,16 +55,6 @@ class TicketsController extends AppController
                                             ]
                         ]
                 );
-                        // ->where([
-                        //         'Tickets.schedule_id'=>$formData['rute'],
-                        //         'Tickets.date'=>$formData['tglKeberangkatan']])
-                        // ->contain(['Schedules','Buses']);
-
-            // foreach ($results as $result) {
-            // debug($result);
-            //     # code...
-            // die();
-            // }
 
             if ($results->count()<1){
                 $this->Flash->error(__('Tiket tidak ditemukan'));
@@ -79,9 +69,9 @@ class TicketsController extends AppController
 
             $id = $formData['id'];
 
-            $schedules = TableRegistry::get('Schedules');
-            $jadwal = $schedules->get($id, [
-                'contain' => ['Routes','Buses']
+            $ticketModel = TableRegistry::get('Tickets');
+            $jadwal = $ticketModel->get($id, [
+                'contain' => ['Schedules','Buses']
             ]);
             
             $this->request->session()->write('Ticket.order', $jadwal);
@@ -94,36 +84,56 @@ class TicketsController extends AppController
             $formData = $this->request->data();
             $detail = [];
 
-            $scheduleId = $formData['scheduleId'];
+            // debug($formData);
+            // die();
 
-            $data['penumpang'] = $formData['penumpang'];
-            $data['customer'] = $formData['customer'];
 
             // debug($formData);
+            $ticketId = $formData['ticketId'];
 
-            $schedules = TableRegistry::get('Schedules');
-            $jadwal = $schedules->get($scheduleId, [
-                'contain' => ['Routes','Buses']
+            for ($i=0; $i < count($formData['penumpang']); $i++) { 
+                $data['penumpang'][$i] = [
+                                            'name' => $formData['penumpang'][$i+1]['name'],
+                                            'gender' => $formData['penumpang'][$i+1]['gender'],
+                                            'kursi' => $formData['kursi'][$i],
+                                            ];
+            }
+
+
+            // debug($data);
+            // die();
+
+
+
+            $data['customer'] = $formData['customer'];
+
+
+            $ticketModel = TableRegistry::get('Tickets');
+            $ticket = $ticketModel->get($ticketId, [
+                'contain' => ['Schedules'=>['Routes'],'Buses']
             ]);
 
-            // $jadwal = $jadwal->toArray();
+
+            // $ticket = $ticket->toArray();
+            // debug($ticket);
+            // die();
 
             // debug($this->request->session()->read);
             // die();
             $session = $this->request->session()->read('Ticket.search');
 
-            $data['rute'] = $jadwal->route->name;
-            $data['dari'] = $jadwal->route->source;
-            $data['tujuan'] = $jadwal->route->destination;
+            $data['rute'] = $ticket->schedule->route->name;
+            $data['dari'] = $ticket->schedule->route->source;
+            $data['tujuan'] = $ticket->schedule->route->destination;
             $data['tanggal'] = $session['tglKeberangkatan'];
-            $data['jam_keberangkatan'] = $jadwal->departure_time;
-            $data['jam_kedatangan'] = $jadwal->arival_time;
+            $data['jam_keberangkatan'] = $ticket->departure_time;
+            $data['jam_kedatangan'] = $ticket->arival_time;
             // $data['distance'] = $jadwal->route->distance;
             $data['jumlah_penumpang'] = count($formData['penumpang']);
-            $data['harga'] = $jadwal->route->fare;
-            $data['total'] = $jadwal->route->fare * count($formData['penumpang']);
-            $data['bus']['tipe'] = $jadwal->bus->name;
-            $data['bus']['nopol'] = $jadwal->bus->plat_no;
+            $data['harga'] = $ticket->schedule->route->fare;
+            $data['total'] = $ticket->schedule->route->fare * count($formData['penumpang']);
+            $data['bus']['tipe'] = $ticket->bus->name;
+            $data['bus']['nopol'] = $ticket->bus->plat_no;
 
             $this->request->session()->write('Ticket.detail', $data);
 
@@ -131,7 +141,7 @@ class TicketsController extends AppController
             // var_dump($data);
             // die();
 
-            $this->set(compact('jadwal','formData'));
+            $this->set(compact('ticket','formData'));
 
             // debug($jadwal);
             // die();
@@ -181,9 +191,9 @@ class TicketsController extends AppController
 
         $ticketData = [
             'customer_id' => $customerId,
-            'schedule_id' => $orderData1->id,
+            'ticket_id' => $orderData1->id,
             'ticket_code' => 'BT0'.substr(number_format(time() * rand(),0,'',''),0,6),
-            'create_at' => date('Y-m-d H:m:s'),
+            // 'create_at' => date('Y-m-d H:m:s'),
             'departure_time' => $orderData['jam_keberangkatan']->i18nFormat('HH:mm:ss'),
             'departure_date' => date('Y-m-d',strtotime($orderData['tanggal'])),
             'arival_time' => $orderData['jam_kedatangan']->i18nFormat('HH:mm:ss'),
@@ -206,6 +216,10 @@ class TicketsController extends AppController
 
         if($aneh = $orderTable->save($order)){
             $orderId = $order->id;
+            $aa = $this->Tickets->get($orderData1->id);
+            $stock = $aa->stock;
+            $aa->stock = $stock - $orderData['jumlah_penumpang'];
+            $this->Tickets->save($aa);
         }else{
             $this->Flash->error(__('Order tiket tidak dapat disimpan!'));
         }
@@ -216,7 +230,7 @@ class TicketsController extends AppController
 
         $passegerTable = TableRegistry::get('TicketPassengers');
         foreach ($penumpangData as $dat) {
-            $data = ['name' => $dat['name'], 'gender'=> $dat['gender'], 'ticket_order_id'=> $orderId];
+            $data = ['name' => $dat['name'], 'gender'=> $dat['gender'], 'ticket_order_id'=> $orderId,'seet_number'=>$dat['kursi']];
             $penumpang = $passegerTable->newEntity();
             $penumpang = $passegerTable->patchEntity($penumpang, $data);
             $penumpang = $passegerTable->newEntity($data);
@@ -242,7 +256,7 @@ class TicketsController extends AppController
             $ticketOrderTable = TableRegistry::get('TicketOrders');
             $ticket = $ticketOrderTable->find('all',[
                 'conditions' => ['TicketOrders.id' => $_ticket->id],
-                'contain' => ['TicketPassengers','Customers','Schedules'=>['Routes','Buses']]
+                'contain' => ['TicketPassengers','Customers','Tickets'=>['Schedules'=>['Routes'],'Buses']]
             ]);
 
             $ticket = $ticket->first();

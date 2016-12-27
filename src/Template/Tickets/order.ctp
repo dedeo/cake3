@@ -8,7 +8,7 @@
 		<div class="kursi-wrapper">
 			<div class="bus-info">
 				<div class="plat-no"><?= $jadwal->bus->plat_no?></div>
-				<?= $this->Form->hidden('scheduleId',['value'=>$jadwal->id]) ?>
+				<?= $this->Form->hidden('ticketId',['value'=>$jadwal->id]) ?>
 				<i class="fa fa-bus" aria-hidden="true"></i>
 			</div>
 			<div class="kursi-list">
@@ -30,35 +30,35 @@
 						if ($arah == 'ka') {
 							if ($i % $kolom == 0) {
 								$tampung = $tampung."<li><div class='checkbox ".$sold_class."'>
-								  <label><input type='checkbox' value=''>$i</label>
+								  <label><input type='checkbox' name='kursi[]' value='$i'>$i</label>
 								</div></li></ul>";
 								echo $tampung;
 								$arah = 'ki';
 								$tampung = '';
 							}elseif ($i % $kolom == 1) {
 								$tampung = "<ul><li><div class='checkbox ".$sold_class."'>
-								  <label><input type='checkbox' value=''>$i</label>
+								  <label><input type='checkbox' name='kursi[]' value='$i'>$i</label>
 								</div></li>".$tampung;
 							}else {
 								$tampung = $tampung."<li><div class='checkbox ".$sold_class."'>
-								  <label><input type='checkbox' value=''>$i</label>
+								  <label><input type='checkbox' name='kursi[]' value='$i'>$i</label>
 								</div></li>";
 							}
 						} else {
 							if($i % $kolom == 0) {
 							  	$tampung = "<ul><li><div class='checkbox ".$sold_class."'>
-								  <label><input type='checkbox' value=''>$i</label>
+								  <label><input type='checkbox' name='kursi[]' value='$i'>$i</label>
 								</div></li>".$tampung;
 							  	echo $tampung;
 							  	$tampung = '';
 							  	$arah = 'ka';
 							} elseif ($i % $kolom == 1) {
 							  	$tampung = $tampung."<li><div class='checkbox ".$sold_class."'>
-								  <label><input type='checkbox' value=''>$i</label>
+								  <label><input type='checkbox' name='kursi[]' value='$i'>$i</label>
 								</div></li></ul>";
 							} else {
 							  	$tampung = "<li><div class='checkbox ".$sold_class."'>
-								  <label><input type='checkbox' value=''>$i</label>
+								  <label><input type='checkbox' name='kursi[]' value='$i'>$i</label>
 								</div></li>".$tampung;
 							}
 						}
