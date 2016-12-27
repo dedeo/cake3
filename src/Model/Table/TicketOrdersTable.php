@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
  * TicketOrders Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
- * @property \Cake\ORM\Association\BelongsTo $Schedules
+ * @property \Cake\ORM\Association\BelongsTo $Tickets
  * @property \Cake\ORM\Association\HasMany $TicketPassengers
  *
  * @method \App\Model\Entity\TicketOrder get($primaryKey, $options = [])
@@ -42,8 +42,8 @@ class TicketOrdersTable extends Table
             'foreignKey' => 'customer_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Schedules', [
-            'foreignKey' => 'schedule_id',
+        $this->belongsTo('Tickets', [
+            'foreignKey' => 'ticket_id',
             'joinType' => 'INNER'
         ]);
         $this->hasMany('TicketPassengers', [
@@ -64,9 +64,12 @@ class TicketOrdersTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
+            ->requirePresence('ticket_code', 'create')
+            ->notEmpty('ticket_code');
+
+        $validator
             ->dateTime('create_at')
-            ->requirePresence('create_at', 'create')
-            ->notEmpty('create_at');
+            ->allowEmpty('create_at');
 
         $validator
             ->time('departure_time')
@@ -77,6 +80,16 @@ class TicketOrdersTable extends Table
             ->date('departure_date')
             ->requirePresence('departure_date', 'create')
             ->notEmpty('departure_date');
+
+        $validator
+            ->time('arival_time')
+            ->requirePresence('arival_time', 'create')
+            ->notEmpty('arival_time');
+
+        $validator
+            ->date('arival_date')
+            ->requirePresence('arival_date', 'create')
+            ->notEmpty('arival_date');
 
         $validator
             ->requirePresence('fare', 'create')
@@ -102,7 +115,7 @@ class TicketOrdersTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
-        $rules->add($rules->existsIn(['schedule_id'], 'Schedules'));
+        $rules->add($rules->existsIn(['ticket_id'], 'Tickets'));
 
         return $rules;
     }

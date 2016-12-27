@@ -34,7 +34,7 @@ class TicketsTable extends Table
         parent::initialize($config);
 
         $this->table('tickets');
-        $this->displayField('id');
+        $this->displayField('route_name');
         $this->primaryKey('id');
 
         $this->belongsTo('Schedules', [

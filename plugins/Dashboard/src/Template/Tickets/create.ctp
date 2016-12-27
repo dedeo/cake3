@@ -1,6 +1,9 @@
 <?php
 $this->Html->addCrumb('Routes', '');
 $this->assign('title', $title);
+
+// debug($schedule);
+
 ?>
 <div class="row">
 	<div class="col-md-12 col-sm-12 col-xs-12">
@@ -11,82 +14,23 @@ $this->assign('title', $title);
 				<div class="clearfix"></div>
 			</div>
 			<div class="x_content">
-				<?php echo $this->Form->create($schedule, ['url'=>['action'=>null],'id'=>'scheduleForm','class'=>'form-horizontal form-label-left','data-parsley-validate']) ?>
-				<!-- <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"> -->
-
-					<div class="form-group">
-						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-							Hari <span class="required">*</span>
-						</label>
-						<div class="col-md-6 col-sm-6 col-xs-12">
-							<?php echo $this->Form->input(
-								'day', 
-								[
-									'options' => $this->MyDate->toOptionsArray(),
-									'label' => false,
-									'class'=>'form-control col-md-7 col-xs-12',
-									'required'=>'required'
-								]); ?>
-							<!-- <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12"> -->
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-							Rute <span class="required">*</span>
-						</label>
-						<div class="col-md-6 col-sm-6 col-xs-12">
-							<?php echo $this->Form->input(
-								'route_id',
-								[
-									'label' => false,
-									'class'=>'form-control col-md-7 col-xs-12',
-									'required'=>'required'
-								]); ?>
-							<!-- <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12"> -->
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Bus <span class="required">*</span>
-						</label>
-						<div class="col-md-6 col-sm-6 col-xs-12">
-							<?php echo $this->Form->input(
-								'bus_id', 
-								[
-									'label' => false,
-									'class'=>'form-control col-md-7 col-xs-12',
-									'required'=>'required'
-								]); ?>
-							<!-- <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12"> -->
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jam Keberangkatan <span class="required">*</span>
-						</label>
-						<div class="col-md-6 col-sm-6 col-xs-12">
-							<?php echo $this->Form->time(
-								'departure_time', 
-								[
-									'label' => false,
-									'class'=>'form-control col-md-7 col-xs-12',
-									'required'=>'required'
-								]); ?>
-							<!-- <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12"> -->
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jam Kedatangan <span class="required">*</span>
-						</label>
-						<div class="col-md-6 col-sm-6 col-xs-12">
-							<?php echo $this->Form->time(
-								'arival_time', 
-								[
-									'label' => false,
-									'class'=>'form-control col-md-7 col-xs-12',
-									'required'=>'required'
-								]); ?>
-						</div>
-					</div>
-				<?php echo $this->Form->end(); ?>
+				<table>
+					<tr>
+						<th>Hari Keberangkatan</th><td>: <?php echo $this->MyDate->getLabel($schedule->day) ?></td>
+					</tr>
+					<tr>
+						<th>Rute Perjalanan</th><td>: <?php echo $schedule->route->name ;?></td>
+					</tr>
+					<tr>
+						<th>No Polisi Bus</th><td>: <?php echo $schedule->bus->plat_no; ?></td>
+					</tr>
+					<tr>
+						<th>Berangkat Pukul</th><td>: <?php echo $this->Time->format($schedule->departure_time, 'HH:mm'); ?></td>
+					</tr>
+					<tr>
+						<th>Sampai Pukul</th><td>: <?php echo $this->Time->format($schedule->arival_time,'HH:mm'); ?></td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</div>

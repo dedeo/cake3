@@ -3,8 +3,8 @@
 	$penumpang = $formData['penumpang'];
 	$customer = $formData['customer'];
 
-	$rute = $jadwal['route'];
-	$bus = $jadwal['bus'];
+	$rute = $ticket['route'];
+	$bus = $ticket['bus'];
 
 	if($this->request->session()->read('Ticket.detail')){
 		$tiket = $this->request->session()->read('Ticket.detail');
@@ -70,7 +70,7 @@
 					<tbody>
 					<?php foreach ($tiket['penumpang'] as $data) { ?>
 						<tr>
-							<td>#</td>
+							<td>#<?=$data['kursi']?></td>
 							<td><?=$data['name']?></td>
 							<td><?=$data['gender']?></td>
 						</tr>

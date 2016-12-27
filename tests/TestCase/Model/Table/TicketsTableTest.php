@@ -1,22 +1,22 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\TicketOrdersTable;
+use App\Model\Table\TicketsTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\TicketOrdersTable Test Case
+ * App\Model\Table\TicketsTable Test Case
  */
-class TicketOrdersTableTest extends TestCase
+class TicketsTableTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \App\Model\Table\TicketOrdersTable
+     * @var \App\Model\Table\TicketsTable
      */
-    public $TicketOrders;
+    public $Tickets;
 
     /**
      * Fixtures
@@ -24,6 +24,10 @@ class TicketOrdersTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
+        'app.tickets',
+        'app.schedules',
+        'app.routes',
+        'app.buses',
         'app.ticket_orders',
         'app.customers',
         'app.users',
@@ -33,10 +37,6 @@ class TicketOrdersTableTest extends TestCase
         'app.groups',
         'app.roles',
         'app.documents',
-        'app.tickets',
-        'app.schedules',
-        'app.routes',
-        'app.buses',
         'app.ticket_passengers'
     ];
 
@@ -48,8 +48,8 @@ class TicketOrdersTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('TicketOrders') ? [] : ['className' => 'App\Model\Table\TicketOrdersTable'];
-        $this->TicketOrders = TableRegistry::get('TicketOrders', $config);
+        $config = TableRegistry::exists('Tickets') ? [] : ['className' => 'App\Model\Table\TicketsTable'];
+        $this->Tickets = TableRegistry::get('Tickets', $config);
     }
 
     /**
@@ -59,7 +59,7 @@ class TicketOrdersTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->TicketOrders);
+        unset($this->Tickets);
 
         parent::tearDown();
     }

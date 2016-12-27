@@ -1,5 +1,5 @@
 <?php
-namespace Dashboard\Model\Table;
+namespace App\Model\Table;
 
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
@@ -7,20 +7,20 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Schedules Model
+ * Tickets Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Routes
+ * @property \Cake\ORM\Association\BelongsTo $Schedules
  * @property \Cake\ORM\Association\BelongsTo $Buses
  *
- * @method \Dashboard\Model\Entity\Schedule get($primaryKey, $options = [])
- * @method \Dashboard\Model\Entity\Schedule newEntity($data = null, array $options = [])
- * @method \Dashboard\Model\Entity\Schedule[] newEntities(array $data, array $options = [])
- * @method \Dashboard\Model\Entity\Schedule|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \Dashboard\Model\Entity\Schedule patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Dashboard\Model\Entity\Schedule[] patchEntities($entities, array $data, array $options = [])
- * @method \Dashboard\Model\Entity\Schedule findOrCreate($search, callable $callback = null)
+ * @method \App\Model\Entity\Ticket get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Ticket newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Ticket[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Ticket|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Ticket patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Ticket[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Ticket findOrCreate($search, callable $callback = null)
  */
-class SchedulesTable extends Table
+class TicketsTable extends Table
 {
 
     /**
@@ -33,19 +33,17 @@ class SchedulesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('schedules');
-        $this->displayField('route_name');
+        $this->table('tickets');
+        $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('Routes', [
-            'foreignKey' => 'route_id',
-            'joinType' => 'INNER',
-            'className' => 'Dashboard.Routes'
+        $this->belongsTo('Schedules', [
+            'foreignKey' => 'schedule_id',
+            'joinType' => 'INNER'
         ]);
         $this->belongsTo('Buses', [
             'foreignKey' => 'bus_id',
-            'joinType' => 'INNER',
-            'className' => 'Dashboard.Buses'
+            'joinType' => 'INNER'
         ]);
     }
 
@@ -62,11 +60,6 @@ class SchedulesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->integer('day')
-            ->requirePresence('day', 'create')
-            ->notEmpty('day');
-
-        $validator
             ->dateTime('create_at')
             ->allowEmpty('create_at');
 
@@ -76,9 +69,26 @@ class SchedulesTable extends Table
             ->notEmpty('departure_time');
 
         $validator
+            ->date('date')
+            ->requirePresence('date', 'create')
+            ->notEmpty('date');
+
+        $validator
             ->time('arival_time')
             ->requirePresence('arival_time', 'create')
             ->notEmpty('arival_time');
+
+        $validator
+            ->requirePresence('fare', 'create')
+            ->notEmpty('fare');
+
+        $validator
+            ->requirePresence('stock', 'create')
+            ->notEmpty('stock');
+
+        $validator
+            ->integer('passegers')
+            ->allowEmpty('passegers');
 
         return $validator;
     }
@@ -92,7 +102,7 @@ class SchedulesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['route_id'], 'Routes'));
+        $rules->add($rules->existsIn(['schedule_id'], 'Schedules'));
         $rules->add($rules->existsIn(['bus_id'], 'Buses'));
 
         return $rules;

@@ -1,5 +1,6 @@
 <body class="ticket-summary">
 <?php if (!empty($ticket)) { ?>
+<?php //debug($ticket)?>
 <div id="ticketpri-wrapper" style="width: 595px; margin: 0 auto;">
 	<div class="header" style="display: inline-block;width: 100%;border-bottom: 1px solid #fe9901;padding-bottom: 5px;margin-bottom:5px;">
 		<h1 style="font-weight: bold;margin-top: 10px;margin-bottom: 0px;float: left;width: 50%;display: inline-block;font-size:15px;"><?=$ticket->ticket_code ?></h1>
@@ -16,8 +17,8 @@
 				<tbody>
 				<tr>
 					<td style="width: 33.33%;">
-						<?=$ticket->schedule->route->name; ?><br>
-						<?=$ticket->schedule->bus->plat_no; ?>
+						<?=$ticket->ticket->schedule->route->name; ?><br>
+						<?=$ticket->ticket->bus->plat_no; ?>
 					</td>
 					<td style="width: 33.33%;">
 						Keberangkatan: <?=$ticket->departure_date->i18nFormat('d MMM Y') ?><br>

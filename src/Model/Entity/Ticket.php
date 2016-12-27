@@ -4,26 +4,23 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * TicketOrder Entity
+ * Ticket Entity
  *
  * @property int $id
- * @property int $customer_id
- * @property int $ticket_id
- * @property string $ticket_code
+ * @property int $schedule_id
  * @property \Cake\I18n\Time $create_at
  * @property \Cake\I18n\Time $departure_time
- * @property \Cake\I18n\Time $departure_date
+ * @property \Cake\I18n\Time $date
  * @property \Cake\I18n\Time $arival_time
- * @property \Cake\I18n\Time $arival_date
  * @property string $fare
+ * @property string $stock
+ * @property int $bus_id
  * @property int $passegers
- * @property string $total
  *
- * @property \App\Model\Entity\Customer $customer
- * @property \App\Model\Entity\Ticket $ticket
- * @property \App\Model\Entity\TicketPassenger[] $ticket_passengers
+ * @property \App\Model\Entity\Schedule $schedule
+ * @property \App\Model\Entity\Bus $bus
  */
-class TicketOrder extends Entity
+class Ticket extends Entity
 {
 
     /**
