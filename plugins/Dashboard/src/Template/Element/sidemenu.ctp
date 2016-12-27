@@ -1,6 +1,6 @@
 <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Bintang Timur</span></a>
+              <div class="site_title"><?= $this->Html->image('logo_dash.png', ['alt' => 'Bintang Timur', 'style'=>'width:55px;']);?> <span>Bintang Timur</span></div>
             </div>
 
             <div class="clearfix"></div>
@@ -30,29 +30,35 @@
                     ['controller'=>'Main','action'=>'index'],
                     ['escape'=>false])
                     ?></li>
-                  <li><a><i class="fa fa-bus"></i> Tiket <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><?= $this->Html->link(' Daftar Tiket',['controller'=>'Tickets','action'=>'index'])?></li>
-                      <li><?= $this->Html->link(' Penjualan Tiket',['controller'=>'Buses','action'=>'index'])?></li>
-                      <li><?= $this->Html->link(' Tambah Tiket Baru',['controller'=>'Tickets','action'=>'add'])?></li>
-                    </ul>
-                  </li>
-                  <li><?= $this->Html->link(
-                    $this->Html->tag('i','',['class'=>'fa fa-bus']).' Jadwal keberangkatan',
-                    ['controller'=>'Schedules','action'=>'index'],
-                    ['escape'=>false])
-                    ?></li>
-                  <li><?= $this->Html->link(
-                    $this->Html->tag('i','',['class'=>'fa fa-bus']).' Rute Perjalanan',
-                    ['controller'=>'Routes','action'=>'index'],
-                    ['escape'=>false])
-                    ?></li>
-                  
+
                   <li><a><i class="fa fa-bus"></i> Bus/Armada <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><?= $this->Html->link(' Daftar Bus',['controller'=>'Buses','action'=>'index'])?></li>
                       <!-- <li><?= $this->Html->link(' Rute Bus',['controller'=>'Routes','action'=>'index'])?></li> -->
                       <li><?= $this->Html->link(' Tambah Bus',['controller'=>'Buses','action'=>'add'])?></li>
+                    </ul>
+                  </li>
+
+                  <li>
+                    <?= $this->Html->link(
+                    $this->Html->tag('i','',['class'=>'fa fa-map-marker']).' Rute Perjalanan',
+                    ['controller'=>'Routes','action'=>'index'],
+                    ['escape'=>false])
+                    ?>
+                  </li>
+
+                  <li><?= $this->Html->link(
+                    $this->Html->tag('i','',['class'=>'fa fa-calendar']).' Jadwal keberangkatan',
+                    ['controller'=>'Schedules','action'=>'index'],
+                    ['escape'=>false])
+                    ?>
+                  </li>
+
+                  <li><a><i class="fa fa-ticket"></i> Tiket <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><?= $this->Html->link(' Daftar Tiket',['controller'=>'Tickets','action'=>'index'])?></li>
+                      <li><?= $this->Html->link(' Penjualan Tiket',['controller'=>'Buses','action'=>'index'])?></li>
+                      <li><?= $this->Html->link(' Tambah Tiket Baru',['controller'=>'Tickets','action'=>'add'])?></li>
                     </ul>
                   </li>
 <!--                   <li><?= $this->Html->link(
@@ -68,7 +74,7 @@
                     </ul>
                   </li> -->
                   <li><?= $this->Html->link(
-                    $this->Html->tag('i','',['class'=>'fa fa-user']).' User',
+                    $this->Html->tag('i','',['class'=>'fa fa-user-secret']).' User',
                     ['controller'=>'Users','action'=>'index'],
                     ['escape'=>false])
                     ?></li>

@@ -165,7 +165,16 @@
 					$(this).find('input').attr("disabled", false);
 				});
 			}
-		}
+		};
+
+
+
+		$('.lanjut-btn').click(function() {
+	      if(kursi_count!=0) {
+	        alert("Pilih "+kursi_count+" kursi");
+	        return false;
+	      }
+	    });
 
 	});
 </script>

@@ -16,7 +16,7 @@
 	</div>
 	<div class="hasil-pencarian-content row">
 		<div class="top-info col-sm-12 row">
-			<div class="rute-info col-sm-8">Hasil Pencarian: <?php //echo $dataResult['route']['name'] ?></div>
+			<div class="rute-info col-sm-8">Hasil Pencarian: <?php echo $dataResult['route']['name'] ?></div>
 			<div class="date-info col-sm-4">
 				<i class="fa fa-calendar" aria-hidden="true"></i><?= $this->Time->format($formData['tglKeberangkatan'],'dd MMM Y') ?>
 				</div>
@@ -45,10 +45,9 @@
 							<td class="search-tipe">
 								<span><?=$this->Bus->getLabel($ticket->bus->class)?></span>
 								Fasilitas<br>
-								<?php $fasilitas = unserialize($ticket->bus->facilities); ?>
-								<?php foreach ($fasilitas as $item) { ?>
-									- <?= $item ?><br>
-								<?php } ?>
+								- AC <br>
+								- Selimut <br>
+								- Bantal
 							</td>
 							<td class="search-time">
 								<span><?= $this->Time->format($ticket->departure_time,'HH:mm'); ?></span>

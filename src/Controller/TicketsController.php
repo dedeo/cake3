@@ -126,6 +126,8 @@ class TicketsController extends AppController
             $this->Flash->error(__('Data tiket tidak ditemukan'));
         }
 
+        // debug($orderData);
+
         //
         // save customer first, and get customer id;
         //
