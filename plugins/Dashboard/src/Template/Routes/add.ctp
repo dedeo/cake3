@@ -37,6 +37,7 @@ $this->assign('title', $title);
                                 'source', 
                                 [
                                     'label' => false,
+                                    'value' => '',
                                     'class'=>'form-control col-md-7 col-xs-12',
                                     'required'=>'required'
                                 ]); ?>
@@ -51,6 +52,7 @@ $this->assign('title', $title);
                                 'destination', 
                                 [
                                     'label' => false,
+                                    'value' => '',
                                     'class'=>'form-control col-md-7 col-xs-12',
                                     'required'=>'required'
                                 ]); ?>
@@ -58,7 +60,7 @@ $this->assign('title', $title);
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Jarak <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Jarak
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                             <!-- <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="First Name"> -->
@@ -67,8 +69,7 @@ $this->assign('title', $title);
                                 [
                                     'type'=>'number',
                                     'label' => false,
-                                    'class'=>'form-control col-md-7 col-xs-12 has-feedback-right',
-                                    'required'=>'required'
+                                    'class'=>'form-control col-md-7 col-xs-12 has-feedback-right'
                                 ]); ?>
                             <span class="form-control-feedback right" aria-hidden="true">Km</span>
                         </div>

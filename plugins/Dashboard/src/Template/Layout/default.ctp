@@ -24,7 +24,11 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
     </title>
-    <?= $this->Html->meta('icon') ?>
+        <?= $this->Html->meta(
+        '/favicon.ico',
+        '/favicon.ico',
+        ['type' => 'icon']
+    ); ?>
 
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('cake.css') ?>
