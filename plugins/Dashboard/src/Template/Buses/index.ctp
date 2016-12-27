@@ -18,6 +18,7 @@ $this->assign('title', 'List Armada');
 				<th class="column-title"><?= $this->Paginator->sort('id') ?> </th>
 				<th class="column-title"><?= $this->Paginator->sort('name') ?> </th>
 				<th class="column-title"><?= $this->Paginator->sort('Tipe') ?> </th>
+				<th class="column-title"><?= $this->Paginator->sort('capacity','Kapasitas') ?> </th>
 				<th class="column-title"><?= $this->Paginator->sort('status') ?> </th>
 				<th class="column-title no-link last"><span class="nobr">Action</span></th>
 			  </tr>
@@ -28,6 +29,7 @@ $this->assign('title', 'List Armada');
 					<td><?= $this->Number->format($bus->id) ?></td>
 					<td><?= $this->Html->link(h($bus->name),(['controller'=>'Buses','action'=>'edit',$bus->id])) ?></td>
 					<td><?= $this->Bus->getLabel($bus->class); ?></td>
+					<td><?= $bus->capacity; ?></td>
 					<td><?= $this->Number->format($bus->status) ?></td>
 					<td class="actions">
 				      	<a href=<?= $this->Url->build(['controller'=>'Buses','action'=>'edit',$bus->id])?> class="text-general"><i class="fa fa-edit"></i></a>

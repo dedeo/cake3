@@ -16,21 +16,6 @@ $this->assign('title', 'Tambah Armada Baru');
 				<!-- <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"> -->
 
 					<div class="form-group">
-					<label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Armada <span class="required">*</span>
-						</label>
-						<div class="col-md-6 col-sm-6 col-xs-12">
-							<?php echo $this->Form->text(
-								'name', 
-								[
-									'label' => false,
-									'class'=>'form-control col-md-7 col-xs-12',
-									'required'=>'required',
-									'value'=>''
-								]); ?>
-							<!-- <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12"> -->
-						</div>
-					</div>
-					<div class="form-group">
 					<label class="control-label col-md-3 col-sm-3 col-xs-12">Nomor Polisi <span class="required">*</span>
 						</label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
@@ -48,17 +33,16 @@ $this->assign('title', 'Tambah Armada Baru');
 						<label class="control-label col-md-3 col-sm-3 col-xs-12" >Tipe <span class="required">*</span>
 						</label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
-						<?php $options = ['hight_class'=>'Hight Class Bus',
-												'big_top'=>'Big Top',
-												'bisnis'=>'Bisnis'
-												] ?>
 							<?php echo $this->Form->select(
-								'class', $options,
+								'class', 
+								$this->Bus->toOptionsArray(),
 								[
 									'label' => false,
 									'class'=>'form-control col-md-7 col-xs-12',
-									'required'=>'required'
+									'required'=>'required',
+									'onchange' =>'getCapacity(this)'
 								]); ?>
+							<?php echo $this->Form->hidden('capacity',['id'=>'capacity']) ?>
 						</div>
 					</div>
 					<div class="form-group">
@@ -82,6 +66,14 @@ $this->assign('title', 'Tambah Armada Baru');
 	</div>
 </div>
 <script type="text/javascript">
+	function getCapacity(elm){
+		var capacityArray = <?php echo json_encode($this->Bus->getCapacity()) ?>;
+		var busClass = elm.options[elm.selectedIndex].value;
+
+		// alert(busClass);
+		document.getElementById('capacity').value = capacityArray[busClass];
+	}
+
 	function newBus(){
 		var form = document.getElementById("newBusForm");
 		// document.getElementById("your-id").addEventListener("click", function () {
