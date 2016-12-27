@@ -3,6 +3,8 @@ namespace Dashboard\Controller;
 
 use Dashboard\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use Cake\I18n\Time;
+
 
 
 /**
@@ -72,29 +74,95 @@ class TicketsController extends AppController
 
     public function create($scheduleid = null)
     {
-        debug($scheduleid);
+
+        // debug($scheduleid);
         $scheduleTable = TableRegistry::get('Schedules');
 
         $schedule = $scheduleTable->get($scheduleid, [
-            'contain' => ['Buses', 'Routes']
+            'contain' => ['Routes', 'Buses']
         ]);
-        // die();
+
+        $weekdayNumber = $schedule->day;
+
+        // debug($schedule);
+
+        $firstday = strtotime('first day of this month');
+        $lastmonth = strtotime("last day of this month");
+        // echo 'today: '.$firstday;
+        // echo 'lastmonth: '.$weekdayNumber;
 
         $ticket = $this->Tickets->newEntity();
-        if ($this->request->is('post')) {
-            $ticket = $this->Tickets->patchEntity($ticket, $this->request->data);
-            if ($this->Tickets->save($ticket)) {
-                $this->Flash->success(__('The ticket has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The ticket could not be saved. Please, try again.'));
+        // $dateArr = array();
+
+            do
+            {
+                // 'w' is Numeric representation of the day of the week   
+                // 0 (for Sunday) through 6 (for Saturday)
+                if(date("w", $firstday) != $weekdayNumber)
+                {
+                    $firstday += (24 * 3600); // add 1 day
+                }
+            } while(date("w", $firstday) != $weekdayNumber);
+
+
+            while($firstday <= $lastmonth)
+            {
+                $dateArr[] = date('Y-m-d', $firstday);
+                $firstday += (7 * 24 * 3600); // add 7 days
+
             }
-        }
-        // $schedules = $this->Tickets->Schedules->find('list', ['limit' => 200]);
-        $buses = $this->Tickets->Buses->find('list', ['limit' => 200]);
-        $this->set(compact('ticket', 'schedules', 'buses'));
-        $this->set('_serialize', ['ticket']);
+
+            $dateNow = date('Y-m-d H:m:s', strtotime('now'));
+            foreach ($dateArr as $date) {
+
+                $newTicket = [
+                    'schedule_id' => $schedule->id,
+                    // 'create_at' => $dateNow,
+                    'route_id' => $schedule->route_id,
+                    'departure_time' => $schedule->departure_time->i18nFormat('HH:mm:ss'),
+                    'date' => $date,
+                    'arival_time' => $schedule->arival_time->i18nFormat('HH:mm:ss'), 
+                    'fare' => $schedule->route->fare,
+                    'stock' => $schedule->bus->capacity,
+                    'bus_id' => $schedule->bus_id,
+                    'passegers' => '',
+                ];
+                
+                $ticket = $this->Tickets->patchEntity($ticket,$newTicket);
+                $ticket = $this->Tickets->newEntity($newTicket);
+
+                // debug($ticket);
+
+                $save = $this->Tickets->save($ticket);
+                // debug($save);
+            }
+
+            // die();
+
+            // $ticket = $this->Tickets->newEntities($newTicket);
+
+            // foreach ($newTicket as $data) {
+            //     $entity = $this->Tickets->patchEntity($ticket,$data );
+            //     // $order = $orderTable->patchEntity($order, $ticketData);
+            //     $entity = $this->Tickets->newEntity($data);
+            // //     debug($ticket);
+            //     if ($this->Tickets->save($entity)) {
+            //         $this->Flash->success(__('The ticket has been saved.'));
+
+            //         return $this->redirect(['action' => 'index']);
+            //     } else {
+            //         $this->Flash->error(__('The ticket could not be saved. Please, try again.'));
+            //     }
+            // }
+
+            // debug($dateArr);
+
+            // $schedules = $schedule->Routes->find('list', ['limit' => 200]);
+            $buses = $this->Tickets->Buses->find('list', ['limit' => 200]);
+            $this->set(compact('ticket', 'schedule', 'buses'));
+            // $this->set('_serialize', ['ticket','schedules']);
+            $this->set('title', 'Buat Tiket Baru');        
     }
 
     /**

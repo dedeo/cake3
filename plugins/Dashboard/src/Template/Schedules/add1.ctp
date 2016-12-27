@@ -13,12 +13,22 @@ $this->assign('title', $title);
 			<div class="x_content">
 				<?php echo $this->Flash->render() ?>
 				<?php echo $this->Form->create($schedule, ['id'=>'scheduleForm','class'=>'form-horizontal form-label-left','data-parsley-validate']) ?>
+				<!-- <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"> -->
 
 					<div class="form-group">
 					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Hari Keberangkatan <span class="required">*</span>
 						</label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<?php 
+								// echo $this->Form->input(
+								// 'day',
+								// [
+								// 	'empty'=>'- Pulih Hari Keberangkatan -',
+								// 	'options' => $this->MyDate->toOptionsArray(),
+								// 	'label' => false,
+								// 	'class'=>'form-control col-md-7 col-xs-12',
+								// 	'required'=>'required'
+								// ]); 
 	                            echo $this->Form->select(
 	                                'day',
 	                                $this->MyDate->toOptionsArray(), [
@@ -26,25 +36,10 @@ $this->assign('title', $title);
 	                                    'required'=>'required'
 	                                ]);
 								?>
-						</div>
-					</div>
 
-					<div class="form-group">
-					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Bus <span class="required">*</span>
-						</label>
-						<div class="col-md-6 col-sm-6 col-xs-12">
-							<?php echo $this->Form->input(
-								'bus_id', 
-								[
-									'empty'=>'- Pulih Bus -',
-									'label' => false,
-									'class'=>'form-control col-md-7 col-xs-12',
-									'required'=>'required',
-								]); ?>
 							<!-- <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12"> -->
 						</div>
 					</div>
-
 					<div class="form-group">
 					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Rute <span class="required">*</span>
 						</label>
@@ -59,6 +54,21 @@ $this->assign('title', $title);
 									'onChange'=>'routeChange(this)'
 								]); ?>
 							<input type="hidden" name='route_name' id="route_name">
+						</div>
+					</div>
+					<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Bus <span class="required">*</span>
+						</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<?php echo $this->Form->input(
+								'bus_id', 
+								[
+									'empty'=>'- Pulih Bus -',
+									'label' => false,
+									'class'=>'form-control col-md-7 col-xs-12',
+									'required'=>'required',
+								]); ?>
+							<!-- <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12"> -->
 						</div>
 					</div>
 					<div class="form-group">

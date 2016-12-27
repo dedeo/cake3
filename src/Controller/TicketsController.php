@@ -27,19 +27,44 @@ class TicketsController extends AppController
 
         $jadwal = TableRegistry::get('Schedules');
 
+
+
         $results = null;
 
         if ($this->request->is('post')) {
             $formData = $this->request->data;
             $this->request->session()->write('Ticket.search', $formData);
 
-            $day = date('N', strtotime($formData['tglKeberangkatan']));
+            $tgl = date('Y-m-d', strtotime($formData['tglKeberangkatan']));
 
-            $results = $jadwal->find('all')
-                        ->where(['Schedules.route_id' => $formData['rute'],
-                                 'Schedules.day' => $day
-                             ])
-                        ->contain(['Routes','Buses','TicketOrders']);
+            // debug($day);
+            // die();
+
+            // $results = $jadwal->find('all')
+            //             ->where(['Schedules.route_id' => $formData['rute'],
+            //                      'Schedules.day' => $day
+            //                  ])
+            //             ->contain(['Routes','Buses','TicketOrders']);
+
+            $results = $this->Tickets->find('all',
+                        [
+                            'contain'=>['Schedules'=>['Routes'],'Buses'],
+                            'conditions'=>['Tickets.route_id'=>$formData['rute'],
+                                            'Tickets.date'=>$tgl
+
+                                            ]
+                        ]
+                );
+                        // ->where([
+                        //         'Tickets.schedule_id'=>$formData['rute'],
+                        //         'Tickets.date'=>$formData['tglKeberangkatan']])
+                        // ->contain(['Schedules','Buses']);
+
+            // foreach ($results as $result) {
+            // debug($result);
+            //     # code...
+            // die();
+            // }
 
             if ($results->count()<1){
                 $this->Flash->error(__('Tiket tidak ditemukan'));
