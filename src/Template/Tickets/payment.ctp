@@ -91,7 +91,7 @@
 					<tbody>
 						<tr>
 							<td><?=$tiket['customer']['name']?></td>
-							<td><?=$tiket['customer']['no_tlp']?></td>
+							<td><?=$tiket['customer']['phone']?></td>
 							<td><?=$tiket['customer']['email']?></td>
 						</tr>
 					</tbody>

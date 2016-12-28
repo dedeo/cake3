@@ -20,7 +20,7 @@ class TicketsController extends AppController
     public function initialize(){
         parent::initialize();
 
-        $this->Auth->allow(['search','order','pembayaran', 'saveOrder']);
+        $this->Auth->allow(['search','getTicket','pembayaran', 'saveOrder']);
     }
 
     public function search($param = array()){
@@ -63,20 +63,76 @@ class TicketsController extends AppController
         $this->set(compact('results','formData'));
     }
 
-    public function order(){
+    public function getTicket(){
         if($this->request->is('post')){
             $formData = $this->request->data();
 
-            $id = $formData['id'];
+            // debug($formData);
+            // die();
 
-            $ticketModel = TableRegistry::get('Tickets');
-            $jadwal = $ticketModel->get($id, [
-                'contain' => ['Schedules','Buses']
-            ]);
+            $ticket = $formData['id'];
+
+            // $ticketModel = TableRegistry::get('Tickets');
+            // $jadwal = $ticketModel->get($id, [
+            //     'contain' => ['Schedules','Buses']
+            // ]);
             
-            $this->request->session()->write('Ticket.order', $jadwal);
-            $this->set(compact('jadwal','formData'));
-        }   
+            $this->request->Session()->write('Ticket.id', $ticket);
+            $this->request->Session()->write('FormData', $formData);
+            // $this->set(compact('jadwal','formData'));
+            return $this->redirect(['controller'=>'Tickets','action'=>'order']);
+        }
+        return $this->redirect('/');
+    }
+
+
+
+    public function order(){
+        if($this->request->Session()->read('Ticket.id')){
+            $ticketId = $this->request->Session()->read('Ticket.id');
+            $formData = $this->request->Session()->read('FormData');
+
+            $ticket = $this->Tickets->get($ticketId,
+                        [
+                            'contain' => ['Schedules','Buses']
+                    ]);
+            
+            // debug($ticket);
+            $this->request->Session()->write('Ticket.ticket', $ticket);
+            $this->set(compact('ticket','formData'));
+
+
+            $orderModel = TableRegistry::get('TicketOrders');
+
+            // cari ticket yang telah terjual
+            //
+            $soldTicket = $orderModel->find('all', [
+                    'condition' => ['TicketOrders.ticket_id'=>$ticketId],
+                    'contain' => ['TicketPassengers']
+                ]);
+
+            // cari kursi yang terlah terjual
+            // berdasarkan tiket yang telah terjual
+            $soldSeets = [];
+            foreach ($soldTicket as $ticket) {
+                $passegers = $ticket->ticket_passengers;
+                foreach ($passegers as $passeger) {
+                    $soldSeets[] = $passeger->seet_number;
+                }
+            }
+
+            // debug($soldSeets);
+            // die();
+            // debug($ticket);
+
+            // die();
+
+            // $this->request->Session()->write('Ticket.sold', $soldTicket);
+            $this->set(compact('soldSeets'));
+        }
+        else{
+            return $this->redirect('/');
+        }
     }
 
     public function payment(){
@@ -151,8 +207,8 @@ class TicketsController extends AppController
     }
 
     public function saveOrder(){
-        $orderData = $this->request->session()->read('Ticket.detail');
-        $orderData1 = $this->request->session()->read('Ticket.order');
+        $orderData = $this->request->Session()->read('Ticket.detail');
+        $orderData1 = $this->request->Session()->read('Ticket.ticket');
         $formData = $this->request->data();
 
         // var_dump($formData);
@@ -222,6 +278,8 @@ class TicketsController extends AppController
             $this->Tickets->save($aa);
         }else{
             $this->Flash->error(__('Order tiket tidak dapat disimpan!'));
+            return $this->redirect(['action' => 'order']);
+
         }
 
         // debug($aneh);
@@ -399,6 +457,5 @@ class TicketsController extends AppController
     // public function logout() {
     //     return $this->redirect($this->Auth->logout());
     // }
-
 
 }

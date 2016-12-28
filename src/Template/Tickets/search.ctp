@@ -34,7 +34,7 @@
 				<tbody>
 				<?php foreach ($results as $ticket) { ?>
 					<tr>
-						<form action="<?php echo $this->Url->build(['controller'=>'Tickets','action'=>'order']) ?>" method="POST">
+						<form action="<?php echo $this->Url->build(['controller'=>'Tickets','action'=>'getTicket']) ?>" method="POST">
 							<?= $this->Form->hidden('id',['value'=>$ticket->id]) ?>			
 							<?= $this->Form->hidden('jmlPenumpang',['value'=>$formData['jmlPenumpang']]) ?>			
 							<td class="search-img">
@@ -54,7 +54,7 @@
 								<?= $duration->h.' jam, '.$duration->i.' menit'; ?>
 							</td>
 							<td class="search-capacity">
-								<span><?=$ticket->bus->capacity?></span>
+								<span><?=$ticket->stock?></span>/<?=$ticket->bus->capacity?>
 								<!-- <span>12/</span>28 -->
 							</td>
 							<td class="search-price">
