@@ -1,5 +1,5 @@
 <?php
-// debug($jadwal);
+// debug($ticket);
 ?>
 <body class="data-penumpang">
 <form action="<?=$this->Url->build(['controller'=>'Tickets','action'=>'payment']) ?>" method="POST">
@@ -7,14 +7,14 @@
 		<h1>Pilih Kursi</h1>
 		<div class="kursi-wrapper">
 			<div class="bus-info">
-				<div class="plat-no"><?= $jadwal->bus->plat_no?></div>
-				<?= $this->Form->hidden('ticketId',['value'=>$jadwal->id]) ?>
+				<div class="plat-no"><?= $ticket->bus->plat_no?></div>
+				<?= $this->Form->hidden('ticketId',['value'=>$ticket->id]) ?>
 				<i class="fa fa-bus" aria-hidden="true"></i>
 			</div>
 			<div class="kursi-list">
 				<!-- List kursi seperti ular tangga -->
 				<?php 
-					$total_kursi = $jadwal->bus->capacity;
+					$total_kursi = $ticket->bus->capacity;
 					$i = 1;
 					if($total_kursi==28){
 						$kolom=4;
@@ -24,7 +24,7 @@
 				?><div class="total-kursi-<?php echo $total_kursi ?>"><?php
 					$tampung = '';
 					$arah = 'ka';
-					$sold = [4,3,20];
+					$sold = $soldSeets;
 					while ( $i <= $total_kursi) {
 						$sold_class = (in_array($i, $sold))?'sold':'';
 						if ($arah == 'ka') {
@@ -106,7 +106,7 @@
 			</div>
 			<div class="penumpang-phone">
 				<label for="penumpang-phone">Nomor Telepon</label>
-				<input type="text" name="customer[no_tlp]" placeholder="Input nomor telepon" id="penumpang-phone">
+				<input type="text" name="customer[phone]" placeholder="Input nomor telepon" id="penumpang-phone">
 			</div>
 			<div class="penumpang-email">
 				<label for="penumpang-email">Email (Opsional)</label>
