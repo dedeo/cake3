@@ -1,0 +1,7 @@
+.tile_count .tile_stats_count:before {
+	display: none;
+}
+
+body .container.body .right_col {
+	min-height: 500px !important;
+}

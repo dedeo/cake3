@@ -7,7 +7,6 @@ $this->assign('title', $title);
 		<div class="x_panel">
 			<div class="x_title">
 				<a href='#' class="btn btn-warning btn-sm pull-right" id="saveBtn">Simpan</a>
-				<a href='<?= $this->Url->build(['controller'=>'Tickets','action'=>'create',$schedule->id])?>' class="btn btn-general btn-sm pull-right" id="createTicket">Buat Tiket</a>
 				<a href=<?= $this->Url->build(['controller'=>'Schedules','action'=>'index'])?> class="btn btn-general btn-sm pull-right"><i class="fa fa-arrow-left"></i> Kembali</a>
 				<div class="clearfix"></div>
 			</div>
@@ -87,29 +86,34 @@ $this->assign('title', $title);
 								]); ?>
 						</div>
 					</div>
-				<?php echo $this->Form->end(); ?>
+					<?php echo $this->Form->end(); ?>
+					<div class="form-group">
+						<?php echo $this->Form->create('scheduleId', ['url'=>['controller'=>'Tickets','action'=>'create'],'id'=>'jadwalForm','class'=>'form-horizontal form-label-left','data-parsley-validate']) ?>
+						<input type="hidden" name="scheduleid" value="<?php echo $schedule->id;?>">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal tiket berlaku<span class="required">*</span>
+						</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<input type="text" name="daterangeticket" value="" required />
+						</div>
+						<?php echo $this->Form->end(); ?>
+					</div>
+				
 			</div>
+			<button class="btn btn-warning btn-sm" id="saveNewBtn">Buat Tiket</button>
 		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-12 col-sm-12 col-xs-12">
-	<?php echo $this->Form->checkbox('aaa') ?>
-	Buat tiket untuk jadwal keberangkatan : <?= $routes->toArray()[$schedule->route_id];//$schedule->route_id;?>
 	</div>
 </div>
 <?php 
 $this->Html->scriptStart(['block'=>true]); ?>
+	$(document).ready(function() {
+		$('input[name="daterangeticket"]').daterangepicker();
+	});
+
 	$( "#saveBtn" ).click(function() {
 	  $( "#scheduleForm" ).submit();
 	});
-	$( "#saveNewBtn" ).click(function(e) {
-	  // $( "form" ).submit();
-	  var data = $("form").serialize();
-	  // alert( "Data Loaded: " + data );
-	  e.preventDefault();
-	  $('#scheduleForm').attr('action',"/dashboard/schedules/edit/new");
-	  $( "#scheduleForm" ).submit();
+	$( "#saveNewBtn").click(function() {
+	  $( "#jadwalForm").submit();
 	});
 
 <?php $this->Html->scriptEnd();

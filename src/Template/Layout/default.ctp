@@ -28,15 +28,11 @@ $cakeDescription = 'Bintang Timur: Bus untuk anda semua';
     <?= $this->Html->css('bootstrap.min.css') ?>
     <?= $this->Html->css('bootstrap-select.min.css') ?>
     <?= $this->Html->css('global.css') ?>
-    <?= $this->Html->css('home.css') ?>
     <?= $this->Html->css('font-awesome.min.css') ?>
     <?= $this->Html->css('owl.carousel.css') ?>
     <?= $this->Html->css('owl.theme.default.css') ?>
     <?= $this->Html->css('jquery-ui.min.css') ?>
     
-
-    
-
     <?= $this->Html->script('jquery-1.11.3');?>
     <?= $this->Html->script('jquery-3.1.1.min');?>
     <?= $this->Html->script('owl.carousel');?>

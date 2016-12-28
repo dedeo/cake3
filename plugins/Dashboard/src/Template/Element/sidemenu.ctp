@@ -48,17 +48,15 @@
                   </li>
 
                   <li><?= $this->Html->link(
-                    $this->Html->tag('i','',['class'=>'fa fa-calendar']).' Jadwal keberangkatan',
+                    $this->Html->tag('i','',['class'=>'fa fa-calendar']).' Jadwal Rutin',
                     ['controller'=>'Schedules','action'=>'index'],
                     ['escape'=>false])
                     ?>
                   </li>
 
-                  <li><a><i class="fa fa-ticket"></i> Tiket <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-ticket"></i>Jadwal Tiket <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><?= $this->Html->link(' Daftar Tiket',['controller'=>'Tickets','action'=>'index'])?></li>
-                      <li><?= $this->Html->link(' Penjualan Tiket',['controller'=>'Buses','action'=>'index'])?></li>
-                      <li><?= $this->Html->link(' Tambah Tiket Baru',['controller'=>'Tickets','action'=>'add'])?></li>
                     </ul>
                   </li>
 
@@ -78,21 +76,4 @@
               </div>
             </div>
             <!-- /sidebar menu -->
-
-            <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
-            <!-- /menu footer buttons -->
           </div>

@@ -24,8 +24,8 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
 	                <th scope="col"><?= $this->Paginator->sort('bus_id','Bus') ?></th>
 	                <!-- <th scope="col"><?= $this->Paginator->sort('fare') ?></th> -->
 	                <!-- <th scope="col"><?= $this->Paginator->sort('create_at') ?></th> -->
-	                <th scope="col"><?= $this->Paginator->sort('departure_time','Jam Keberangkatan') ?></th>
-	                <th scope="col"><?= $this->Paginator->sort('arival_time','Jam Kedatangan') ?></th>
+	                <th scope="col"><?= $this->Paginator->sort('departure_time','Berangkat') ?></th>
+	                <th scope="col"><?= $this->Paginator->sort('arival_time','Datang') ?></th>
 	                <!-- <th scope="col"><?= $this->Paginator->sort('status') ?></th> -->
 	                <th scope="col" class="actions"><?= __('Actions') ?></th>
 	            </tr>
