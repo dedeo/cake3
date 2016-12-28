@@ -459,7 +459,6 @@ div.ui-datepicker table.ui-datepicker-calendar {
 	opacity: 0.8;
 }
 
-
 /*Search Result*/
 
 .hasil-pencarian-content {
@@ -477,6 +476,10 @@ div.ui-datepicker table.ui-datepicker-calendar {
 
 .date-info .fa {
 	margin-right: 10px;
+}
+
+.top-info .date-info {
+	text-align: right;
 }
 
 .result-search th {

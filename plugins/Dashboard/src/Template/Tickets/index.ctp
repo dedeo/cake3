@@ -11,7 +11,7 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
     <div class="x_panel">
       <div class="x_content">
           <div class="x_title">
-            <a href=<?= $this->Url->build(['controller'=>'Schedules','action'=>'add'])?> class="btn btn-warning btn-sm pull-right"> Tambah Jadwal Baru</a>
+            <a href=<?= $this->Url->build(['controller'=>'Schedules'])?> class="btn btn-warning btn-sm pull-right"> Tambah Jadwal Baru</a>
             <div class="clearfix"></div>
           </div>
 
@@ -19,16 +19,14 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
           <table class="table" id="tableRoutes">
             <thead>
                 <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('schedule_id','Rute') ?></th>
-                <!-- <th scope="col"><?= $this->Paginator->sort('create_at') ?></th> -->
-                <th scope="col"><?= $this->Paginator->sort('date','Tanggal') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('departure_time','Berangkatan') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('arival_time','Datangan') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('fare','Harga') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('stock') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('bus_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('passegers','Terjual') ?></th>
+                    <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                    <th scope="col"><?= $this->Paginator->sort('schedule_id','Rute') ?></th>
+                    <th scope="col"><?= $this->Paginator->sort('date','Tanggal') ?></th>
+                    <th scope="col"><?= $this->Paginator->sort('departure_time','Berangkatan') ?></th>
+                    <th scope="col"><?= $this->Paginator->sort('arival_time','Datangan') ?></th>
+                    <th scope="col"><?= $this->Paginator->sort('fare','Harga') ?></th>
+                    <th scope="col"><?= $this->Paginator->sort('stock') ?></th>
+                    <th scope="col"><?= $this->Paginator->sort('bus_id') ?></th>
                     <th scope="col" class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -43,8 +41,7 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
                     <td><?= h($this->Time->format($ticket->arival_time,'HH:mm')) ?></td>
                     <td><?= h('Rp '.$ticket->fare) ?></td>
                     <td><?= h($ticket->stock) ?></td>
-                    <td><?= $ticket->has('bus') ? $this->Html->link($ticket->bus->name, ['controller' => 'Buses', 'action' => 'view', $ticket->bus->id]) : '' ?></td>
-                    <td><?= $this->Number->format($ticket->passegers) ?></td>                    
+                    <td><?= $ticket->has('bus') ? $this->Html->link($ticket->bus->name, ['controller' => 'Buses', 'action' => 'view', $ticket->bus->id]) : '' ?></td>                   
                     <td class="actions">
                             <a href=<?= $this->Url->build(['controller'=>'Tickets','action'=>'edit',$ticket->id])?> class="text-general"><i class="fa fa-edit"></i></a>
                             <?= $this->Form->postLink('<i class="fa fa-remove"></i>', ['action' => 'delete', $ticket->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ticket->id),'escape'=>false,'class'=>'text-danger']) ?>
@@ -53,32 +50,6 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
                 <?php endforeach; ?>
             </tbody>
 
-<!--            <thead>
-              <tr class="headings">
-                <th class="column-title"><?= $this->Paginator->sort('id','Id') ?> </th>
-                <th class="column-title"><?= $this->Paginator->sort('source','Kota Asal') ?> </th>
-                <th class="column-title"><?= $this->Paginator->sort('destination','Kota Tujuan') ?> </th>
-                <th class="column-title"><?= $this->Paginator->sort('distance','Jarak') ?> </th>
-                <th class="column-title"><?= $this->Paginator->sort('fare','Tarif') ?> </th>
-                <!-- <th class="column-title"><?= $this->Paginator->sort('') ?> </th>
-                <th class="column-title no-link last"><span class="nobr">Action</span></th>
-              </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($routes as $route): ?>
-                <tr>
-                    <td><?= $this->Number->format($route->id) ?></td>
-                    <td><?= $this->Html->link(h($route->source),(['controller'=>'Routes','action'=>'edit',$route->id])) ?></td>
-                    <td><?= $route->destination ?></td>
-                    <td><?= $route->distance ?> Km</td>
-                    <td>Rp <?= $route->fare ?></td>
-                    <td class="actions">
-                        <a href=<?= $this->Url->build(['controller'=>'Routes','action'=>'edit',$route->id])?> class="text-general"><i class="fa fa-edit"></i></a>
-                        <?= $this->Form->postLink('<i class="fa fa-remove"></i>', ['action' => 'delete', $route->id], ['confirm' => __('Are you sure you want to delete # {0}?', $route->id),'escape'=>false,'class'=>'text-danger']) ?>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody> -->
           </table>
         </div>
       </div>
@@ -93,17 +64,3 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
     </div>
     </div>
 </div>
-
-<?php
-// $this->Html->script(
-//  [
-//      'jquery.min.js',
-//      'bootstrap.min.js',
-//      'fastclick.js',
-//      'nprogress.js',
-//      'icheck.min.js',
-//      'custom.min.js',
-//  ],
-//  ['block'=>true]
-// );
-?>

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
   <title>Dashboard - <?php echo h($this->fetch('title')); ?></title>
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <?php
   echo $this->fetch('meta');
 
@@ -14,7 +14,9 @@
       'Dashboard.green',
       'Dashboard.bootstrap-progressbar-3.3.4.min',
       'Dashboard.jquery-jvectormap-2.0.3',
-      'Dashboard.custom.min']
+      'Dashboard.custom.min',
+      'Dashboard.gopecustom'
+    ]
   );
   echo $this->fetch('css');
 
@@ -37,37 +39,16 @@
               <div class="title_left">
                 <h3><?php echo h($this->fetch('title')); ?></h3>
               </div>
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                </div>
-              </div> 
           </div>
           <div class="clearfix"></div>
           <?php echo $this->Flash->render() ?>
-
-        <?php
-        // echo $this->Html->getCrumbs(' > ', [
-        //     'text' => 'Home',
-        //     'url' => ['controller' => 'Main', 'action' => 'index'],
-        //     'escape' => true
-        // ]); 
-        ?>       
-        <?= $this->fetch('content'); ?>
+          <?= $this->fetch('content'); ?>
         </div>
         <!-- /page content -->
-
-        <!-- footer content -->
-        <?php //echo $this->element('footer'); ?>
-        <!-- /footer content -->
       </div>
     </div>
-
+</body>
+</html>
   <?php
   echo $this->Html->script(
     [
@@ -112,5 +93,4 @@
         ]
       );
     ?>
-  </body>
-</html>
+  

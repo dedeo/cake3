@@ -2,6 +2,8 @@
 namespace Dashboard\Controller;
 
 use Dashboard\Controller\AppController;
+use Cake\ORM\TableRegistry;
+use Cake\I18n\Time;
 
 /**
  * Posts Controller
@@ -32,6 +34,32 @@ class MainController extends AppController
 
         // $this->set(compact('posts'));
         // $this->set('_serialize', ['posts']);
+
+        $ordermodel = TableRegistry::get('TicketOrders');
+
+        $tickets = $ordermodel->find('all',[
+            'conditions'=>[
+                // 'Tickets.Schedules.Buses.id'=>$formData['buses'],
+                'TicketOrders.create_at >'=>date('Y-m-d',strtotime('first day of this month')),
+                'TicketOrders.create_at <'=>date('Y-m-d',strtotime('last day of this month'))
+                ]
+        ]);
+        //debug($tickets->toArray());
+
+        $timeToday = Time::now();
+
+        //debug(Time::format($timeToday));
+
+        $ticketorderTotal = 0;
+        $ticketorderPasseger = 0;
+        foreach ($tickets as $ticket) {
+            $ticketorderTotal += $ticket->total;
+            $ticketorderPasseger += $ticket->passegers;
+        }
+        $this->set('jualTotal', $ticketorderTotal);
+        $this->set('jualPessanger', $ticketorderPasseger);
+        $this->set('jualBulan', $timeToday);
+        
     }
 
     /**

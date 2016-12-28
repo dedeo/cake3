@@ -66,7 +66,7 @@ class TicketsController extends AppController
                 $this->Flash->error(__('The ticket could not be saved. Please, try again.'));
             }
         }
-        $schedules = $this->Tickets->Schedules->find('list', ['limit' => 200]);
+        $schedules = $this->Tickets->Schedules->schedulevaluescheduleidfind('list', ['limit' => 200]);
         $buses = $this->Tickets->Buses->find('list', ['limit' => 200]);
         $this->set(compact('ticket', 'schedules', 'buses'));
         $this->set('_serialize', ['ticket']);
@@ -74,8 +74,11 @@ class TicketsController extends AppController
 
     public function create($scheduleid = null)
     {
-
-        // debug($scheduleid);
+        $scheduleid = $this->request->data['scheduleid'];
+        $scheduledaterange = $this->request->data['daterangeticket'];
+        $scheduledate = explode('-',$scheduledaterange);
+        // debug(explode(' - ',$scheduledaterange));
+        // die();
         $scheduleTable = TableRegistry::get('Schedules');
 
         $schedule = $scheduleTable->get($scheduleid, [
@@ -86,8 +89,8 @@ class TicketsController extends AppController
 
         // debug($schedule);
 
-        $firstday = strtotime('first day of this month');
-        $lastmonth = strtotime("last day of this month");
+        $firstday = strtotime($scheduledate[0]);
+        $lastmonth = strtotime($scheduledate[1]);
         // echo 'today: '.$firstday;
         // echo 'lastmonth: '.$weekdayNumber;
 
@@ -138,6 +141,9 @@ class TicketsController extends AppController
                 // debug($save);
             }
 
+            $allScheduleModel = TableRegistry::get('Tickets');
+            $allTickets = $allScheduleModel->find('all',['conditions'=>['Tickets.schedule_id'=>$scheduleid], 'contain'=>['Schedules','Buses']]);
+            // debug($allTickets->toArray());
             // die();
 
             // $ticket = $this->Tickets->newEntities($newTicket);
@@ -160,7 +166,7 @@ class TicketsController extends AppController
 
             // $schedules = $schedule->Routes->find('list', ['limit' => 200]);
             $buses = $this->Tickets->Buses->find('list', ['limit' => 200]);
-            $this->set(compact('ticket', 'schedule', 'buses'));
+            $this->set(compact('ticket', 'schedule', 'buses','allTickets'));
             // $this->set('_serialize', ['ticket','schedules']);
             $this->set('title', 'Buat Tiket Baru');        
     }
