@@ -69,7 +69,7 @@
 				</tbody>
 			</table>
 			<?php }else{ ?>
-			<!-- <p>Tiket tidak ditemukan</p> -->
+			<p>Tiket tidak ditemukan</p> 
 			<?php } ?>
 		</div>
 	</div>

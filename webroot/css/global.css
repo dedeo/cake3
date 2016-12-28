@@ -347,6 +347,28 @@ p.red-text {
 	margin-right: 8px;
 }
 
+.search-form .input-list select, .search-form .input-list input {
+    width: 100%;
+    height: 34px;
+    border-radius: 5px;
+    border: 1px solid #000;
+}
+.input-list input::-webkit-input-placeholder {
+   color: #000;
+}
+
+.input-list input:-moz-placeholder { /* Firefox 18- */
+   color: #000;  
+}
+
+.input-list input::-moz-placeholder {  /* Firefox 19+ */
+   color: #000;  
+}
+
+.input-list input:-ms-input-placeholder {  
+   color: #000;  
+}
+
 /*Search Top*/
 .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
 	max-width: 100%;
@@ -657,6 +679,7 @@ td.search-order .order-button {
 
 .penumpang-list .penumpang-kelamin .radio input[type=radio] {
 	margin-top: -7px;
+    max-width: 14px;
 }
 
 .penumpang-contact {
@@ -927,5 +950,343 @@ td.search-order .order-button {
     border-style: none;
     max-width: 300px;
     display: inline-block !important;
+}
+
+/* Home Styling*/
+
+.top-home {
+	position: relative;
+}
+
+/*Slider*/
+.home-slider {
+	width: 70%;
+	display: inline-block;
+	float: left;
+	padding: 0px;
+	max-height: 370px;
+	height: auto;
+	overflow: hidden;
+	-webkit-box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
+	-moz-box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
+	box-shadow: 10px 10px 16px -12px rgba(0,0,0,0.75);
+}
+
+.home-slider .slider-list {
+	position: relative;
+}
+
+.home-slider .owl-custom-next,  .home-slider .owl-custom-prev {
+	width: 40px;
+	height: 40px;
+    font-size: 25px;
+    cursor: pointer;
+    color: #fe9901;
+}
+
+.home-slider .owl-custom-next {
+	position: absolute;
+	top: 170px;
+	right: -1px;
+    padding: 5px 14px;
+}
+
+.home-slider .owl-custom-prev {
+	position: absolute;
+	top: 170px;
+	left: -1px;
+	padding: 5px 10px;
+}
+
+/*Cara Pemesanan*/
+.cara-pemesanan-desc {
+	display: inline-block;
+	width: 100%;
+	margin-top: 35px;
+	padding-top: 35px;
+}
+
+.bantuan-page .cara-pemesanan-desc {
+	margin-top: 0px;
+	padding-top: 0px;
+}
+
+.cara-pemesanan-desc h1 {
+	text-align: center;
+}
+
+.cara-pemesanan-desc li {
+	width: 20%;
+	float: left;
+	display: inline-block;
+	text-align: center;
+	padding: 0px 20px;
+}
+
+.cara-pemesanan-desc .fa {
+	font-size: 35px;
+	border: 1px solid #fe9901;
+	text-align: center;
+	width: 100%;
+	margin: 20px 0px;
+	padding: 30px 0px;
+	color: #fe9901;
+}
+
+.cara-pemesanan-desc .info {
+    font-size: 15px;
+    color: #6c6d6c;
+    line-height: 1.3;
+}
+
+.menulist-mobile {
+	display: none;
+}
+
+.message {
+	width: 100%;
+	max-width: 1024px;
+	padding: 0px 25px;
+	margin: 0 auto;
+}
+
+/*Responsive*/
+@media only screen and (max-width: 960px) {
+	.home-slider {
+		width: 60%;
+	}
+
+	.ticket-search {
+		max-width: 40%;
+	}
+
+	#main-container {
+	    padding: 70px 10px 0px;
+	}
+
+	#header-container {
+		padding: 0 10px;
+	}
+
+	#footer-container {
+		padding: 25px 10px;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.home-slider {
+		width: 100%;
+	}
+
+	.home-slider .owl-custom-nav {
+		display: none;
+	}
+
+	.ticket-search {
+		max-width: 100%;
+		width: 100%;
+		padding-left: 0px;
+		margin-top: 20px;
+	}
+
+	.block-header hr {
+		display: none;
+	}
+
+	.block-header h1 {
+		width: 100%;
+		max-width: 100%;
+		font-size: 20px;
+
+	}
+
+	.logo-header {
+		text-align: center;
+	    display: block;
+	    margin: auto;
+	    float: none;
+	    max-width: 30%;
+	    min-width: 300px;
+	}
+
+	.logo-header img {
+		margin: 0 auto;
+	}
+
+	#header-container {
+		position: relative;
+	}
+
+	.menu-list {
+	    position: absolute;
+	    display: none;
+	    width: 100%;
+	    float: none;
+	    left: 0px;
+	    top: 60px;
+	    text-align: center;
+	    background: #fe9901;
+	    margin: 0px;
+	    padding: 10px 0px;
+	}
+
+	.menu-list li {
+		float: left;
+	    width: 100%;
+	    text-align: left;
+	    padding-left: 20px;
+	}
+
+	.menu-list li a {
+		color: #fff;
+	}
+
+	.menulist-mobile {
+	    width: auto;
+	    display: inline-block;
+	    position: absolute;
+	    left: 15px;
+	    top: 10px;
+	    font-size: 25px;
+	    color: #fe9901;
+	    cursor: pointer;
+	}
+
+	.cara-pemesanan-desc  {
+		padding-top: 0px;
+	}
+
+	.cara-pemesanan-desc li {
+		width: 100%;
+	}
+
+	.bantuan-footer, .media-sosial, .rute-footer {
+		width: 100%;
+	    text-align: center;
+    	margin-bottom: 25px;
+	}
+
+	.search-form.search-top .input-list {
+		margin-bottom: 20px;	
+	}
+
+	.search-form.search-top .btn.btn-search {
+		margin-top: 0px;
+	}
+
+	.search-form.search-top .input-list, .search-form.search-top .btn.btn-search {
+		width: 100%;
+	}
+
+	.top-info {
+		padding: 10px 0px;
+	}
+
+	.top-info .date-info {
+		margin-top: 10px;
+	}
+
+	.result-search table {
+		display: inline-block;
+		width: 100%;
+	}
+
+	.result-search table thead {
+		display: none;
+	}
+
+	.result-search table tr {
+		display: inline-block;
+		width: 100%;
+		border-bottom: 1px solid #5bc0de;
+	    padding: 10px 0px;
+	}
+
+	.result-search table td {
+		display: inline-block;
+		border-bottom: 0px;
+	}
+
+	.result-search table td.search-img{
+		width: 100%;
+		float: none;
+	}
+
+	.result-search table td.search-tipe, .result-search table td.search-time {
+		width: 50%; 
+		float: left;
+	}
+
+	.result-search table td.search-capacity {
+		width: 100%;
+	    padding-top: 0px;
+	}
+
+	.result-search table td.search-order, .result-search table td.search-price {
+		float: right;
+		width: 50%;
+	}
+
+	.result-search table td.search-order .order-button {
+		width: 100%;
+	}
+
+	.pilih-kursi {
+		width: 100%;
+	}
+
+	.penumpang-content {
+		width: 100%;
+		padding-left: 0px;
+		margin-top: 20px;
+	}
+
+	.penumpang-content h1 {
+		display: inline-block;
+		width: 100%;
+	}
+
+	.penumpang-content h1 span {
+		width: 100%;
+	}
+
+	.data-penumpang .buttom-wrapper .lanjut-btn, .pembayaran .buttom-wrapper .finish-btn, .data-penumpang .buttom-wrapper .batal-btn, .pembayaran .buttom-wrapper .batal-btn {
+		width: 100%;
+		margin-top: 10px;
+	}
+
+	.total-price-wrapper {
+		width: 100%;
+	}
+
+	.detail-order {
+		width: 100%;
+		padding-left: 0px;
+		margin-top: 20px;
+	}
+
+	.ticket-summary #main-container {
+		overflow-y: hidden;
+	}
+
+	.bantuan-menu {
+		width: 100%;
+	}
+
+	.bantuan-content {
+		width: 100%;
+		padding-left: 0px;
+		margin-top: 20px;
+	}
+}
+
+@media only screen and (max-width: 560px) {
+	.contact-wrapper .perwakilan-head {
+		width: 100%;
+	}
+
+	.contact-wrapper .perwakilan-phone {
+		width: 100%;
+	}
 }
 

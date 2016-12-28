@@ -82,16 +82,16 @@
 					<h2><?php echo "Penumpang #".$n ?> </h2>
 					<div class="penumpang-name">
 						<label for="nama-penumpang-1">Nama</label>
-						<input type="text" name="penumpang[<?=$n?>][name]" placeholder="Input nama penumpang" id="nama-penumpang-<?=$n?>">
+						<input type="text" name="penumpang[<?=$n?>][name]" placeholder="Input nama penumpang" id="nama-penumpang-<?=$n?>" required>
 					</div>
-					<div class="penumpang-kelamin">
+					<div class="penumpang-kelamin form-group">
 						<h3>Jenis Kelamin</h3>
 
 						<div class="radio">
-						  <label><input type="radio" name="penumpang[<?=$n?>][gender]" value="male"> Laki-laki</label>
+						  <label><input type="radio" name="penumpang[<?=$n?>][gender]" value="male" required> Laki-laki</label>
 						</div>
 						<div class="radio">
-						  <label><input type="radio" name="penumpang[<?=$n?>][gender]" value="female"> Perempuan</label>
+						  <label><input type="radio" name="penumpang[<?=$n?>][gender]" value="female" required> Perempuan</label>
 						</div>
 					</div>
 				</li>
@@ -102,11 +102,11 @@
 			<h2>Kontak yang bisa dihubungi</h2>
 			<div class="penumpang-kontak">
 				<label for="penumpang-kontak">Nama</label>
-				<input type="text" name="customer[name]" placeholder="Input nama yang bisa dihubungi" id="penumpang-kontak">
+				<input type="text" name="customer[name]" placeholder="Input nama yang bisa dihubungi" id="penumpang-kontak" required>
 			</div>
 			<div class="penumpang-phone">
 				<label for="penumpang-phone">Nomor Telepon</label>
-				<input type="text" name="customer[phone]" placeholder="Input nomor telepon" id="penumpang-phone">
+				<input type="text" name="customer[phone]" placeholder="Input nomor telepon" id="penumpang-phone" required>
 			</div>
 			<div class="penumpang-email">
 				<label for="penumpang-email">Email (Opsional)</label>
@@ -116,9 +116,10 @@
 	</div>
 	
 	<div class="buttom-wrapper">
-		<a href="#" class="batal-btn">Batalkan</a>
+		<a href="/" class="batal-btn">Batalkan</a>
 		<button type="submit" class="lanjut-btn">Lanjutkan</button>
 	</div>
+</form>
 </body>
 
 <script type="text/javascript">

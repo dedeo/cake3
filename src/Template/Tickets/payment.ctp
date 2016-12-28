@@ -101,7 +101,7 @@
 	</div>
 	<div class="buttom-wrapper">
 		<?php echo $this->Form->create('Ticket',['url'=>'/tickets/saveorder/']) ?>
-		<a href="#" class="batal-btn">Batalkan</a>
+		<a href="/" class="batal-btn">Batalkan</a>
 		<button type="submit" class="finish-btn">Selesai &amp; Bayar</button>
 		<?php echo $this->Form->end() ?>
 	</div>

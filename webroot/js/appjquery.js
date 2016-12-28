@@ -58,6 +58,11 @@ $(document).ready(function(){
   $('.bantuan-menu .nav-tabs a').on('shown.bs.tab', function (e) {
     window.top.location.hash = e.target.hash;
     $(document).scrollTop(0);
-  })
+  });
+
+  /*Mobile menu*/
+  $(".menulist-mobile").click(function(){
+    $(".menu-list").slideToggle();
+  });
 
 });
