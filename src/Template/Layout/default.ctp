@@ -56,6 +56,7 @@ $cakeDescription = 'Bintang Timur: Bus untuk anda semua';
             <a href="/pages/home" class="logo-header">
                 <?= $this->Html->image('logo.png', ['alt' => 'Bintang Timur']);?>
             </a>
+            <div class="menulist-mobile"><i class="fa fa-bars" aria-hidden="true"></i>&nbsp;</div>
             <ul class="menu-list">
                 <li class="check-ticket">
                     <a href="/pages/check_ticket"><i class="fa fa-book" aria-hidden="true"></i> Cek Ticket</a>
