@@ -60,13 +60,21 @@
                     </ul>
                   </li>
 
+                  <li><a><i class="fa fa-list"></i> Report <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><?= $this->Html->link(' Penjualan Tiket',['controller'=>'Reports','action'=>'ticketSales'])?></li>
+                      <li><?= $this->Html->link(' Pendapatan Bus',['controller'=>'Reports','action'=>'busEarning'])?></li>
+                      <!-- <li><?= $this->Html->link(' Tambah Tiket Baru',['controller'=>'Tickets','action'=>'add'])?></li> -->
+                    </ul>
+                  </li>
+<!-- 
                   <li><?= $this->Html->link(
                     $this->Html->tag('i','',['class'=>'fa fa-list']).' Report',
                     ['controller'=>'Reports','action'=>'index'],
                     ['escape'=>false])
                     ?>
                   </li>
-
+ -->
                   <li><?= $this->Html->link(
                     $this->Html->tag('i','',['class'=>'fa fa-user-secret']).' User',
                     ['controller'=>'Users','action'=>'index'],

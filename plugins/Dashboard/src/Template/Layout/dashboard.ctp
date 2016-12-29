@@ -38,6 +38,10 @@
           <div class="page-title">
               <div class="title_left">
                 <h3><?php echo h($this->fetch('title')); ?></h3>
+                <?php
+                // $this->Html->addCrumb('Routes', '');
+                // $this->assign('title', $title);
+                ?>                
               </div>
           </div>
           <div class="clearfix"></div>

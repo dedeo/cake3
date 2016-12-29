@@ -5,7 +5,7 @@ namespace Dashboard\Controller;
 use App\Controller\AppController as BaseController;
 // use Cake\Controller\Controller;
 use Cake\Event\Event;
-
+use Cake\ORM\TableRegistry;
 
 class AppController extends BaseController
 {
@@ -68,6 +68,9 @@ class AppController extends BaseController
         
         // Only for ACL setup
         // $this->Auth->allow();
+
+        $this->_loadRoutes();
+        $this->_loadBuses();
     }
 
     /**
@@ -115,4 +118,20 @@ class AppController extends BaseController
         // Default deny
         return false;
     }
+
+    private function _loadRoutes(){
+        $routeModel = TableRegistry::get('Routes');
+        $routes = $routeModel->find('list');
+
+        $this->request->Session()->write('Routes.list',$routes->toArray());
+    }
+
+    private function _loadBuses(){
+        $busesModel = TableRegistry::get('Buses');
+        $buses = $busesModel->find('list');
+
+        $this->request->Session()->write('Buses.list',$buses->toArray());
+    }
+
+
 }

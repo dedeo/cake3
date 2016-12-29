@@ -3,18 +3,37 @@ namespace App\View\Helper;
 
 use Cake\View\Helper;
 
-class BusHelper extends Helper
+class RoutesHelper extends Helper
 {
-	private $types = ['hight_class'=>'Hight Class Bus',
-												'big_top'=>'Big Top',
-												'bisnis'=>'Bisnis'
-												];
-    public function getLabel($type)
+    private $_routes = null;
+
+    public function getLabel($route)
     {
-    	return $this->types[$type];
+        if($this->_routes == null){
+            $this->_setRoutes();
+        }
+    	return $this->routes[$route];
     }
 
     public function toOptionsArray(){
-    	return $this->types;
+
+        if($this->_routes == null){
+            $this->_setRoutes();
+        }
+        return $this->_routes;
     }
+
+    public function getRouteList(){
+
+        if($this->_routes == null){
+            $this->_setRoutes();
+        }
+        return $this->_routes;
+    }
+
+
+    private function _setRoutes(){
+        return $this->_routes = $this->request->Session()->read('Routes.list');
+    }
+
 }

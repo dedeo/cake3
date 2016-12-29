@@ -1,5 +1,5 @@
 <?php
-namespace App\Test\Fixture;
+namespace Dashboard\Test\Fixture;
 
 use Cake\TestSuite\Fixture\TestFixture;
 
@@ -50,10 +50,10 @@ class TicketOrdersFixture extends TestFixture
             'customer_id' => 1,
             'ticket_id' => 1,
             'ticket_code' => 'Lorem ipsum dolor sit amet',
-            'create_at' => 1482942969,
-            'departure_time' => '16:36:09',
+            'create_at' => 1482942990,
+            'departure_time' => '16:36:30',
             'departure_date' => '2016-12-28',
-            'arival_time' => '16:36:09',
+            'arival_time' => '16:36:30',
             'arival_date' => '2016-12-28',
             'fare' => 'Lorem ipsum dolor ',
             'passegers' => 1,
