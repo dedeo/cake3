@@ -1,5 +1,7 @@
-
-
+<?php
+$this->Html->addCrumb('Routes', '');
+$this->assign('title', $title);
+?>
 <div class="row">
 	<div class="filter-report">
 		<ul class="nav nav-tabs">
