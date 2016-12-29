@@ -40,8 +40,8 @@ class MainController extends AppController
         $tickets = $ordermodel->find('all',[
             'conditions'=>[
                 // 'Tickets.Schedules.Buses.id'=>$formData['buses'],
-                'TicketOrders.create_at >'=>date('Y-m-d',strtotime('first day of this month')),
-                'TicketOrders.create_at <'=>date('Y-m-d',strtotime('last day of this month'))
+                'TicketOrders.date_create_at >'=>date('Y-m-d',strtotime('first day of this month')),
+                'TicketOrders.date_create_at <'=>date('Y-m-d',strtotime('last day of this month'))
                 ]
         ]);
         //debug($tickets->toArray());

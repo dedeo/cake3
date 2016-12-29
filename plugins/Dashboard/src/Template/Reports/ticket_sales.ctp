@@ -33,7 +33,7 @@ $this->assign('title', $title);
 					<!-- <th class="column-title">Tanggal</th> -->
 					<!-- <th class="column-title">Rute</th> -->
 					<!-- <th class="column-title">Jumlah Penumpang</th> -->
-					<th class="column-title">Tanggal</th>
+					<th class="column-title">Tanggal Penjualan</th>
 					<th class="column-title">Pendapatan</th>
 				  </tr>
 				</thead>

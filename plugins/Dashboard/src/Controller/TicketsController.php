@@ -74,6 +74,10 @@ class TicketsController extends AppController
 
     public function create($scheduleid = null)
     {
+
+        // debug($this->request->data);
+        // die();
+
         $scheduleid = $this->request->data['scheduleid'];
         $scheduledaterange = $this->request->data['daterangeticket'];
         $scheduledate = explode('-',$scheduledaterange);
@@ -121,7 +125,7 @@ class TicketsController extends AppController
 
                 $newTicket = [
                     'schedule_id' => $schedule->id,
-                    // 'create_at' => $dateNow,
+                    'date_create_at' => date('Y-m-d',strtotime("now")),
                     'route_id' => $schedule->route_id,
                     'departure_time' => $schedule->departure_time->i18nFormat('HH:mm:ss'),
                     'date' => $date,
