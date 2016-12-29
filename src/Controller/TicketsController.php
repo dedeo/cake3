@@ -36,7 +36,7 @@ class TicketsController extends AppController
             $this->request->session()->write('Ticket.search', $formData);
 
             $tgl = date('Y-m-d', strtotime($formData['tglKeberangkatan']));
-
+            $passegers = $formData['jmlPenumpang'];
             // debug($day);
             // die();
 
@@ -50,8 +50,8 @@ class TicketsController extends AppController
                         [
                             'contain'=>['Schedules'=>['Routes'],'Buses'],
                             'conditions'=>['Tickets.route_id'=>$formData['rute'],
-                                            'Tickets.date'=>$tgl
-
+                                            'Tickets.date'=>$tgl,
+                                            'Tickets.stock >='=>$passegers
                                             ]
                         ]
                 );
@@ -249,7 +249,8 @@ class TicketsController extends AppController
             'customer_id' => $customerId,
             'ticket_id' => $orderData1->id,
             'ticket_code' => 'BT0'.substr(number_format(time() * rand(),0,'',''),0,6),
-            // 'create_at' => date('Y-m-d H:m:s'),
+            'date_create_at' => date('Y-m-d',strtotime('now')),
+            'time_create_at' => date('H:m:s',strtotime('now')),
             'departure_time' => $orderData['jam_keberangkatan']->i18nFormat('HH:mm:ss'),
             'departure_date' => date('Y-m-d',strtotime($orderData['tanggal'])),
             'arival_time' => $orderData['jam_kedatangan']->i18nFormat('HH:mm:ss'),
@@ -325,47 +326,6 @@ class TicketsController extends AppController
         }else{
             $this->Flash->error(__('Ticket summary kosong!.'));
         }
-
-
-        // if($this->request->is('post')){
-        //     $formData = $this->request->data();
-
-        //     $scheduleId = $formData['scheduleId'];
- 
-        //     // debug($formData);
-
-        //     // foreach ($formData as $key => $value) {
-        //     //     $split = explode('_', $key);
-        //     //     $data[$split[0]][$split[1]] = $value;
-        //     // }
-
-        //     // debug($data);
-            
-        //     foreach ($data as $key => $value) {
-        //         if($key!='customer' && $key!='scheduleId'){
-        //             $passeger[]=$value;
-        //         }
-        //     }
-            
-        //     //debug($passeger);
-        //     $scheduleId = 5;
-        //     $customer = ['name' => 'nama1','phone' => '8111122233','email' => 'hallo@gmail.com'];
-        //     $passeger = [['name' => 'nama1','gender' => 'female','seet_number'=>'1'],
-        //                     ['name' => 'nama2','gender' => 'male','seet_number'=>'2'],
-        //                     ['name' => 'nama3','gender' => 'male','seet_number'=>'3'],
-        //                     ['name' => 'nama4','gender' => 'male','seet_number'=>'4']
-        //                 ];            
-        //     // die();
-
-        //     // $id = $formData['id'];
-
-        //     // $schedules = TableRegistry::get('Schedules');
-        //     // $jadwal = $schedules->get($id, [
-        //     //     'contain' => ['Routes','Buses']
-        //     // ]);
-            
-        //     // $this->set(compact('jadwal','formData'));
-        // }   
     }
 
     private function _getNextId(){
@@ -442,20 +402,5 @@ class TicketsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-
-    // public function login() {
-    //     if ($this->request->is('post')) {
-    //         $user = $this->Auth->identify();
-    //         if ($user) {
-    //             $this->Auth->setUser($user);
-    //             return $this->redirect($this->Auth->redirectUrl());
-    //         }
-    //         $this->Flash->error(__('Invalid username or password, try again'));
-    //     }
-    // }
-
-    // public function logout() {
-    //     return $this->redirect($this->Auth->logout());
-    // }
 
 }

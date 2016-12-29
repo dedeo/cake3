@@ -25,6 +25,12 @@ class ReportsController extends AppController
     	if($this->request->is('post')){
 
     		$formData = $this->request->data;
+
+            if(empty($formData['buses']) || empty($formData['daterange']==null)){
+                $this->Flash->error(__('Bus atau tanggal belum dipilih'));
+                return $this->redirect(['action'=>'busEarning']);
+            }
+
     		// formData = 
 			// 'buses' => [
 			// 	(int) 0 => '1',
