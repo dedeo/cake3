@@ -38,6 +38,7 @@ $this->assign('title', 'Tambah Armada Baru');
 								$this->Bus->toOptionsArray(),
 								[
 									'label' => false,
+									'empty'=>'-Pilih tipe bus-',
 									'class'=>'form-control col-md-7 col-xs-12',
 									'required'=>'required',
 									'onchange' =>'getCapacity(this)'

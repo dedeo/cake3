@@ -33,7 +33,7 @@ class BusHelper extends Helper
     }
 
     public function toOptionsArray(){
-        return $this->getBusList();
+        return $this->types;
     }
 
     public function getBusList(){
