@@ -351,6 +351,27 @@ class TicketsController extends AppController
         return $result->toArray();        
     }
 
+    public function check(){
+        $result = null;
+        $error = null;
+        if($this->request->is('post')){
+            $code = $this->request->data['kode_tiket'];
+            if(!empty($code)){
+                $this->loadModel('TicketOrders');
+                $ticket = $this->TicketOrders->findByTicketCode($code)
+                            ->contain(['TicketPassengers','Customers','Tickets'=>['Schedules'=>['Routes'],'Buses']])
+                            ->first();
+
+                if($ticket==null){
+                    $error = 'Kode tidak ditemukan, silahkan periksa kembali';
+                }
+            }else{
+                $error='Kode tiket tidak valid';
+            }
+        }
+        $this->set(compact('ticket','error'));
+    }
+
     /**
      * View method
      *
