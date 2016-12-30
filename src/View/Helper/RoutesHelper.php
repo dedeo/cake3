@@ -12,7 +12,7 @@ class RoutesHelper extends Helper
         if($this->_routes == null){
             $this->_setRoutes();
         }
-    	return $this->routes[$route];
+    	return $this->_routes[$route];
     }
 
     public function toOptionsArray(){

@@ -116,7 +116,7 @@ class ReportsController extends AppController
             // ],
             // 'daterange' => '12/01/2016 - 12/29/2016'
 
-            $tglrange = split(' - ', $formData['daterange']);
+            $tglrange = explode(' - ', $formData['daterange']);
 
             // if($tglrange[0]==$tglrange[1]){
                 $startDate = date('Y-m-d', strtotime($tglrange[0]));

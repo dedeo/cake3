@@ -14,7 +14,7 @@
 	</div>
 	<div class="hasil-pencarian-content row">
 		<div class="top-info col-sm-12 row">
-			<div class="rute-info col-sm-8">Hasil Pencarian: <?php //echo $dataResult['route']['name'] ?></div>
+			<div class="rute-info col-sm-8">Hasil Pencarian: <?php echo $this->Routes->getLabel($formData['rute']) ?></div>
 			<div class="date-info col-sm-4">
 				<i class="fa fa-calendar" aria-hidden="true"></i><?= $this->Time->format($formData['tglKeberangkatan'],'dd MMM Y') ?>
 				</div>
