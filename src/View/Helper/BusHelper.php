@@ -32,6 +32,10 @@ class BusHelper extends Helper
         return $this->capacity[$type];
     }
 
+    public function toOptionsArray(){
+        return $this->getBusList();
+    }
+
     public function getBusList(){
         if($this->_buses==null){
             $this->_setBuses();
