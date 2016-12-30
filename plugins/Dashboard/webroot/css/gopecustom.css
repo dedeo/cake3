@@ -5,3 +5,12 @@
 body .container.body .right_col {
 	min-height: 500px !important;
 }
+
+.message.error {
+	display: inline-block;
+	width: 100%;
+	background: red;
+	color: #fff;
+	padding: 10px 20px;
+	font-size: 15px;
+}

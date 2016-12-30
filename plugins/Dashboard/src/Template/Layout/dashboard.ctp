@@ -15,7 +15,8 @@
       'Dashboard.bootstrap-progressbar-3.3.4.min',
       'Dashboard.jquery-jvectormap-2.0.3',
       'Dashboard.custom.min',
-      'Dashboard.gopecustom'
+      'Dashboard.gopecustom',
+      'Dashboard.bootstrap-select.min'
     ]
   );
   echo $this->fetch('css');
@@ -83,6 +84,7 @@
       'Dashboard.moment.min.js',
       'Dashboard.daterangepicker.js',
       'Dashboard.custom.min.js',
+      'Dashboard.bootstrap-select.min.js'
     ]
   );
   echo $this->fetch('script');
