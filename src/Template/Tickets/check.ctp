@@ -121,7 +121,6 @@
 		</div>
 	</div>
 	<button class="print-ticket" onclick="ticketPrint()" style="width: 40%;border-radius: 0px;background: #5bc0de;color: #fff;text-align: center;font-size: 16px;text-transform: uppercase;margin-top: 15px;padding: 8px 0px;border-style: none;max-width: 300px;display: none;float:left">Print</button>
-	<button class="print-ticket" onclick="javascript:GoToHomePage()" style="width: 40%;border-radius: 0px;background: #5bc0de;color: #fff;text-align: center;font-size: 16px;text-transform: uppercase;margin-top: 15px;padding: 8px 0px;border-style: none;max-width: 300px;display: none;float:right">Cari Ticket</button>
 	<iframe id="ifmcontentstoprint" style="height: 0px; width: 0px; display: none"></iframe>
 	<?php } ?>
 
@@ -131,3 +130,14 @@
 	</div>
 	<?php } ?>
 </body>
+<script type="text/javascript">
+	function ticketPrint(){
+		var content = document.getElementById("ticketpri-wrapper");
+		var pri = document.getElementById("ifmcontentstoprint").contentWindow;
+		pri.document.open();
+		pri.document.write(content.innerHTML);
+		pri.document.close();
+		pri.focus();
+		pri.print();
+	}
+</script>

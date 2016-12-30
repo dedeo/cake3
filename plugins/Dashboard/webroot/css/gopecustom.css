@@ -14,3 +14,19 @@ body .container.body .right_col {
 	padding: 10px 20px;
 	font-size: 15px;
 }
+
+input[name='daterangeticket'], input[name='daterange'] {
+    padding: 5px 10px;
+    font-size: 14px;
+    min-width: 180px;
+    text-align: center;
+}
+
+select[name='departure_time[hour]'], select[name='departure_time[minute]'], select[name='arival_time[hour]'], select[name='arival_time[minute]'] {
+    height: 30px;
+    font-size: 14px;
+}
+
+select[name='departure_time[hour]'], select[name='arival_time[hour]'] {
+	margin-right: 5px;
+}

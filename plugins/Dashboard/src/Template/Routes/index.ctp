@@ -22,7 +22,6 @@ $this->assign('title', 'Rute Bus');
 				<th class="column-title"><?= $this->Paginator->sort('name','Nama') ?> </th>
 				<th class="column-title"><?= $this->Paginator->sort('source','Kota Asal') ?> </th>
 				<th class="column-title"><?= $this->Paginator->sort('destination','Kota Tujuan') ?> </th>
-				<th class="column-title"><?= $this->Paginator->sort('distance','Jarak') ?> </th>
 				<th class="column-title"><?= $this->Paginator->sort('fare','Tarif') ?> </th>
 				<!-- <th class="column-title"><?= $this->Paginator->sort('') ?> </th> -->
 				<th class="column-title no-link last"><span class="nobr">Action</span></th>
@@ -32,10 +31,9 @@ $this->assign('title', 'Rute Bus');
 				<?php foreach ($routes as $route): ?>
 				<tr>
 					<td><?= $this->Number->format($route->id) ?></td>
-					<td><?= $route->name ?></td>
-					<td><?= $this->Html->link(h($route->source),(['controller'=>'Routes','action'=>'edit',$route->id])) ?></td>
+					<td><?= $this->Html->link(h($route->name),(['controller'=>'Routes','action'=>'edit',$route->id])) ?></td>
+					<td><?= $route->source ?></td>
 					<td><?= $route->destination ?></td>
-					<td><?= $route->distance ?> Km</td>
 					<td>Rp <?= $route->fare ?></td>
 					<td class="actions">
 				      	<a href=<?= $this->Url->build(['controller'=>'Routes','action'=>'edit',$route->id])?> class="text-general"><i class="fa fa-edit"></i></a>

@@ -83,8 +83,10 @@ class ReportsController extends AppController
             $passengersModel = $this->loadModel('TicketPassengers');
             $passengers = $passengersModel->find('all',[
                     'contain'=>['TicketOrders'=>['Tickets','Customers']],
-                    'conditions'=>['Tickets.id'=>$ticketId]
+                    'conditions'=>['Tickets.id'=>$ticketId],
+                    'order' => ['TicketPassengers.seet_number' => 'ASC']
                 ]);
+            // debug($ticket->toArray());
         }
         $this->set(compact('ticket','passengers'));
     }

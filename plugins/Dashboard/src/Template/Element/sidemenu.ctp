@@ -31,12 +31,12 @@
                     ['escape'=>false])
                     ?></li>
 
-                  <li><a><i class="fa fa-bus"></i> Bus/Armada <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><?= $this->Html->link(' Daftar Bus',['controller'=>'Buses','action'=>'index'])?></li>
-                      <!-- <li><?= $this->Html->link(' Rute Bus',['controller'=>'Routes','action'=>'index'])?></li> -->
-                      <li><?= $this->Html->link(' Tambah Bus',['controller'=>'Buses','action'=>'add'])?></li>
-                    </ul>
+                  <li>
+                    <?= $this->Html->link(
+                    $this->Html->tag('i','',['class'=>'fa fa-bus']).' Daftar Bus',
+                    ['controller'=>'Buses','action'=>'index'],
+                    ['escape'=>false])
+                    ?>
                   </li>
 
                   <li>
@@ -54,27 +54,20 @@
                     ?>
                   </li>
 
-                  <li><a><i class="fa fa-ticket"></i>Jadwal Tiket <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><?= $this->Html->link(' Daftar Tiket',['controller'=>'Tickets','action'=>'index'])?></li>
-                    </ul>
-                  </li>
-
-                  <li><a><i class="fa fa-list"></i> Report <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><?= $this->Html->link(' Penjualan Tiket Bus',['controller'=>'Reports','action'=>'ticketSales'])?></li>
-                      <!-- <li><?= $this->Html->link(' Pendapatan Bus',['controller'=>'Reports','action'=>'busEarning'])?></li> -->
-                      <!-- <li><?= $this->Html->link(' Tambah Tiket Baru',['controller'=>'Tickets','action'=>'add'])?></li> -->
-                    </ul>
-                  </li>
-<!-- 
                   <li><?= $this->Html->link(
-                    $this->Html->tag('i','',['class'=>'fa fa-list']).' Report',
-                    ['controller'=>'Reports','action'=>'index'],
+                    $this->Html->tag('i','',['class'=>'fa fa-ticket']).' Jadwal Tiket',
+                    ['controller'=>'Tickets','action'=>'index'],
                     ['escape'=>false])
                     ?>
                   </li>
- -->
+
+                  <li><?= $this->Html->link(
+                    $this->Html->tag('i','',['class'=>'fa fa-list']).' Report',
+                    ['controller'=>'Reports','action'=>'ticketSales'],
+                    ['escape'=>false])
+                    ?>
+                  </li>
+                  
                   <li><?= $this->Html->link(
                     $this->Html->tag('i','',['class'=>'fa fa-user-secret']).' User',
                     ['controller'=>'Users','action'=>'index'],
