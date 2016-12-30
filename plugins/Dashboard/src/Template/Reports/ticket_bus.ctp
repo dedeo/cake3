@@ -2,6 +2,8 @@
 $this->Html->addCrumb('Jadwal Keberangkatan Bus', '');
 $this->assign('title', 'Daftar Penumpang Bus');
 
+$gender = ['female'=>'P','male'=>'L'];
+
 // debug($routes);
 
 ?>
@@ -16,9 +18,10 @@ $this->assign('title', 'Daftar Penumpang Bus');
 		  </div>
 
 		<div class="table-responsive">
-		<div class="row">
-			<div class="col-md-6">
+		<!-- <div class="row"> -->
+			<div class="col-md-4">
 				<dl class="dl-horizontal">
+				  <dt>Tanggal Keberangkatan</dt><dd><?= date('d-M-Y',strtotime($ticket->date)) ?></dd>
 				  <dt>Tipe Bus</dt><dd><?= $this->Bus->getLabel($ticket->bus->class)?></dd>
 				  <dt>Kota Asal</dt><dd><?=$ticket->schedule->route->source?></dd>
 				  <dt>Kota Tujuan</dt><dd><?=$ticket->schedule->route->destination?></dd>
@@ -31,7 +34,7 @@ $this->assign('title', 'Daftar Penumpang Bus');
 				  <dt>Kondekter</dt><dd>....</dd>
 				</dl>								
 			</div>
-		</div>
+		<!-- </div> -->
 		</div>
 	  </div>
 	</div>
@@ -47,8 +50,9 @@ $this->assign('title', 'Daftar Penumpang Bus');
 	            <tr>
 	                <th scope="col">#</th>
 	                <th scope="col">Nama Penumpang</th>
-	                <th scope="col">Jenis Kelamin</th>
-	                <th scope="col">Nomer Kursi</th>
+	                <th scope="col">L/P</th>
+	                <th scope="col">No.Kursi</th>
+	                <th scope="col">CP</th>
 	            </tr>
 	        </thead>
 	        <tbody>
@@ -57,8 +61,9 @@ $this->assign('title', 'Daftar Penumpang Bus');
 	            <tr>
 	                <td><?= $this->Number->format($no) ?></td>
 	                <td><?= $person->name ?></td>
-	                <td><?= $person->gender ?></td>
+	                <td><?= $gender[$person->gender] ?></td>
 	                <td>#<?= $person->seet_number ?></td>
+	                <td><?= $person->ticket_order->customer->name.'('.$person->ticket_order->customer->phone.')';?></td>
 	            </tr>
 	            <?php $no++; ?>
 	            <?php endforeach; ?>

@@ -84,7 +84,7 @@ class ReportsController extends AppController
 
             $passengersModel = $this->loadModel('TicketPassengers');
             $passengers = $passengersModel->find('all',[
-                    'contain'=>['TicketOrders'=>['Tickets']],
+                    'contain'=>['TicketOrders'=>['Tickets','Customers']],
                     'conditions'=>['Tickets.id'=>$ticketId]
                 ]);
         }
