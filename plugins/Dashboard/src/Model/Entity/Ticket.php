@@ -8,17 +8,18 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $schedule_id
- * @property \Cake\I18n\Time $create_at
+ * @property int $route_id
+ * @property \Cake\I18n\Time $date_create_at
  * @property \Cake\I18n\Time $departure_time
  * @property \Cake\I18n\Time $date
  * @property \Cake\I18n\Time $arival_time
  * @property string $fare
- * @property string $stock
+ * @property int $stock
  * @property int $bus_id
  * @property int $passegers
  *
- * @property \Dashboard\Model\Entity\Schedule $schedule
- * @property \Dashboard\Model\Entity\Bus $bus
+ * @property \App\Model\Entity\Schedule $schedule
+ * @property \App\Model\Entity\Bus $bus
  */
 class Ticket extends Entity
 {

@@ -62,8 +62,8 @@
 
                   <li><a><i class="fa fa-list"></i> Report <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><?= $this->Html->link(' Penjualan Tiket',['controller'=>'Reports','action'=>'ticketSales'])?></li>
-                      <li><?= $this->Html->link(' Pendapatan Bus',['controller'=>'Reports','action'=>'busEarning'])?></li>
+                      <li><?= $this->Html->link(' Penjualan Tiket Bus',['controller'=>'Reports','action'=>'ticketSales'])?></li>
+                      <!-- <li><?= $this->Html->link(' Pendapatan Bus',['controller'=>'Reports','action'=>'busEarning'])?></li> -->
                       <!-- <li><?= $this->Html->link(' Tambah Tiket Baru',['controller'=>'Tickets','action'=>'add'])?></li> -->
                     </ul>
                   </li>
