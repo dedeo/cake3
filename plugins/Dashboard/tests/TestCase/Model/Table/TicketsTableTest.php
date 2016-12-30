@@ -27,7 +27,11 @@ class TicketsTableTest extends TestCase
         'plugin.dashboard.tickets',
         'plugin.dashboard.schedules',
         'plugin.dashboard.routes',
-        'plugin.dashboard.buses'
+        'plugin.dashboard.buses',
+        'plugin.dashboard.ticket_orders',
+        'plugin.dashboard.customers',
+        'plugin.dashboard.avatars',
+        'plugin.dashboard.ticket_passengers'
     ];
 
     /**

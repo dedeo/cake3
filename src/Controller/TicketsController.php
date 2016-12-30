@@ -27,8 +27,6 @@ class TicketsController extends AppController
 
         $jadwal = TableRegistry::get('Schedules');
 
-
-
         $results = null;
 
         if ($this->request->is('post')) {
@@ -46,6 +44,9 @@ class TicketsController extends AppController
             //                  ])
             //             ->contain(['Routes','Buses','TicketOrders']);
 
+            // debug($tgl);
+            // die();
+
             $results = $this->Tickets->find('all',
                         [
                             'contain'=>['Schedules'=>['Routes'],'Buses'],
@@ -56,7 +57,11 @@ class TicketsController extends AppController
                         ]
                 );
 
-            if ($results->count()<1){
+            // debug($results);
+            // debug($results->toArray());
+
+
+            if ($results->count()){
                 $this->Flash->error(__('Tiket tidak ditemukan'));
             }
         }
@@ -92,6 +97,8 @@ class TicketsController extends AppController
             $ticketId = $this->request->Session()->read('Ticket.id');
             $formData = $this->request->Session()->read('FormData');
 
+            debug($ticketId);
+
             $ticket = $this->Tickets->get($ticketId,
                         [
                             'contain' => ['Schedules','Buses']
@@ -102,14 +109,18 @@ class TicketsController extends AppController
             $this->set(compact('ticket','formData'));
 
 
-            $orderModel = TableRegistry::get('TicketOrders');
+            // $orderModel = TableRegistry::get('TicketOrders');
 
             // cari ticket yang telah terjual
             //
-            $soldTicket = $orderModel->find('all', [
-                    'condition' => ['TicketOrders.ticket_id'=>$ticketId],
+            $this->loadModel('TicketOrders');
+            $soldTicket = $this->TicketOrders->find('all', [
+                    'conditions' => ['TicketOrders.ticket_id'=>$ticketId],
                     'contain' => ['TicketPassengers']
                 ]);
+
+            // debug($soldTicket->toArray());
+            // die();
 
             // cari kursi yang terlah terjual
             // berdasarkan tiket yang telah terjual
@@ -244,11 +255,13 @@ class TicketsController extends AppController
         // debug($this->_getNextId());
         // die();
 
+        $month = date('m',strtotime($orderData['tanggal']));
+        $scheduleCode = $orderData1['schedule_id'];
 
         $ticketData = [
             'customer_id' => $customerId,
             'ticket_id' => $orderData1->id,
-            'ticket_code' => 'BT0'.substr(number_format(time() * rand(),0,'',''),0,6),
+            'ticket_code' => 'BT'.$month.$scheduleCode.substr(number_format(time() * rand(),0,'',''),0,4),
             'date_create_at' => date('Y-m-d',strtotime('now')),
             'time_create_at' => date('H:m:s',strtotime('now')),
             'departure_time' => $orderData['jam_keberangkatan']->i18nFormat('HH:mm:ss'),

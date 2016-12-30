@@ -10,7 +10,7 @@ $this->assign('title', $title);
 		<div class="selection-report" style="padding:10px;">
 			<label for="startDate">Bus/Armada:</label>
 			<?php 
-			echo $this->Form->select('buses',$this->Bus->getBusList(),['multiple'=>'true'])
+			echo $this->Form->select('routes',$this->Routes->getRouteList(),['multiple'=>'true'])
 
 			?>
 		</div>
@@ -29,11 +29,11 @@ $this->assign('title', $title);
 				<thead>
 				  <tr class="headings">
 					<th class="column-title">#</th>
-					<th class="column-title">Bus</th>
+					<th class="column-title">Rute</th>
 					<!-- <th class="column-title">Tanggal</th> -->
 					<!-- <th class="column-title">Rute</th> -->
 					<!-- <th class="column-title">Jumlah Penumpang</th> -->
-					<th class="column-title">Tiket Tanggal</th>
+					<th class="column-title">Tanggal Penjualan</th>
 					<th class="column-title">Pendapatan</th>
 				  </tr>
 				</thead>
@@ -42,7 +42,7 @@ $this->assign('title', $title);
 					<?php foreach ($results as $result) { ?>
 					<tr>
 						<td><?= $i ?></td>
-						<td><?= $this->Html->link($result->busname,['action'=>'ticketBus',$result->ticket_id]) ?></td>
+						<td><?= $result->route ?></td>
 						<td><?= $result->date ?></td>
 						<td>Rp <?= $result->earning?></td>
 					</tr>

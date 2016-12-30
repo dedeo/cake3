@@ -67,10 +67,10 @@ class CustomersTable extends Table
         $validator
             ->allowEmpty('lastname');
 
-        $validator
-            ->email('email')
-            ->requirePresence('email', 'create')
-            ->notEmpty('email');
+        // $validator
+        //     ->email('email')
+        //     ->requirePresence('email', 'create')
+        //     ->notEmpty('email');
 
         $validator
             ->allowEmpty('password');
