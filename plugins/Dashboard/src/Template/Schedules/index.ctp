@@ -35,8 +35,8 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
 	            <tr>
 	                <td><?= $this->Number->format($schedule->id) ?></td>
 	                <td><?= $this->MyDate->getLabel($schedule->day) ?></td>
-	                <td><?= $schedule->has('route') ? $this->Html->link($schedule->route->name, ['controller' => 'Routes', 'action' => 'edit', $schedule->route->id]) : '' ?></td>
-	                <td><?= $schedule->has('bus') ? $this->Html->link($schedule->bus->name, ['controller' => 'Buses', 'action' => 'edit', $schedule->bus->id]) : '' ?></td>
+	                <td><?= $schedule->has('route') ? $this->Html->link($schedule->route->name, ['controller' => 'Schedules', 'action' => 'edit', $schedule->id]) : '' ?></td>
+	                <td><?= $schedule->has('bus') ? $schedule->bus->name : '' ?></td>
 	                <!-- <td><?= $this->Number->format($schedule->fare) ?></td> -->
 	                <!-- <td><?= $this->Number->format($schedule->create_at) ?></td> -->
 	                <td><?= $this->Time->format($schedule->departure_time,'HH:mm') ?></td>
