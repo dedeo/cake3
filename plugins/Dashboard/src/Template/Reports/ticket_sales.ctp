@@ -10,7 +10,7 @@ $this->assign('title', $title);
 		<div class="selection-report" style="padding:10px;">
 			<label for="startDate">Bus/Armada:</label>
 			<?php 
-			echo $this->Form->select('buses',$this->Bus->getBusList(),['multiple'=>'true'])
+			echo $this->Form->select('buses',$this->Bus->getBusList(),['multiple'=>'true','class'=>'selectpicker'])
 
 			?>
 		</div>

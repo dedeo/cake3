@@ -107,7 +107,8 @@
 			7.	Setelah pembayaran dan mengambil tiket penumpang MENYATAKAN STUJUH &amp; TIDAK KEBERATAN atas semua ketentuan yang ada.</br>
 		</div>
 	</div>
-	<button class="print-ticket" onclick="ticketPrint()" style="width: 100%;border-radius: 0px;background: #5bc0de;color: #fff;text-align: center;font-size: 16px;text-transform: uppercase;margin-top: 15px;padding: 8px 0px;border-style: none;max-width: 300px;display: none">Print</button>
+	<button class="print-ticket" onclick="ticketPrint()" style="width: 40%;border-radius: 0px;background: #5bc0de;color: #fff;text-align: center;font-size: 16px;text-transform: uppercase;margin-top: 15px;padding: 8px 0px;border-style: none;max-width: 300px;display: none;float:left">Print</button>
+	<button class="print-ticket" onclick="javascript:GoToHomePage()" style="width: 40%;border-radius: 0px;background: #5bc0de;color: #fff;text-align: center;font-size: 16px;text-transform: uppercase;margin-top: 15px;padding: 8px 0px;border-style: none;max-width: 300px;display: none;float:right">Cari Ticket</button>
 	<iframe id="ifmcontentstoprint" style="height: 0px; width: 0px; display: none"></iframe>
 	<?php }else{ ?>
 	Data order tiket kosong, klik <a href="/">disini</a> untuk melakukan pemesanan
@@ -125,4 +126,9 @@
 		pri.focus();
 		pri.print();
 	}
+
+	function GoToHomePage()
+	  {
+	    window.location = '/';   
+	  }
 </script>
