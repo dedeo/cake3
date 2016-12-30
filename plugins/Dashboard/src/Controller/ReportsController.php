@@ -80,8 +80,6 @@ class ReportsController extends AppController
                     'contain'=>['Schedules'=>['Routes'],'Buses']
                 ]);
 
-            // debug($ticket->toArray());
-
             $passengersModel = $this->loadModel('TicketPassengers');
             $passengers = $passengersModel->find('all',[
                     'contain'=>['TicketOrders'=>['Tickets','Customers']],
@@ -97,17 +95,15 @@ class ReportsController extends AppController
         $results = null;
 
         if($this->request->is('post')){
-
             $formData = $this->request->data;
-
-            // debug($formData);
-            // die();
 
             if(empty($formData['buses']) || empty($formData['daterange'])) {
                 $this->Flash->error(__('Bus atau tanggal belum dipilih'));
                 return $this->redirect(['action'=>'ticketSales']);
             }
 
+            /////////////////////////////////////////////////////////////////////
+            // sampe data
             // formData = 
             // 'buses' => [
             //  (int) 0 => '1',
@@ -118,27 +114,18 @@ class ReportsController extends AppController
 
             $tglrange = explode(' - ', $formData['daterange']);
 
-            // if($tglrange[0]==$tglrange[1]){
                 $startDate = date('Y-m-d', strtotime($tglrange[0]));
                 $endDate = date('Y-m-d', strtotime($tglrange[1]));
-            // }else{
-            //  $startDate = date('Y-m-d 00:00:00', strtotime($tglrange[0]));
-            //  $endDate = date('Y-m-d 23:59:59', strtotime($tglrange[1]));             
-            // }
 
             $ticketModel = TableRegistry::get('TicketOrders');
             $results = $ticketModel->find('all',[
-                    // 'contain'=>['Tickets'=>['Schedules'=>['Buses']]]
-                    // 'contain'=>['Tickets.Schedules.Buses'=> function ($q) {
-                          //       return $q->where(['Buses.id' => $formData['buses']]);
-                    //      }]
                     'fields' => [
                             'id'=>'TicketOrders.id',
                             'ticket_id'=>'TicketOrders.ticket_id',
                             'earning'=>'sum(TicketOrders.total)',
                             'busname'=>'Buses.name',
                             'date'=>'Tickets.date'],
-                    'contain'=>['Tickets'=>['Schedules'=>['Buses']]],
+                    'contain'=>['Tickets'=>['Schedules','Buses'],'Customers'],
                     'conditions'=>[
                             'Schedules.bus_id IN'=>$formData['buses'],
                             'TicketOrders.date_create_at >='=>$startDate,
