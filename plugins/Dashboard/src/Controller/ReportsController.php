@@ -71,9 +71,7 @@ class ReportsController extends AppController
     //     $this->set(compact('results'));
     // }
 
-
     public function ticketBus($ticketId=null){
-        // debug($this->request->param);
         if($ticketId){
             $ticketModel = $this->loadModel('Tickets');
             $ticket = $ticketModel->get($ticketId,[
@@ -86,7 +84,6 @@ class ReportsController extends AppController
                     'conditions'=>['Tickets.id'=>$ticketId],
                     'order' => ['TicketPassengers.seet_number' => 'ASC']
                 ]);
-            // debug($ticket->toArray());
         }
         $this->set(compact('ticket','passengers'));
     }

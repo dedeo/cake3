@@ -48,25 +48,45 @@ $gender = ['female'=>'P','male'=>'L'];
 		  <table class="table" id="tableRoutes">
 	        <thead>
 	            <tr>
-	                <th scope="col">#</th>
+	                <th scope="col">No.Kursi</th>
 	                <th scope="col">Nama Penumpang</th>
 	                <th scope="col">L/P</th>
-	                <th scope="col">No.Kursi</th>
 	                <th scope="col">CP</th>
+	                <th scope="col">Harga</th>
 	            </tr>
 	        </thead>
 	        <tbody>
-	        	<?php $no = 1;?>
-	            <?php foreach ($passengers as $person): ?>
-	            <tr>
-	                <td><?= $this->Number->format($no) ?></td>
-	                <td><?= $person->name ?></td>
-	                <td><?= $gender[$person->gender] ?></td>
-	                <td>#<?= $person->seet_number ?></td>
-	                <td><?= $person->ticket_order->customer->name.'('.$person->ticket_order->customer->phone.')';?></td>
-	            </tr>
-	            <?php $no++; ?>
+	        	<?php 
+	        	$nSeet = $ticket->bus->capacity;
+	        	$_seets = array_fill(1, $nSeet,null);		//create an empty array seets as much as bus capacity
+
+	        	foreach ($passengers as $person) {
+	        		$seet_number = $person->seet_number;
+	        		$_seets[$seet_number] = $person;
+	        	}
+	        	$i = 1;
+	        	$total = 0;
+	            foreach ($_seets as $seet): ?>
+		            <?php if(!empty($seet)): ?>
+			            <tr>
+			                <td><?= $seet->seet_number ?></td>
+			                <td><?= $seet->name ?></td>
+			                <td><?= $gender[$seet->gender] ?></td>
+			                <td><?= $seet->ticket_order->customer->name.'('.$person->ticket_order->customer->phone.')';?></td>
+			                <td><?= $seet->ticket_order->fare?></td>
+			            </tr>
+			        <?php $total += $seet->ticket_order->fare; ?>
+			        <?php else:?>
+			            <tr>
+			                <td><?=$i?></td><td></td><td></td><td></td><td></td>
+			            </tr>
+			        <?php endif ?>
+			    	<?php $i++; ?>
 	            <?php endforeach; ?>
+	            <tr>
+	            	<td colspan="4"><strong>Total</strong></td>
+	            	<td>Rp <?php echo $total;?></td>
+	            </tr>
 	        </tbody>
 		  </table>
 		</div>
