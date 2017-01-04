@@ -502,6 +502,20 @@ div.ui-datepicker table.ui-datepicker-calendar {
 	font-size: 14px;
 }
 
+.result-search td.search-img img {
+	max-width: 100px;
+    margin: 0 auto;
+    display: block;
+}
+
+.result-search .plat-no {
+	color: #000;
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+	margin-top: 5px;
+}
+
 .result-search td:first-child {
 	padding: 10px 20px;
 }

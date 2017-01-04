@@ -38,7 +38,8 @@
 							<?= $this->Form->hidden('id',['value'=>$ticket->id]) ?>			
 							<?= $this->Form->hidden('jmlPenumpang',['value'=>$formData['jmlPenumpang']]) ?>			
 							<td class="search-img">
-								<?= $this->Html->image('slider-img/slider1.jpg', ['alt' => 'search-img']);?>
+								<?= $this->Html->image('bus.jpg', ['alt' => 'search-img']);?>
+								<span class="plat-no"><?= $ticket->bus->plat_no;?></span>
 							</td>
 							<td class="search-tipe">
 								<span><?=$this->Bus->getLabel($ticket->bus->class)?></span>

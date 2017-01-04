@@ -33,40 +33,24 @@
 		</table>
 		<table class="table" style="border: 0px;font-size: 11px;width:100%;">
 			<thead>
-				<th colspan="3" style="border: 0px;font-size: 11px;background: #d9dfe9;width: 33.33%;text-align:left">Penumpang</th>
-			</thead>
-			<tbody>
-				<?php $penumpang = $ticket->ticket_passengers ?>
-				<?php foreach ($penumpang as $data) { ?>
-					<tr>
-						<td style="width: 33.33%;">
-							<?=$data->name; ?><br>
-						</td>
-						<td style="width: 33.33%;">
-							<?=$data->gender; ?>
-						</td>
-						<td style="width: 33.33%;">
-							Nomor Kursi: #<?=$data->seet_number; ?>
-						</td>
-					</tr>
-				<?php } ?>
-			</tbody>
-		</table>
-		<table class="table" style="border: 0px;font-size: 11px;width:100%;">
-			<thead>
 				<th colspan="3" style="border: 0px;font-size: 11px;background: #d9dfe9;width: 33.33%;text-align:left">Kustomer</th>
 			</thead>
 			<tbody>
 				<tr>
-				<td style="width: 33.33%;">
-					<?=$ticket->customer->name; ?><br>
-				</td>
-				<td style="width: 33.33%;">
-					<?=$ticket->customer->email; ?>
-				</td>
-				<td style="width: 33.33%;">
-					<?=$ticket->customer->no_tlp; ?>
-				</td>
+					<td style="width: 33.33%;">
+						<?=$ticket->customer->name; ?><br>
+						<?php //debug($ticket); ?>
+					</td>
+					<td style="width: 33.33%;">
+						<?=$ticket->customer->phone; ?>
+					</td>
+					<td style="width: 33.33%;">
+						Nomor Kursi:
+					<?php $penumpang = $ticket->ticket_passengers ?>
+					<?php foreach ($penumpang as $data) { ?>
+						#<?=$data->seet_number; ?>
+					<?php } ?>
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -76,26 +60,12 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td style="width: 33.33%;">Harga tiket:</td>
-					<td style="width: 33.33%;"><?=$ticket->fare ?></td>
-					<td style="width: 33.33%;">&nbsp;</td>
-				</tr>
-				<tr>
 					<td style="width: 33.33%;">Harga Total:</td>
 					<td style="width: 33.33%;"><?=$ticket->total ?></td>
 					<td style="width: 33.33%;">&nbsp;</td>
 				</tr>
 			</tbody>
 		</table>
-		<div class="perhatian-info" style="font-size:10px;background:#d9dfe9;padding:10px 15px;margin-top:10px">
-			PERHATIAN</br>
-			1.	Barang-barang Penumpang diluar tanggungjawab kami,kecuali barang kiriman</br>
-			2.	Dilarang merokok diatas bus</br>
-			3.	Jagalah kebersihan diatas bus</br>
-			4.	Penumpang yang ketinggalan bus tiketnya tidak berlaku lagi</br>
-			5.	Pemberangkatan bus sewaktu-waktu dapat berubah</br>
-			6.	Cek ulang tanggal yang tertulis pada tiket anda</br>
-		</div>
 		<div class="perhatian-info" style="font-size:10px;background:#d9dfe9;padding:10px 15px;margin-top:10px">
 			KETENTUAN PERATURAN TIKET</br>
 			1.	Tanggal keberangkatan yang berlaku adalah yang TERTULIS SESUAI pada lembaran tiket</br>
