@@ -2,7 +2,7 @@
 $this->Html->addCrumb('Jadwal Keberangkatan Bus', '');
 $this->assign('title', 'Jadwal Keberangkatan Bus');
 
-// debug($routes);
+// debug($schedules->toArray());
 
 ?>
 <div class="row">
@@ -22,7 +22,7 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
 	                <th scope="col"><?= $this->Paginator->sort('day','Hari') ?></th>
 	                <th scope="col"><?= $this->Paginator->sort('route_id','Rute') ?></th>
 	                <th scope="col"><?= $this->Paginator->sort('bus_id','Bus') ?></th>
-	                <!-- <th scope="col"><?= $this->Paginator->sort('fare') ?></th> -->
+	                <th scope="col"><?= $this->Paginator->sort('Routes.fare','Harga') ?></th>
 	                <!-- <th scope="col"><?= $this->Paginator->sort('create_at') ?></th> -->
 	                <th scope="col"><?= $this->Paginator->sort('departure_time','Berangkat') ?></th>
 	                <th scope="col"><?= $this->Paginator->sort('arival_time','Datang') ?></th>
@@ -37,7 +37,7 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
 	                <td><?= $this->MyDate->getLabel($schedule->day) ?></td>
 	                <td><?= $schedule->has('route') ? $this->Html->link($schedule->route->name, ['controller' => 'Schedules', 'action' => 'edit', $schedule->id]) : '' ?></td>
 	                <td><?= $schedule->has('bus') ? $schedule->bus->name : '' ?></td>
-	                <!-- <td><?= $this->Number->format($schedule->fare) ?></td> -->
+	                <td><?= $this->Number->format($schedule->route->fare) ?></td>
 	                <!-- <td><?= $this->Number->format($schedule->create_at) ?></td> -->
 	                <td><?= $this->Time->format($schedule->departure_time,'HH:mm') ?></td>
 	                <td><?= $this->Time->format($schedule->arival_time,'HH:mm') ?></td>

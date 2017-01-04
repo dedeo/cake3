@@ -33,7 +33,7 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
                 <?php foreach ($tickets as $ticket): ?>
                 <tr>
                     <td><?= $this->Number->format($ticket->id) ?></td>
-                    <td><?= h($ticket->date) ?></td>
+                    <td><?= $this->Time->format($ticket->date,'dd MMM yyyy') ?></td>
                     <td><?= $ticket->has('bus') ? $ticket->bus->name : '' ?></td> 
                     <td><?= $ticket->has('schedule') ? $ticket->schedule->route_name : '' ?></td>
                     <td><?= h('Rp '.$ticket->fare) ?></td>
