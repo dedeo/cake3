@@ -7,101 +7,101 @@ $gender = ['female'=>'P','male'=>'L'];
 // debug($routes);
 
 ?>
-<div id="printArea">
-<div class="row">
-	<div class="col-md-12 col-sm-12 col-xs-12">
-	<div class="x_panel">
-	  <div class="x_content">
-		  <div class="x_title">
-	      	<a href='#' class="btn btn-warning btn-sm pull-right" onclick="reportPrint()"> Print</a>
-		    <div class="clearfix"></div>
-		  </div>
-
-		<div class="table-responsive">
-		<!-- <div class="row"> -->
-			<div class="col-md-4">
-				<dl class="dl-horizontal">
-				  <dt>Tanggal Keberangkatan</dt><dd><?= date('d-M-Y',strtotime($ticket->date)) ?></dd>
-				  <dt>Tipe Bus</dt><dd><?= $this->Bus->getLabel($ticket->bus->class)?></dd>
-				  <dt>Kota Asal</dt><dd><?=$ticket->schedule->route->source?></dd>
-				  <dt>Kota Tujuan</dt><dd><?=$ticket->schedule->route->destination?></dd>
-				</dl>				
+<a href='#' class="btn btn-warning btn-sm pull-right" onclick="reportPrint()"> Print</a>
+<div id="printArea" style="display:inline-block;margin-bottom:20px;color:#000;">
+	<div style="display:inline-block;width:100%;background:#fff;padding:15px;margin-bottom:10px;border:1px solid #000;box-sizing: border-box;">
+		<div style="display:inline-block;width:50%;float:left;">
+			<div style="display:inline-block;width:100%;">
+				<div style="width:150px;float:left;text-align:left;font-weight:bold;">Tgl Keberangkatan</div>
+				<div style="width:150px;float:left;text-align:left;clear:right;"><?= ' : ' .date('d-M-Y',strtotime($ticket->date)) ?></div>
 			</div>
-			<div class="col-md-6">
-				<dl class="dl-horizontal">
-				  <dt>No.Pol Bus</dt><dd><?=$ticket->bus->plat_no?></dd>
-				  <dt>Sopir</dt><dd>....</dd>
-				  <dt>Kondekter</dt><dd>....</dd>
-				</dl>								
+			<div style="display:inline-block;width:100%;">
+				<div style="width:150px;float:left;text-align:left;font-weight:bold;">Tipe Bus</div>
+				<div style="width:150px;float:left;text-align:left;clear:right;"><?= ' : ' .$this->Bus->getLabel($ticket->bus->class)?></div>
 			</div>
-		<!-- </div> -->
+			<div style="display:inline-block;width:100%;">
+				<div style="width:150px;float:left;text-align:left;font-weight:bold;">Kota Asal</div>
+				<div style="width:150px;float:left;text-align:left;clear:right;"><?= ' : ' .$ticket->schedule->route->source?></div>
+			</div>
+			<div style="display:inline-block;width:100%;">
+				<div style="width:150px;float:left;text-align:left;font-weight:bold;">Kota Tujuan</div>
+				<div style="width:150px;float:left;text-align:left;clear:right;"><?= ' : ' .$ticket->schedule->route->destination?></div>
+			</div>			
 		</div>
-	  </div>
+		<div style="display:inline-block;width:50%;float:left;">
+			<div style="display:inline-block;width:100%;">
+				<div style="width:150px;float:left;text-align:left;font-weight:bold;">No.Pol Bus</div>
+				<div style="width:150px;float:left;text-align:left;clear:right;"><?= ' : ' .$ticket->bus->plat_no?></div>
+			</div>
+			<div style="display:inline-block;width:100%;">
+				<div style="width:150px;float:left;text-align:left;font-weight:bold;">Sopir</div>
+				<div style="width:150px;float:left;text-align:left;clear:right;"><?= ' : ....'?></div>
+			</div>
+			<div style="display:inline-block;width:100%;">
+				<div style="width:150px;float:left;text-align:left;font-weight:bold;">Kondektur</div>
+				<div style="width:150px;float:left;text-align:left;clear:right;"><?= ' : ....'?></div>
+			</div>								
+		</div>
 	</div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-12 col-sm-12 col-xs-12">
-	<div class="x_panel">
-	  <div class="x_content">
-		<div class="table-responsive">
-		  <table class="table" id="tableRoutes">
-	        <thead>
-	            <tr>
-	                <th scope="col">No.Kursi</th>
-	                <th scope="col">Nama Penumpang</th>
-	                <th scope="col">L/P</th>
-	                <th scope="col">CP</th>
-	                <th scope="col">Harga</th>
-	            </tr>
-	        </thead>
-	        <tbody>
-	        	<?php 
-	        	$nSeet = $ticket->bus->capacity;
-	        	$_seets = array_fill(1, $nSeet,null);		//create an empty array seets as much as bus capacity
+	<div style="display:inline-block;width:100%;padding:10px 0px;background:#fff;">
+	<table id="tableRoutes" style="width:100%;border-collapse:collapse;box-sizing: border-box;color:#000;">
+		<thead>
+		    <tr>
+		        <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">Kursi</th>
+		        <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">Penumpang</th>
+		        <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">Code Tiket</th>
+		        <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">L/P</th>
+		        <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">CP</th>
+		        <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">Harga</th>
+		    </tr>
+		</thead>
+		<tbody>
+			<?php 
+			$nSeet = $ticket->bus->capacity;
+			$_seets = array_fill(1, $nSeet,null);		//create an empty array seets as much as bus capacity
 
-	        	foreach ($passengers as $person) {
-	        		$seet_number = $person->seet_number;
-	        		$_seets[$seet_number] = $person;
-	        	}
-	        	$i = 1;
-	        	$total = 0;
-	            foreach ($_seets as $seet): ?>
-		            <?php if(!empty($seet)): ?>
-			            <tr>
-			                <td><?= $seet->seet_number ?></td>
-			                <td><?= $seet->name ?></td>
-			                <td><?= $gender[$seet->gender] ?></td>
-			                <td><?= $seet->ticket_order->customer->name.'('.$person->ticket_order->customer->phone.')';?></td>
-			                <td><?= $seet->ticket_order->fare?></td>
-			            </tr>
-			        <?php $total += $seet->ticket_order->fare; ?>
-			        <?php else:?>
-			            <tr>
-			                <td><?=$i?></td><td></td><td></td><td></td><td></td>
-			            </tr>
-			        <?php endif ?>
-			    	<?php $i++; ?>
-	            <?php endforeach; ?>
-	            <tr>
-	            	<td colspan="4"><strong>Total</strong></td>
-	            	<td>Rp <?php echo $total;?></td>
-	            </tr>
-	        </tbody>
-		  </table>
-		</div>
-	  </div>
-	</div>
+			foreach ($passengers as $person) {
+				$seet_number = $person->seet_number;
+				$_seets[$seet_number] = $person;
+			}
+			$i = 1;
+			$total = 0;
+		    foreach ($_seets as $seet): ?>
+		        <?php if(!empty($seet)): ?>
+		            <tr>
+		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $seet->seet_number ?></td>
+		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $seet->ticket_order->customer->name?></td>
+		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $seet->ticket_order->ticket_code ?></td>
+		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $gender[$seet->gender] ?></td>
+		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $person->ticket_order->customer->phone;?></td>
+		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $seet->ticket_order->fare?></td>
+		            </tr>
+		        <?php $total += $seet->ticket_order->fare; ?>
+		        <?php else:?>
+		            <tr>
+		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?=$i?></td><td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"></td><td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"></td><td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"></td><td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"></td><td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"></td>
+		            </tr>
+		        <?php endif ?>
+		    	<?php $i++; ?>
+		    <?php endforeach; ?>
+		    <tr>
+		    	<td colspan="5" style="padding:10px;text-align:left;font-size:15px;border:1px solid #000;"><strong>Total</strong></td>
+		    	<td style="padding:10px;text-align:left;font-size:15px;border:1px solid #000;"><strong>Rp <?php echo $total;?></strong></td>
+		    </tr>
+		</tbody>
+	</table>
 	</div>
 </div>
-</div>
+
+<iframe id="ifmcontentstoprint" style="height: 0px; width: 0px; display: none"></iframe>
 <script type="text/javascript">
 	function reportPrint(){
-		var elm = document.getElementById('printArea').innerHtml;
-		var content = document.body.innerHtml;
-
-		document.body.innerHtml = elm;
-		window.print();
-		document.body.innerHtml = content;
+		var content = document.getElementById("printArea");
+		var pri = document.getElementById("ifmcontentstoprint").contentWindow;
+		pri.document.open();
+		pri.document.write(content.innerHTML);
+		pri.document.close();
+		pri.focus();
+		pri.print();
 	}
 </script>
