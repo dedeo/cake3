@@ -51,21 +51,130 @@ class RoutesController extends AppController
         $this->set('title', 'Tambah Rute Baru');
 
         $route = $this->Routes->newEntity();
+        $routeList = $this->_getRouteList();
+
+        $cities = $this->_getCityList();
+        
         if ($this->request->is('post')) {
             $data = $this->request->data;
-            $data['create_at'] = date('Y-m-d H:i:s');
-            $route = $this->Routes->patchEntity($route, $data);
-            if ($this->Routes->save($route)) {
-                $this->Flash->success(__('The route has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The route could not be saved. Please, try again.'));
+            $city_name = $cities->toArray();
+
+            $rute = [
+                    'name'=> $city_name[$data['source']].' - '.$city_name[$data['destination']],
+                    'source' => $data['source'],
+                    'destination' => $data['destination'],
+                    'distance' => $data['distance'],
+                    'fare'  => $data['fare'],
+                    'create_at' => date('Y-m-d H:m:s'),
+                    'parent_route' => (($data['parent_route']=='')? 0:$data['parent_route'])
+                ];
+
+            if(!empty($data['source'])){
+                $route = $this->Routes->patchEntity($route, $rute,['assosiated'=>['RouteDestinations']]);
+
+                if ($this->Routes->save($route)) {
+
+                    $this->Flash->success(__('The route has been saved.'));
+
+                    return $this->redirect(['action' => 'index']);
+                } else {
+                    $this->Flash->error(__('The route could not be saved. Please, try again.'));
+                }
+                
             }
         }
-        $this->set(compact('route'));
+        $this->set(compact('route','routeList','cities'));
         $this->set('_serialize', ['route']);
     }
+
+    // public function add()
+    // {
+    //     $this->set('title', 'Tambah Rute Baru');
+
+    //     $route = $this->Routes->newEntity();
+    //     // $routeDestination = $this->loadModel('RouteDestinations')->newEntity();
+
+    //     $cities = $this->loadModel('Cities')->find('list',
+    //             [
+    //                 'keyField' => 'id',
+    //                 'valueField' => 'city'                    
+    //             ]);
+        
+    //     if ($this->request->is('post')) {
+    //         $data = $this->request->data;
+
+    //         $rute = [
+    //             // 'name' => $data['name'],
+    //             'source' => $data['source'],
+    //             'create_at' => date('Y-m-d H:i:s')
+    //         ];
+
+    //         $_destinations = $data['route_destinations'];
+    //         $destinations = array();
+            
+    //         $_cities = $cities->toArray();
+
+    //         $routeName[0] = $data['source'];
+
+    //         foreach ($_destinations as $dest) {
+    //             if(!empty($dest['city']) AND !empty($dest['fare'])){
+    //                 $city_name = $_cities[$dest['city']];
+    //                 $destinations[] = [
+    //                         'city'      => $dest['city'],
+    //                         'city_name' => $city_name,
+    //                         'distance'  => $dest['distance'],
+    //                         'fare'      => $dest['fare']
+    //                         ];
+    //                 $routeName[] = $city_name;
+    //             }
+    //         }
+    //         $rute['name'] = implode(' - ', $routeName);
+    //         $rute['route_destinations'] = $destinations;
+    //         // $data['create_at'] = date('Y-m-d H:i:s');
+            
+    //         // debug($rute);
+    //         // die();
+
+    //         // debug($this->Routes);
+    //         // debug($routeDestination);
+    //         // die();
+
+    //         if(!empty($data['source'])){
+    //             $route = $this->Routes->patchEntity($route, $rute,['assosiated'=>['RouteDestinations']]);
+    //             // $route = $this->Routes->newEntity($rute,[
+    //             //         'assosiated'=>['RouteDestinations']
+    //             //         ]
+    //             //     );
+
+    //             // debug($route);
+    //             // die();
+
+    //             if ($this->Routes->save($route,[
+    //                     'validate' => false,
+    //                     'assosiated'=>['RouteDestinations']
+    //                 ])) {
+
+    //                 // $routeId = $route->getId
+
+    //                 // $routeDestination = $routeDestination->patchEntity($routeDestination, $_destinations);
+    
+
+
+    //                 $this->Flash->success(__('The route has been saved.'));
+
+    //                 return $this->redirect(['action' => 'index']);
+    //             } else {
+    //                 $this->Flash->error(__('The route could not be saved. Please, try again.'));
+    //             }
+                
+    //         }
+
+
+    //     }
+    //     $this->set(compact('route','cities'));
+    //     $this->set('_serialize', ['route']);
+    // }
 
     /**
      * Edit method
@@ -76,29 +185,50 @@ class RoutesController extends AppController
      */
     public function edit($id = null)
     {
-        // if($id == 'new'){
-        //     $route = $this->Routes->newEntity();
-        //     if ($this->request->is('post')) {
-        //         $route = $this->Routes->patchEntity($route, $this->request->data);
-        //         if ($this->Routes->save($route)) {
-        //             $this->Flash->success(__('The route has been saved.'));
-
-        //             return $this->redirect(['action' => 'index']);
-        //         } else {
-        //             $this->Flash->error(__('The route could not be saved. Please, try again.'));
-        //         }
-        //     }
-
-        //     $this->set('title', 'Armada Baru');
-        //     $this->set(compact('route'));
-        //     $this->set('_serialize', ['route']);
-        // }else{
             $route = $this->Routes->get($id, [
-                'contain' => []
+                'contain' => ['RouteDestinations']
             ]);
+            $cities = $this->_getCityList();
+            $routeList = $this->_getRouteList();
+
             if ($this->request->is(['patch', 'post', 'put'])) {
-                $route = $this->Routes->patchEntity($route, $this->request->data);
-                if ($this->Routes->save($route)) {
+
+                $data = $this->request->data;
+                debug($data);
+                // die();
+
+                $_destinations = $data['route_destinations'];
+                $destinations = array();
+                
+                $_cities = $cities->toArray();
+
+                $routeName[0] = $data['source'];
+
+                foreach ($_destinations as $dest) {
+                    if(!empty($dest['city']) AND !empty($dest['fare'])){
+                        $city_name = $_cities[$dest['city']];
+                        $destinations[] = [
+                                'id'      => $dest['id'],
+                                'city'      => $dest['city'],
+                                'city_name' => $city_name,
+                                'distance'  => $dest['distance'],
+                                'fare'      => $dest['fare']
+                                ];
+                        $routeName[] = $city_name;
+                    }
+                }
+
+                $rute['name'] = $data['name'];
+                $rute['source'] = $data['source'];
+                $rute['route_destinations'] = $destinations;
+
+
+                $route = $this->Routes->patchEntity($route, $rute,['assosiated'=>['RouteDestinations']]);
+
+                if ($this->Routes->save($route,[
+                        'validate' => false,
+                        'assosiated'=>['RouteDestinations']
+                    ])) {
                     $this->Flash->success(__('The route has been saved.'));
 
                     return $this->redirect(['action' => 'index']);
@@ -107,26 +237,8 @@ class RoutesController extends AppController
                 }
             }
             $this->set('title', $route['name']);
-            $this->set(compact('route'));
+            $this->set(compact('route','routeList','cities'));
             $this->set('_serialize', ['route']);            
-        // }
-
-
-        // $route = $this->Routes->get($id, [
-        //     'contain' => []
-        // ]);
-        // if ($this->request->is(['patch', 'post', 'put'])) {
-        //     $route = $this->Routes->patchEntity($route, $this->request->data);
-        //     if ($this->Routes->save($route)) {
-        //         $this->Flash->success(__('The route has been saved.'));
-
-        //         return $this->redirect(['action' => 'index']);
-        //     } else {
-        //         $this->Flash->error(__('The route could not be saved. Please, try again.'));
-        //     }
-        // }
-        // $this->set(compact('route'));
-        // $this->set('_serialize', ['route']);
     }
 
     /**
@@ -147,5 +259,23 @@ class RoutesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    private function _getCityList(){
+        return $this->loadModel('Cities')->find('list',
+                [
+                    'keyField' => 'id',
+                    'valueField' => 'city'                    
+                ]);
+    }
+
+    private function _getRouteList(){
+        return $this->Routes
+            ->find('list',[
+                'keyField' => 'id',
+                'valueField' => 'name',
+                ])
+            ->where(['parent_route'=>0])
+            ;
     }
 }

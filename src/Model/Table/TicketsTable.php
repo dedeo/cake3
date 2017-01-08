@@ -45,6 +45,12 @@ class TicketsTable extends Table
             'foreignKey' => 'bus_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('Routes', [
+            'foreignKey' => 'route_id',
+            'joinType' => 'INNER',
+            'className' => 'Dashboard.Routes'
+        ]);
+        
     }
 
     /**
@@ -78,9 +84,9 @@ class TicketsTable extends Table
             ->requirePresence('arival_time', 'create')
             ->notEmpty('arival_time');
 
-        $validator
-            ->requirePresence('fare', 'create')
-            ->notEmpty('fare');
+        // $validator
+        //     ->requirePresence('fare', 'create')
+        //     ->notEmpty('fare');
 
         $validator
             ->requirePresence('stock', 'create')

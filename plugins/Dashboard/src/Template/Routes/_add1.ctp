@@ -14,7 +14,7 @@ $this->assign('title', $title);
             <div class="x_content">
                 <?php echo $this->Form->create($route, ['id'=>'routesForm','class'=>'form-horizontal form-label-left','data-parsley-validate']) ?>
                 <!-- <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"> -->
-                <!-- 
+
                     <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Rute <span class="required">*</span>
                         </label>
@@ -27,8 +27,9 @@ $this->assign('title', $title);
                                     'required'=>'required',
                                     'placeholder'=> 'contoh: MAKASAR - SOROWAKO - BONE'
                                 ]); ?>
+                            <!-- <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12"> -->
                         </div>
-                    </div> -->
+                    </div>
                     <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kota Asal <span class="required">*</span>
                         </label>
@@ -40,11 +41,72 @@ $this->assign('title', $title);
                                     'label' => false,
                                     'empty'=>'-Pilih Kota Asal-',
                                     'class'=>'form-control col-md-7 col-xs-12',
-                                    'required'=>'required',
-                                    // 'default'=>8
+                                    'required'=>'required'
                                 ]); ?>
+                            <!-- <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12"> -->
                         </div>
                     </div>
+
+                    <hr>
+                    <table>
+                        <thead>
+                            <th>Kota Tujuan</th>
+                            <th>Jarak</th>
+                            <th>Harga</th>
+                        </thead>
+                        <tbody>
+                        <?php $destinations = $route->route_destinations; ?>    
+                        <?php //debug($destinations)?>                  
+                        <?php for ($i=0; $i<5 ; $i++) { ?> 
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <?php
+                                        echo $this->Form->select('route_destinations.'.$i.'.city',$cities, 
+                                            [
+                                                // 'options'=>$cities,
+                                                'class'=>'form-control',
+                                                // 'id'=>'destination'.$i.'-city',
+                                                'empty'=>'-Pilih Kota Tujuan-',
+                                                'label'=>false,
+                                                // 'value'=>$destinations[$i]->city
+
+                                            ]);
+                                        ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <?php
+                                        echo $this->Form->input('route_destinations.'.$i.'.distance', 
+                                            [
+                                                'class'=>'form-control',
+                                                // 'id'=>'destination'.$i.'-city',
+                                                'label'=>false,
+                                                'placeholder'=>'Jarak'
+                                            ]);
+                                        ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <?php
+                                        echo $this->Form->input('route_destinations.'.$i.'.fare', 
+                                            [
+                                                'class'=>'form-control',
+                                                // 'id'=>'destination'.$i.'-city',
+                                                'label'=>false,
+                                                'placeholder'=>'Tarif'
+                                            ]);
+                                        ?>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                        </tbody>
+                    </table>
+
+<!--                     
                     <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tujuan <span class="required">*</span>
                         </label>
@@ -52,11 +114,9 @@ $this->assign('title', $title);
                             <?php echo $this->Form->input(
                                 'destination', 
                                 [
-                                    'options' => $cities,
                                     'label' => false,
-                                    // 'value' => '',
+                                    'value' => '',
                                     'class'=>'form-control col-md-7 col-xs-12',
-                                    'empty'=>'-Pilih Kota Tujuan-',
                                     'required'=>'required'
                                 ]); ?>
                         </div>
@@ -91,21 +151,11 @@ $this->assign('title', $title);
                         </div>
                     </div>
                     <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Sub Rute Dari <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?php echo $this->Form->input(
-                                'parent_route', 
-                                [
-                                    'options' => $routeList,
-                                    'label' => false,
-                                    // 'value' => '',
-                                    'class'=>'form-control col-md-7 col-xs-12',
-                                    'empty'=>'-Pilih Rute Utama-',
-                                    'required'=>'required'
-                                ]); ?>
-                        </div>
+                    
                     </div>
+ -->                    
+                    <!-- <div class="ln_solid"></div> -->
+
                 </form>
             </div>
         </div>

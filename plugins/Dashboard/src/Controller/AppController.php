@@ -71,6 +71,7 @@ class AppController extends BaseController
 
         $this->_loadRoutes();
         $this->_loadBuses();
+        $this->_loadCities();
     }
 
     /**
@@ -131,6 +132,16 @@ class AppController extends BaseController
         $buses = $busesModel->find('list');
 
         $this->request->Session()->write('Buses.list',$buses->toArray());
+    }
+
+    private function _loadCities(){
+        $cities = $this->loadModel('Cities')
+                    ->find('list',[
+                            'keyField' => 'id',
+                            'valueField' => 'city',                            
+                        ]);
+
+        $this->request->Session()->write('Cities.list',$cities->toArray());
     }
 
 

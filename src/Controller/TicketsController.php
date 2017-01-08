@@ -34,6 +34,7 @@ class TicketsController extends AppController
             $this->request->session()->write('Ticket.search', $formData);
 
             $tgl = date('Y-m-d', strtotime($formData['tglKeberangkatan']));
+            $day = date('w', strtotime($formData['tglKeberangkatan']));
             $passegers = $formData['jmlPenumpang'];
             // debug($day);
             // die();
@@ -47,25 +48,98 @@ class TicketsController extends AppController
             // debug($tgl);
             // die();
 
-            $results = $this->Tickets->find('all',
+            //////////////////////////////////////////////////////////////////////////////////////////
+            // $results = $this->Tickets->find('all',
+            //             [
+            //                 'contain'=>['Schedules'=>['Routes'],'Buses'],
+            //                 'conditions'=>['Tickets.route_id'=>$formData['rute'],
+            //                                 'Tickets.date'=>$tgl,
+            //                                 'Tickets.stock >='=>$passegers
+            //                                 ]
+            //             ]
+            //     );
+            $this->loadModel('Routes');
+            $ruteParent = $this->Routes->find('all',[
+                    'conditions'=>['Routes.id'=>$formData['rute']]
+                ]);
+
+            foreach ($ruteParent as $route) {
+                $routeId = array();
+                if($route->route_parent!=0){
+                    $routeId[] = $route->route_parent;
+                }else{
+                    $routeId[] = $route->id;
+                }
+            }
+
+
+            $this->loadModel('Schedules');
+            $schedules = $this->Schedules->find('all',
                         [
-                            'contain'=>['Schedules'=>['Routes'],'Buses'],
-                            'conditions'=>['Tickets.route_id'=>$formData['rute'],
-                                            'Tickets.date'=>$tgl,
-                                            'Tickets.stock >='=>$passegers
+                            'contain'=>['Routes','Buses'],
+                            'conditions'=>['Schedules.route_id IN'=>$routeId,
+                                            'Schedules.day'=>$day
+                                            // 'Tickets.stock >='=>$passegers
                                             ]
                         ]
                 );
 
-            // debug($results);
+            // debug($schedules->count());
             // debug($results->toArray());
+            // die();
+            if($schedules->count()){
+                $schedulesId = array();
+                foreach ($schedules as $schedule) {
+                    $schedulesId[] = $schedule->id;
+                }
 
+                $this->loadModel('Tickets');
+                $tickets = $this->Tickets->find('all',
+                    [
+                        'conditions'=>[
+                            'Tickets.route_id IN'=>$schedulesId,
+                            'Tickets.stock >='=>$passegers],
+                    ]);
 
-            if ($results->count()){
-                $this->Flash->error(__('Tiket tidak ditemukan'));
+                // jika tiket belum ada, create ticket berdasarkan parent route
+                //
+                if($tickets->count()==0){
+
+                    foreach ($schedulesId as $scheduleId) {
+                        $schedule = $this->Schedules->get($schedulesId,[
+                                'contain'=>['Routes','Buses']
+                            ]);
+
+                        $dataTicket[] = [
+                            'schedule_id'   => $schedule->id ,
+                            'route_id'  => $schedule->route_id,
+                            'date_create_at'    => date('Y-m-d H:m:s',strtotime('now')),
+                            'departure_time'    => date('H:m:s', strtotime($schedule->departure_time)),
+                            'date'  =>  date('Y-m-d',strtotime($tgl)),
+                            'arival_time'   =>  date('H:m:s', strtotime($schedule->arival_time)),
+                            'stock' => $schedule->bus->capacity,
+                            'bus_id'    => $schedule->bus_id,
+                        ];
+                    }
+
+                    $newTickets = $this->Tickets->newEntities($dataTicket);
+
+                    foreach ($newTickets as $newTicket) {
+                        $save = $this->Tickets->save($newTicket);
+                    }
+
+                }
+    
+                $routes = $ruteParent;
+                $results = $this->Tickets->find('all',[
+                        'conditions'=>['Tickets.route_id IN'=>$routeId],
+                        'contain'=>['Buses','Routes']
+                    ]);
+
             }
+
         }
-        $this->set(compact('results','formData'));
+        $this->set(compact('results','routes','formData'));
     }
 
     public function getTicket(){
@@ -97,7 +171,7 @@ class TicketsController extends AppController
             $ticketId = $this->request->Session()->read('Ticket.id');
             $formData = $this->request->Session()->read('FormData');
 
-            debug($ticketId);
+            // debug($ticketId);
 
             $ticket = $this->Tickets->get($ticketId,
                         [

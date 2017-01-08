@@ -59,7 +59,7 @@
 								<!-- <span>12/</span>28 -->
 							</td>
 							<td class="search-price">
-								<span><?= $this->Number->currency($ticket->fare,'IDR'); ?></span>
+								<span><?= $this->Number->currency($ticket->route->fare,'IDR'); ?></span>
 							</td>
 							<td class="search-order">
 								<button type="submit" class="order-button"><i class="fa fa-tag" aria-hidden="true"></i> Pesan</button>

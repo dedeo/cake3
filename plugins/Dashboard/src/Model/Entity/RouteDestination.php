@@ -4,19 +4,18 @@ namespace Dashboard\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Route Entity
+ * RouteDestination Entity
  *
  * @property int $id
- * @property string $name
- * @property string $source
- * @property string $destination
+ * @property int $city
  * @property int $distance
  * @property int $fare
- * @property \Cake\I18n\Time $create_at
+ * @property int $route_id
+ * @property string $city_name
  *
- * @property \App\Model\Entity\Schedule[] $schedules
+ * @property \Dashboard\Model\Entity\Route $route
  */
-class Route extends Entity
+class RouteDestination extends Entity
 {
 
     /**
