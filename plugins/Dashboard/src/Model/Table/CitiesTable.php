@@ -31,15 +31,8 @@ class CitiesTable extends Table
         parent::initialize($config);
 
         $this->table('cities');
-        $this->displayField('id');
+        $this->displayField('city');
         $this->primaryKey('id');
-        // $this->belongsToMany(
-        //         'Routes',[
-        //             'className' =>'Routes',
-        //             'targetForeignKey'=> 'destination',
-        //             'propertyName' => 'city',
-        //         ]
-        //     );        
     }
 
     /**

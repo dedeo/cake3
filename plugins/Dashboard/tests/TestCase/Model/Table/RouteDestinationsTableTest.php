@@ -3,20 +3,20 @@ namespace Dashboard\Test\TestCase\Model\Table;
 
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
-use Dashboard\Model\Table\RoutesTable;
+use Dashboard\Model\Table\RouteDestinationsTable;
 
 /**
- * Dashboard\Model\Table\RoutesTable Test Case
+ * Dashboard\Model\Table\RouteDestinationsTable Test Case
  */
-class RoutesTableTest extends TestCase
+class RouteDestinationsTableTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \Dashboard\Model\Table\RoutesTable
+     * @var \Dashboard\Model\Table\RouteDestinationsTable
      */
-    public $Routes;
+    public $RouteDestinations;
 
     /**
      * Fixtures
@@ -24,15 +24,10 @@ class RoutesTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'plugin.dashboard.routes',
         'plugin.dashboard.route_destinations',
+        'plugin.dashboard.routes',
         'plugin.dashboard.schedules',
-        'plugin.dashboard.buses',
-        'plugin.dashboard.tickets',
-        'plugin.dashboard.ticket_orders',
-        'plugin.dashboard.customers',
-        'plugin.dashboard.avatars',
-        'plugin.dashboard.ticket_passengers'
+        'plugin.dashboard.buses'
     ];
 
     /**
@@ -43,8 +38,8 @@ class RoutesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Routes') ? [] : ['className' => 'Dashboard\Model\Table\RoutesTable'];
-        $this->Routes = TableRegistry::get('Routes', $config);
+        $config = TableRegistry::exists('RouteDestinations') ? [] : ['className' => 'Dashboard\Model\Table\RouteDestinationsTable'];
+        $this->RouteDestinations = TableRegistry::get('RouteDestinations', $config);
     }
 
     /**
@@ -54,7 +49,7 @@ class RoutesTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->Routes);
+        unset($this->RouteDestinations);
 
         parent::tearDown();
     }
@@ -75,6 +70,16 @@ class RoutesTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

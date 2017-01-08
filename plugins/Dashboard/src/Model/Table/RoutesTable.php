@@ -9,7 +9,9 @@ use Cake\Validation\Validator;
 /**
  * Routes Model
  *
+ * @property \Cake\ORM\Association\HasMany $RouteDestinations
  * @property \Cake\ORM\Association\HasMany $Schedules
+ * @property \Cake\ORM\Association\HasMany $Tickets
  *
  * @method \Dashboard\Model\Entity\Route get($primaryKey, $options = [])
  * @method \Dashboard\Model\Entity\Route newEntity($data = null, array $options = [])
@@ -36,9 +38,17 @@ class RoutesTable extends Table
         $this->displayField('name');
         $this->primaryKey('id');
 
+        $this->hasMany('RouteDestinations', [
+            'foreignKey' => 'route_id',
+            'className' => 'Dashboard.RouteDestinations'
+        ]);
         $this->hasMany('Schedules', [
             'foreignKey' => 'route_id',
             'className' => 'Dashboard.Schedules'
+        ]);
+        $this->hasMany('Tickets', [
+            'foreignKey' => 'route_id',
+            'className' => 'Dashboard.Tickets'
         ]);
     }
 
@@ -62,24 +72,23 @@ class RoutesTable extends Table
             ->requirePresence('source', 'create')
             ->notEmpty('source');
 
-        $validator
-            ->requirePresence('destination', 'create')
-            ->notEmpty('destination');
+        // $validator
+        //     ->requirePresence('destination', 'create')
+        //     ->notEmpty('destination');
 
-        $validator
-            ->integer('distance')
-            ->requirePresence('distance', 'create')
-            ->notEmpty('distance');
+        // $validator
+        //     ->integer('distance')
+        //     ->requirePresence('distance', 'create')
+        //     ->notEmpty('distance');
 
-        $validator
-            ->integer('fare')
-            ->requirePresence('fare', 'create')
-            ->notEmpty('fare');
+        // $validator
+        //     ->integer('fare')
+        //     ->requirePresence('fare', 'create')
+        //     ->notEmpty('fare');
 
         $validator
             ->dateTime('create_at')
-            ->requirePresence('create_at', 'create')
-            ->notEmpty('create_at');
+            ->allowEmpty('create_at');
 
         return $validator;
     }
