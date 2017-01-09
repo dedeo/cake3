@@ -2,6 +2,10 @@
 	if(!empty($results)){
 		$dataResult = $results->toArray();
 	}
+
+	// debug($results);
+	// die();
+
 ?>
 <body class="hasil-pencarian">
 	<div class="toogle-menu">
@@ -20,7 +24,7 @@
 				</div>
 		</div>
 		<div class="result-search">
-		<?php if($results->count()){ ?>
+		<?php if($results!=null){ ?>
 			<table>
 				<thead>
 					<tr>

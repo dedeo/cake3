@@ -97,9 +97,13 @@ class TicketsController extends AppController
                 $tickets = $this->Tickets->find('all',
                     [
                         'conditions'=>[
-                            'Tickets.route_id IN'=>$schedulesId,
+                            'Tickets.schedule_id IN'=>$schedulesId,
                             'Tickets.stock >='=>$passegers],
                     ]);
+
+                // debug($schedulesId);
+                // debug($tickets->count());
+                // die();
 
                 // jika tiket belum ada, create ticket berdasarkan parent route
                 //
@@ -127,7 +131,6 @@ class TicketsController extends AppController
                     foreach ($newTickets as $newTicket) {
                         $save = $this->Tickets->save($newTicket);
                     }
-
                 }
     
                 $routes = $ruteParent;
@@ -135,9 +138,7 @@ class TicketsController extends AppController
                         'conditions'=>['Tickets.route_id IN'=>$routeId],
                         'contain'=>['Buses','Routes']
                     ]);
-
             }
-
         }
         $this->set(compact('results','routes','formData'));
     }
