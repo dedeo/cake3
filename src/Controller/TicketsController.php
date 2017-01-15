@@ -428,9 +428,8 @@ class TicketsController extends AppController
 
         if(!empty($_ticket)){
             $this->loadModel('TicketOrders');
-            $ticket = $this->TicketOrders->find('all',[
-                'conditions' => ['TicketOrders.id' => $_ticket->id],
-                'contain' => ['Customers','Tickets']
+            $ticket = $this->TicketOrders->get($_ticket->id,[
+                'contain' => ['Customers','Tickets'=>['Buses']]
             ]);
 
         //     $ticket = $ticket->first();

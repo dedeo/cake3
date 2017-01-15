@@ -21,12 +21,12 @@
 						<?=$ticket->ticket->bus->plat_no; ?>
 					</td>
 					<td style="width: 33.33%;">
-						Keberangkatan: <?php //$ticket->departure_date->i18nFormat('d MMM Y') ?><br>
+						Keberangkatan: <?php echo date('d M Y',strtotime($ticket->departure_date)) ?><br>
 						<?php //$ticket->departure_time->i18nFormat('HH:mm:ss') ?>
 					</td>
 					<td style="width: 33.33%;">
-						Tiba: <?php//$ticket->arival_date->i18nFormat('d MMM Y') ?><br>
-						<?php //$ticket->arival_time->i18nFormat('HH:mm:ss') ?>
+						Tiba: <?php echo date('d M Y', strtotime($ticket->arival_date)); ?><br>
+						<?php echo date('H:m:s', strtotime($ticket->arival_time)) ?>
 					</td>
 				</tr>
 			</tbody>
@@ -45,11 +45,7 @@
 						<?=$ticket->customer->phone; ?>
 					</td>
 					<td style="width: 33.33%;">
-						Nomor Kursi:
-					<?php $penumpang = $ticket->ticket_passengers ?>
-					<?php foreach ($penumpang as $data) { ?>
-						#<?=$data->seet_number; ?>
-					<?php } ?>
+						Nomor Kursi: <?php echo $ticket->sheet ?>
 					</td>
 				</tr>
 			</tbody>
