@@ -3,8 +3,8 @@
 		$dataResult = $results->toArray();
 	}
 
-	// debug($results);
-	// die();
+	$searchParam = $this->request->session()->read('Search.params');
+
 
 ?>
 <body class="hasil-pencarian">
@@ -18,13 +18,13 @@
 	</div>
 	<div class="hasil-pencarian-content row">
 		<div class="top-info col-sm-12 row">
-			<div class="rute-info col-sm-8">Hasil Pencarian: <?php echo $this->Routes->getLabel($formData['rute']) ?></div>
+			<div class="rute-info col-sm-8">Hasil Pencarian: <?php echo $searchParam['route']['name']; ?></div>
 			<div class="date-info col-sm-4">
-				<i class="fa fa-calendar" aria-hidden="true"></i><?= $this->Time->format($formData['tglKeberangkatan'],'dd MMM Y') ?>
+				<i class="fa fa-calendar" aria-hidden="true"></i><?= $this->Time->format($searchParam['date'],'dd MMM Y') ?>
 				</div>
 		</div>
 		<div class="result-search">
-		<?php if($results!=null){ ?>
+		<?php if(!empty($results)){ ?>
 			<table>
 				<thead>
 					<tr>
@@ -36,34 +36,55 @@
 					</tr>
 				</thead>
 				<tbody>
-				<?php foreach ($results as $ticket) { ?>
+				<?php foreach ($results as $schedule) { ?>
 					<tr>
 						<form action="<?php echo $this->Url->build(['controller'=>'Tickets','action'=>'getTicket']) ?>" method="POST">
-							<?= $this->Form->hidden('id',['value'=>$ticket->id]) ?>			
-							<?= $this->Form->hidden('jmlPenumpang',['value'=>$formData['jmlPenumpang']]) ?>			
+							<?php 
+								// debug($schedule->id);
+								// debug(empty($schedule->tickets));
+								if(!empty($schedule->has_tickets)){
+									echo $this->Form->hidden('ticket',['value'=>true]);
+									echo $this->Form->hidden('ticket_id',['value'=>$schedule->has_tickets->id]);			
+									echo $this->Form->hidden('schedule_id',['value'=>$schedule->id]);			
+								}else{ 
+									echo $this->Form->hidden('ticket',['value'=>false]);
+									echo $this->Form->hidden('schedule_id',['value'=>$schedule->id]);			
+								} 
+							?>
+							<?= $this->Form->hidden('jmlPenumpang',['value'=>$formData['jmlPenumpang']]) ?>	
+							<?= $this->Form->hidden('tglKeberangkatan',['value'=>$formData['tglKeberangkatan']]) ?>			
 							<td class="search-img">
 								<?= $this->Html->image('bus.jpg', ['alt' => 'search-img']);?>
-								<span class="plat-no"><?= $ticket->bus->plat_no;?></span>
+								<span class="plat-no"><?= $schedule->bus->plat_no;?></span>
 							</td>
 							<td class="search-tipe">
-								<span><?=$this->Bus->getLabel($ticket->bus->class)?></span>
+								<span><?=$this->Bus->getLabel($schedule->bus->class)?></span>
 								Fasilitas<br>
 								- AC <br>
 								- Selimut <br>
 								- Bantal
 							</td>
 							<td class="search-time">
-								<span><?= $this->Time->format($ticket->departure_time,'HH:mm'); ?></span>
+								<span><?= $this->Time->format($schedule->departure_time,'HH:mm'); ?></span>
 								Lama Perjalanan: <br>
-								<?php $duration = date_diff($ticket->arival_time, $ticket->departure_time); ?>
+								<?php $duration = date_diff($schedule->arival_time, $schedule->departure_time); ?>
 								<?= $duration->h.' jam, '.$duration->i.' menit'; ?>
 							</td>
 							<td class="search-capacity">
-								<span><?=$ticket->stock?></span>/<?=$ticket->bus->capacity?>
+								<span>
+								<?php if($schedule->has_tickets){
+										echo $schedule->availabel_sheet;
+									}else{
+										echo $schedule->bus->capacity;
+									}
+								?>
+								</span>
+
+								/<?=$schedule->bus->capacity?>
 								<!-- <span>12/</span>28 -->
 							</td>
 							<td class="search-price">
-								<span><?= $this->Number->currency($ticket->route->fare,'IDR'); ?></span>
+								<span><?= $this->Number->currency($schedule->fare,'IDR'); ?></span>
 							</td>
 							<td class="search-order">
 								<button type="submit" class="order-button"><i class="fa fa-tag" aria-hidden="true"></i> Pesan</button>

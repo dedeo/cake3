@@ -9,13 +9,17 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property int $day
  * @property int $route_id
+ * @property string $route_name
  * @property int $bus_id
  * @property \Cake\I18n\Time $departure_time
  * @property \Cake\I18n\Time $arival_time
  * @property \Cake\I18n\Time $create_at
+ * @property string $class
+ * @property string $fare
  *
  * @property \App\Model\Entity\Route $route
  * @property \App\Model\Entity\Bus $bus
+ * @property \App\Model\Entity\TicketOrder[] $ticket_orders
  */
 class Schedule extends Entity
 {

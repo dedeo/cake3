@@ -62,6 +62,16 @@ class SchedulesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
+            // ->integer('day')
+            ->requirePresence('class', 'create')
+            ->notEmpty('class');
+
+        $validator
+            // ->integer('day')
+            ->requirePresence('fare', 'create')
+            ->notEmpty('fare');
+
+        $validator
             ->integer('day')
             ->requirePresence('day', 'create')
             ->notEmpty('day');

@@ -76,27 +76,6 @@
 			<span>Data Penumpang</span>
 			<span class="jumlah-ticket">Jumlah Tiket: <?=$formData['jmlPenumpang']  ?></span>
 		</h1>
-		<ul class="penumpang-list">
-			<?php for($n = 1; $n<=$formData['jmlPenumpang']; $n++ ) { ?>
-				<li>
-					<h2><?php echo "Penumpang #".$n ?> </h2>
-					<div class="penumpang-name">
-						<label for="nama-penumpang-1">Nama</label>
-						<input type="text" name="penumpang[<?=$n?>][name]" placeholder="Input nama penumpang" id="nama-penumpang-<?=$n?>" required>
-					</div>
-					<div class="penumpang-kelamin form-group">
-						<h3>Jenis Kelamin</h3>
-
-						<div class="radio">
-						  <label><input type="radio" name="penumpang[<?=$n?>][gender]" value="male" required> Laki-laki</label>
-						</div>
-						<div class="radio">
-						  <label><input type="radio" name="penumpang[<?=$n?>][gender]" value="female" required> Perempuan</label>
-						</div>
-					</div>
-				</li>
-			<?php } ?>
-		</ul>
 
 		<div class="penumpang-contact">
 			<h2>Kontak yang bisa dihubungi</h2>

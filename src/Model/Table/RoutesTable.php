@@ -21,6 +21,7 @@ use Cake\Validation\Validator;
  */
 class RoutesTable extends Table
 {
+    protected $_virtual = ['real_route'];
 
     /**
      * Initialize method

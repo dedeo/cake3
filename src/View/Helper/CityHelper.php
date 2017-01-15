@@ -9,6 +9,9 @@ class CityHelper extends Helper
 
     public function getName($cityId)
     {
+        if($this->_cities==null){
+            $this->_setCities();
+        }
         return $this->_cities[$cityId];
     }
 

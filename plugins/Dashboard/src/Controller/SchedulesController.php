@@ -66,6 +66,8 @@ class SchedulesController extends AppController
                             'bus_id' => $dataForm['bus_id'],
                             'departure_time' => $dataForm['departure_time'],
                             'arival_time' => $dataForm['arival_time'],
+                            'class' => $dataForm['class'],
+                            'fare' => $dataForm['fare'],
                             // 'create_at' => date('Y-m-d H:m:s'),
                             ];
             }

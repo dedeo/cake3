@@ -17,16 +17,16 @@
 				<tbody>
 				<tr>
 					<td style="width: 33.33%;">
-						<?=$ticket->ticket->schedule->route->name; ?><br>
+						Tujuan: <?=$this->City->getName($ticket->destination); ?><br>
 						<?=$ticket->ticket->bus->plat_no; ?>
 					</td>
 					<td style="width: 33.33%;">
-						Keberangkatan: <?=$ticket->departure_date->i18nFormat('d MMM Y') ?><br>
-						<?=$ticket->departure_time->i18nFormat('HH:mm:ss') ?>
+						Keberangkatan: <?php //$ticket->departure_date->i18nFormat('d MMM Y') ?><br>
+						<?php //$ticket->departure_time->i18nFormat('HH:mm:ss') ?>
 					</td>
 					<td style="width: 33.33%;">
-						Tiba: <?=$ticket->arival_date->i18nFormat('d MMM Y') ?><br>
-						<?=$ticket->arival_time->i18nFormat('HH:mm:ss') ?>
+						Tiba: <?php//$ticket->arival_date->i18nFormat('d MMM Y') ?><br>
+						<?php //$ticket->arival_time->i18nFormat('HH:mm:ss') ?>
 					</td>
 				</tr>
 			</tbody>

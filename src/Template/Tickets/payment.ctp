@@ -1,13 +1,13 @@
 <?php
 	
-	$penumpang = $formData['penumpang'];
-	$customer = $formData['customer'];
+	// $penumpang = $formData['penumpang'];
+	$customer = $data['customer'];
 
 	$rute = $ticket['route'];
 	$bus = $ticket['bus'];
 
-	if($this->request->session()->read('Ticket.detail')){
-		$tiket = $this->request->session()->read('Ticket.detail');
+	if($this->request->session()->read('Order.customer')){
+		$customer = $this->request->session()->read('Order.customer');
 	}
 
 	// debug($tiket);
@@ -17,10 +17,10 @@
 <body class="pembayaran">
 	<div class="total-price-wrapper">
 		<h1>Total Bayar</h1>
-		<div class="total-price">Rp. <?=$tiket['total']?></div>
+		<div class="total-price">Rp. <?=$data['total']?></div>
 	</div>
 	<div class="detail-order">
-		<h1>Detail Pesanan Tiket: <?=count($tiket['penumpang'])?> Orang</h1>
+		<h1>Detail Pesanan Tiket: <?=$data['jumlah_penumpang']?> Orang</h1>
 		<ul class="detail-list">
 			<li class="detail-ticket">
 				<h2>Detail Tiket</h2>
@@ -32,19 +32,19 @@
 						</tr>
 						<tr>
 							<td>Rute Perjalanan</td>
-							<td><?=$tiket['rute']?></td>
+							<td><?=$data['rute']?></td>
 						</tr>
 						<tr>
 							<td>Tanggal Keberangkatan</td>
-							<td><?= $tiket['tanggal']?></td>
+							<td><?= $data['tanggal']?></td>
 						</tr>
 						<tr>
 							<td>Jam Keberangkatan</td>
-							<td><?= $tiket['jam_keberangkatan']?></td>
+							<td><?= $data['jam_keberangkatan']?></td>
 						</tr>
 						<tr>
 							<td>Jumlah Penumpang</td>
-							<td><?=count($tiket['penumpang'])?></td>
+							<td><?=$data['jumlah_penumpang']?></td>
 						</tr>
 						<tr>
 							<td>Tipe Bus</td>
@@ -52,32 +52,32 @@
 						</tr>
 						<tr>
 							<td>No. Polisi</td>
-							<td><?=$tiket['bus']['nopol']?></td>
+							<td><?=$data['bus']['nopol']?></td>
 						</tr>
 					</tbody>
 				</table>
 			</li>
 			<li class="detail-penumpang">
-				<h2>Detail Penumpang</h2>
+				<h2>Kustomer</h2>
 				<table>
 					<thead>
 						<tr>
-							<th>No. Kursi</th>
 							<th>Nama Penumpang</th>
-							<th>Jenis Kelamin</th>
+							<th>No. Tlp</th>
+							<th>No. Kursi</th>
 						</tr>
 					</thead>
 					<tbody>
-					<?php foreach ($tiket['penumpang'] as $data) { ?>
+					<?php //$customer = $formData['customer']; ?>
 						<tr>
-							<td>#<?=$data['kursi']?></td>
-							<td><?=$data['name']?></td>
-							<td><?=$data['gender']?></td>
+							<td><?=$data['customer']['name']?></td>
+							<td><?=$data['customer']['phone']?></td>
+							<td><?=implode(', ', $customer['kursi']);?></td>
 						</tr>
-					<?php } ?>
 					</tbody>
 				</table>
 			</li>
+			<!-- 			
 			<li class="detail-kontak">
 				<h2>Kontak Yang Bisa Dihubungi</h2>
 				<table>
@@ -96,7 +96,7 @@
 						</tr>
 					</tbody>
 				</table>
-			</li>
+			</li> -->
 		</ul>
 	</div>
 	<div class="buttom-wrapper">
