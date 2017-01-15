@@ -96,6 +96,9 @@ class AppController extends Controller {
         
         // Only for ACL setup
         // $this->Auth->allow();
+        $this->_loadRoutes();
+        $this->_loadBuses();
+        $this->_loadCities();
     }
 
     /**
@@ -142,6 +145,29 @@ class AppController extends Controller {
 
         // Default deny
         return false;
+    }
+    private function _loadRoutes(){
+        $routeModel = $this->loadModel('Routes');
+        $routes = $routeModel->find('list');
+
+        $this->request->Session()->write('Routes.list',$routes->toArray());
+    }
+
+    private function _loadBuses(){
+        $busesModel = $this->loadModel('Buses');
+        $buses = $busesModel->find('list');
+
+        $this->request->Session()->write('Buses.list',$buses->toArray());
+    }
+
+    private function _loadCities(){
+        $cities = $this->loadModel('Cities')
+                    ->find('list',[
+                            'keyField' => 'id',
+                            'valueField' => 'city',                            
+                        ]);
+
+        $this->request->Session()->write('Cities.list',$cities->toArray());
     }
 
 }

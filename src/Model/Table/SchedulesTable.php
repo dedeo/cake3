@@ -11,7 +11,7 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsTo $Routes
  * @property \Cake\ORM\Association\BelongsTo $Buses
- * @property \Cake\ORM\Association\HasMany $TicketOrders
+ * @property \Cake\ORM\Association\HasMany $Tickets
  *
  * @method \App\Model\Entity\Schedule get($primaryKey, $options = [])
  * @method \App\Model\Entity\Schedule newEntity($data = null, array $options = [])
@@ -23,6 +23,8 @@ use Cake\Validation\Validator;
  */
 class SchedulesTable extends Table
 {
+
+    protected $_virtual = ['has_tickets','availabel_sheet'];
 
     /**
      * Initialize method
@@ -46,7 +48,7 @@ class SchedulesTable extends Table
             'foreignKey' => 'bus_id',
             'joinType' => 'INNER'
         ]);
-        $this->hasMany('TicketOrders', [
+        $this->hasMany('Tickets', [
             'foreignKey' => 'schedule_id'
         ]);
     }
@@ -69,6 +71,10 @@ class SchedulesTable extends Table
             ->notEmpty('day');
 
         $validator
+            ->requirePresence('route_name', 'create')
+            ->notEmpty('route_name');
+
+        $validator
             ->time('departure_time')
             ->requirePresence('departure_time', 'create')
             ->notEmpty('departure_time');
@@ -81,6 +87,14 @@ class SchedulesTable extends Table
         $validator
             ->dateTime('create_at')
             ->allowEmpty('create_at');
+
+        $validator
+            ->requirePresence('class', 'create')
+            ->notEmpty('class');
+
+        $validator
+            ->requirePresence('fare', 'create')
+            ->notEmpty('fare');
 
         return $validator;
     }
@@ -99,4 +113,6 @@ class SchedulesTable extends Table
 
         return $rules;
     }
+
+    // public functionS
 }

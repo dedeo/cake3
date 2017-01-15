@@ -27,17 +27,7 @@ class TicketsTableTest extends TestCase
         'app.tickets',
         'app.schedules',
         'app.routes',
-        'app.buses',
-        'app.ticket_orders',
-        'app.customers',
-        'app.users',
-        'app.aros',
-        'app.acos',
-        'app.permissions',
-        'app.groups',
-        'app.roles',
-        'app.documents',
-        'app.ticket_passengers'
+        'app.buses'
     ];
 
     /**

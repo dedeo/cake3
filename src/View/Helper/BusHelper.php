@@ -36,6 +36,10 @@ class BusHelper extends Helper
         return $this->types;
     }
 
+    public function getListType(){
+        return $this->types;
+    }
+
     public function getBusList(){
         if($this->_buses==null){
             $this->_setBuses();

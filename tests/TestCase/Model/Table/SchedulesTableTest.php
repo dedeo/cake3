@@ -26,7 +26,18 @@ class SchedulesTableTest extends TestCase
     public $fixtures = [
         'app.schedules',
         'app.routes',
-        'app.buses'
+        'app.buses',
+        'app.ticket_orders',
+        'app.customers',
+        'app.users',
+        'app.aros',
+        'app.acos',
+        'app.permissions',
+        'app.groups',
+        'app.roles',
+        'app.documents',
+        'app.tickets',
+        'app.ticket_passengers'
     ];
 
     /**

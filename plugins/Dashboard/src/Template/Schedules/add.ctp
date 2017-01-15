@@ -15,17 +15,36 @@ $this->assign('title', $title);
 				<?php echo $this->Form->create($schedule, ['id'=>'scheduleForm','class'=>'form-horizontal form-label-left','data-parsley-validate']) ?>
 
 					<div class="form-group">
-					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Hari Keberangkatan <span class="required">*</span>
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Rute <span class="required">*</span>
 						</label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
-							<?php 
-	                            echo $this->Form->select(
-	                                'day',
-	                                $this->MyDate->toOptionsArray(), [
-	                                    'multiple' => 'checkbox',
-	                                    'required'=>'required'
-	                                ]);
-								?>
+							<?php echo $this->Form->input(
+								'route_id',
+								[
+									'empty'=>'- Pulih Rute -',
+									'label' => false,
+									'class'=>'form-control col-md-7 col-xs-12',
+									'required'=>'required',
+									'onChange'=>'routeChange(this)'
+								]); ?>
+							<input type="hidden" name='route_name' id="route_name">
+						</div>
+					</div>
+
+					<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Class <span class="required">*</span>
+						</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<?php echo $this->Form->select(
+								'class', 
+								$this->Bus->getListType(),
+								[
+									'empty'=>'- Class Bus -',
+									'label' => false,
+									'class'=>'form-control col-md-7 col-xs-12',
+									'required'=>'required',
+								]); ?>
+							<!-- <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12"> -->
 						</div>
 					</div>
 
@@ -45,22 +64,21 @@ $this->assign('title', $title);
 						</div>
 					</div>
 
-					<div class="form-group">
-					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Rute <span class="required">*</span>
-						</label>
-						<div class="col-md-6 col-sm-6 col-xs-12">
-							<?php echo $this->Form->input(
-								'route_id',
-								[
-									'empty'=>'- Pulih Rute -',
-									'label' => false,
-									'class'=>'form-control col-md-7 col-xs-12',
-									'required'=>'required',
-									'onChange'=>'routeChange(this)'
-								]); ?>
-							<input type="hidden" name='route_name' id="route_name">
-						</div>
-					</div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Tarif/Harga <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback-left">
+                            <span class="form-control-feedback left" aria-hidden="true">Rp</span>
+                            <?php echo $this->Form->input(
+                                'fare', 
+                                [
+                                    'type'=>'number',
+                                    'label' => false,
+                                    'class'=>'form-control col-md-7 col-xs-12 has-feedback-left',
+                                    'required'=>'required'
+                                ]); ?>
+                        </div>
+                    </div>
 					<div class="form-group">
 					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jam Keberangkatan <span class="required">*</span>
 						</label>
@@ -89,6 +107,22 @@ $this->assign('title', $title);
 							<!-- <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12"> -->
 						</div>
 					</div>
+
+					<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Hari Keberangkatan <span class="required">*</span>
+						</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<?php 
+	                            echo $this->Form->select(
+	                                'day',
+	                                $this->MyDate->toOptionsArray(), [
+	                                    'multiple' => 'checkbox',
+	                                    'required'=>'required'
+	                                ]);
+								?>
+						</div>
+					</div>
+
 					<div class="form-group">
 					
 					</div>
