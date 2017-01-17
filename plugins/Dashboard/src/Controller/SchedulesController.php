@@ -66,7 +66,8 @@ class SchedulesController extends AppController
         if ($this->request->is('post')) {
             $dataForm = $this->request->data;
 
-            // debug($dataForm);
+            debug($dataForm);
+            // die();
 
             foreach ($dataForm['day'] as $day => $label) {
                 $datas[]= [
@@ -76,7 +77,7 @@ class SchedulesController extends AppController
                             'bus_id' => $dataForm['bus_id'],
                             'departure_time' => $dataForm['departure_time'],
                             'arival_time' => $dataForm['arival_time'],
-                            'class' => $dataForm['class'],
+                            'class' => $dataForm['bus_type'],
                             'fare' => $dataForm['fare'],
                             // 'create_at' => date('Y-m-d H:m:s'),
                             ];

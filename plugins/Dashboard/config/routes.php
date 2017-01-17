@@ -15,3 +15,4 @@ Router::plugin(
         $routes->fallbacks(DashedRoute::class);
     }
 );
+// Router::extensions(['json']);

@@ -4,6 +4,8 @@ namespace Dashboard\Controller;
 use Dashboard\Controller\AppController;
 use App\View\Helper\BusHelper;
 
+// App::uses('BusHelper', 'View/Helper');
+
 /**
  * Buses Controller
  *
@@ -11,7 +13,11 @@ use App\View\Helper\BusHelper;
  */
 class BusesController extends AppController
 {
-
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('RequestHandler');
+    }
     /**
      * Index method
      *
@@ -131,5 +137,26 @@ class BusesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function getBusType(){
+        $data = [];
+        // $this->autoRender=false;
+        if($this->request->is('ajax')){
+            $busId = $this->request->data['id'];
+            // debug($busId);
+            $bus = $this->Buses->get($busId);
+
+            if($bus){
+                // $data['response'] = "success";
+                $busHelper = new BusHelper(new \Cake\View\View());
+                $data['type'] = $bus->class;
+                $data['label'] = $busHelper->getLabel($bus->class);
+            }
+        }
+        // $this->response->body(compact('data'));
+        $this->set(compact('data'));
+        $this->set('_serialize',['data']);
+        // return json_encode($data);
     }
 }

@@ -56,10 +56,19 @@ class MainController extends AppController
             $ticketorderTotal += $ticket->total;
             $ticketorderPasseger += $ticket->passegers;
         }
-        $this->set('jualTotal', $ticketorderTotal);
-        $this->set('jualPessanger', $ticketorderPasseger);
-        $this->set('jualBulan', $timeToday);
-        
+
+        /* today Routes */
+        $now = date('w',strtotime('now'));
+        $this->loadModel('Schedules');
+        $todayRoutes = $this->Schedules->find('all',[
+                'conditions' => ['day'=>$now],
+                'contain'=>['Routes','Buses']
+            ]);
+
+        // $this->set('jualTotal', $ticketorderTotal);
+        // $this->set('jualPessanger', $ticketorderPasseger);
+        // $this->set('jualBulan', $timeToday);
+        $this->set(compact('timeToday','ticketorderPasseger','ticketorderTotal','todayRoutes'));
     }
 
     /**
