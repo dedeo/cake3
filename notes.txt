@@ -2,5 +2,4 @@ searching berdasarkan jadwal
 sute besar dan subrute -> menentukan jumlah kursi yang terbeli
 tiket dibuat otomatis ketika ada order
 - hilangkan form input data penumpang, isi data customer saja
-
 - report berdasarkan tanggal, jumlah total pendapatan pertanggal yang dipilih
