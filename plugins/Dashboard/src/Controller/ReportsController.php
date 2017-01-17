@@ -110,6 +110,7 @@ class ReportsController extends AppController
             //  (int) 2 => '3'
             // ],
             // 'daterange' => '12/01/2016 - 12/29/2016'
+            $resultRange = $formData['daterange'];
 
             $tglrange = explode(' - ', $formData['daterange']);
 
@@ -136,7 +137,7 @@ class ReportsController extends AppController
                     'group' =>['date', 'busname']
                 ]);
         }
-        $this->set(compact('results'));
+        $this->set(compact('results','resultRange'));
     }
 
     // public function ticketSales()

@@ -10,37 +10,36 @@ $this->assign('title', $title);
 		<div class="selection-report" style="padding:10px;">
 			<label for="startDate">Date Range:</label>
 			<input type="text" name="daterange" value=""/>
-			<button type='submit' class="btn btn-warning btn-sm pull-right"> Apply</button>
-			<a href="#" onclick="harianPrint()" class="btn btn-warning btn-sm pull-right"> Print</a>
+			<button type='submit' class="btn btn-warning btn-sm"> Apply</button>
+			<a href="#" onclick="reportPrint()" class="btn btn-warning btn-sm pull-right"> Print</a>
 		</div>
 		<?php echo $this->Form->end(); ?>	
-		<div class="x_panel">
-		  <div class="x_content">
+		<div id="printArea" style="display:inline-block;margin-bottom:20px;color:#000;width:100%;box-sizing: border-box;">
+
 		  	<?php if ($results) { ?>
-			<div class="table-responsive">
-			  <table class="table" id="tableRoutes" style="border: 1px;font-size: 12px;width:100%;">
+		  	<span style="margin-bottom:10px;font-size:16px;color:#000;display:inline-block;width:100%;">Hasil: <?= $resultRange ?></span>
+			<div style="display:inline-block;width:100%;padding:10px;background:#fff;box-sizing: border-box;">
+			  <table style="border: 1px;font-size: 13px;width:100%;color:#000;border-collapse:collapse;box-sizing: border-box;">
 				<thead>
-				  <tr class="headings">
-					<th class="column-title">#</th>
-					<th class="column-title">Rute</th>
-					<th class="column-title">Bus</th>
-					<!-- <th class="column-title">Tanggal</th> -->
-					<!-- <th class="column-title">Rute</th> -->
-					<th class="column-title">Terjual/Stock</th>
-					<th class="column-title">Tiket Tanggal</th>
-					<th class="column-title">Pendapatan</th>
+				  <tr>
+					<th style="text-align:left;border:1px solid #000;padding:10px;font-size:13px;">#</th>
+					<th style="text-align:left;border:1px solid #000;padding:10px;font-size:13px;">Rute</th>
+					<th style="text-align:left;border:1px solid #000;padding:10px;font-size:13px;">Bus</th>
+					<th style="text-align:left;border:1px solid #000;padding:10px;font-size:13px;">Terjual/Stock</th>
+					<th style="text-align:left;border:1px solid #000;padding:10px;font-size:13px;">Tanggal Tiket</th>
+					<th style="text-align:left;border:1px solid #000;padding:10px;font-size:13px;">Pendapatan</th>
 				  </tr>
 				</thead>
 				<tbody>
 					<?php $i=1;?>
 					<?php foreach ($results as $result) { ?>
 					<tr>
-						<td><?= $i ?></td>
-						<td><?= $result->route ?></td>
-						<td><?= $this->Html->link($result->busname,['action'=>'ticketBus',$result->ticket_id]) ?></td>
-						<td><?= ($result->stock - $result->sell).'/'.$result->stock ?></td>
-						<td><?= $result->date ?></td>
-						<td>Rp <?= $result->earning?></td>
+						<td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $i ?></td>
+						<td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $this->Html->link($result->route,['action'=>'ticketBus',$result->ticket_id],['style'=>'color:#000;text-decoration:none;']) ?></td>
+						<td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $this->Html->link($result->busname,['action'=>'ticketBus',$result->ticket_id],['style'=>'color:#000;text-decoration:none;']) ?></td>
+						<td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= ($result->stock - $result->sell).'/'.$result->stock ?></td>
+						<td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $result->date ?></td>
+						<td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">Rp <?= $result->earning?></td>
 					</tr>
 					<?php $i++;?>
 					<?php }?>
@@ -48,9 +47,9 @@ $this->assign('title', $title);
 			  </table>
 			</div>
 		  	<?php } ?> 
-		  </div>
 		</div>
 	</div>
+	<iframe id="ifmcontentstoprint" style="height: 0px; width: 0px; display: none"></iframe>
 </div>
 
 <?php $this->Html->scriptStart(['block'=>true]);?>
@@ -62,19 +61,9 @@ $this->assign('title', $title);
 	    });
 	});
 
-	function harianPrint(){
-		var content = document.getElementById("report-harian");
-		var pri = document.getElementById("ifmcontentharian").contentWindow;
-		pri.document.open();
-		pri.document.write(content.innerHTML);
-		pri.document.close();
-		pri.focus();
-		pri.print();
-	};
-
-	function bulananPrint(){
-		var content = document.getElementById("report-bulanan");
-		var pri = document.getElementById("ifmcontentbulanan").contentWindow;
+	function reportPrint(){
+		var content = document.getElementById("printArea");
+		var pri = document.getElementById("ifmcontentstoprint").contentWindow;
 		pri.document.open();
 		pri.document.write(content.innerHTML);
 		pri.document.close();
