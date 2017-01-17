@@ -62,19 +62,19 @@ class RoutesTable extends Table
             ->requirePresence('source', 'create')
             ->notEmpty('source');
 
-        $validator
-            ->requirePresence('destination', 'create')
-            ->notEmpty('destination');
+        // $validator
+        //     ->requirePresence('destination', 'create')
+        //     ->notEmpty('destination');
 
-        $validator
-            ->integer('distance')
-            ->requirePresence('distance', 'create')
-            ->notEmpty('distance');
+        // $validator
+        //     ->integer('distance')
+        //     ->requirePresence('distance', 'create')
+        //     ->notEmpty('distance');
 
-        $validator
-            ->integer('fare')
-            ->requirePresence('fare', 'create')
-            ->notEmpty('fare');
+        // $validator
+        //     ->integer('fare')
+        //     ->requirePresence('fare', 'create')
+        //     ->notEmpty('fare');
 
         $validator
             ->dateTime('create_at')

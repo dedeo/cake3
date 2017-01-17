@@ -75,12 +75,12 @@ class ReportsController extends AppController
         if($ticketId){
             $ticketModel = $this->loadModel('Tickets');
             $ticket = $ticketModel->get($ticketId,[
-                    'contain'=>['Schedules'=>['Routes'],'Buses']
+                    'contain'=>['Routes','Buses','TicketOrders'=>['Customers']]
                 ]);
 
-            $passengersModel = $this->loadModel('TicketPassengers');
-            $passengers = $passengersModel->find('all',[
-                    'contain'=>['TicketOrders'=>['Tickets','Customers']],
+            $orderModel = $this->loadModel('TicketOrders');
+            $orders = $orderModel->find('all',[
+                    'contain'=>['Tickets','Customers'],
                     'conditions'=>['Tickets.id'=>$ticketId],
                     'order' => ['TicketPassengers.seet_number' => 'ASC']
                 ]);
@@ -124,9 +124,9 @@ class ReportsController extends AppController
                             'earning'=>'sum(TicketOrders.total)',
                             'busname'=>'Buses.name',
                             'date'=>'Tickets.date'],
-                    'contain'=>['Tickets'=>['Schedules','Buses'],'Customers'],
+                    'contain'=>['Tickets'=>['Buses'],'Customers'],
                     'conditions'=>[
-                            'Schedules.bus_id IN'=>$formData['buses'],
+                            'Tickets.bus_id IN'=>$formData['buses'],
                             'TicketOrders.date_create_at >='=>$startDate,
                             'TicketOrders.date_create_at <='=>$endDate
                             ],

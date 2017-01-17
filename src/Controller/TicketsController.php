@@ -437,6 +437,9 @@ class TicketsController extends AppController
             $this->set('ticket', $ticket);
             $this->set(compact($ticket));
             
+            $this->request->session()->delete('Order');
+            $this->request->session()->delete('Search');
+
         }else{
             $this->Flash->error(__('Ticket summary kosong!.'));
         }
