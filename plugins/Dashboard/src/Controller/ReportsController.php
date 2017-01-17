@@ -96,7 +96,7 @@ class ReportsController extends AppController
         if($this->request->is('post')){
             $formData = $this->request->data;
 
-            if(empty($formData['buses']) || empty($formData['daterange'])) {
+            if(empty($formData['daterange'])) {
                 $this->Flash->error(__('Bus atau tanggal belum dipilih'));
                 return $this->redirect(['action'=>'ticketSales']);
             }
@@ -122,11 +122,14 @@ class ReportsController extends AppController
                             'id'=>'TicketOrders.id',
                             'ticket_id'=>'TicketOrders.ticket_id',
                             'earning'=>'sum(TicketOrders.total)',
+                            'route'=>'Routes.name',
+                            'stock'=>'Buses.capacity',
+                            'sell'=>'Tickets.stock',
                             'busname'=>'Buses.name',
                             'date'=>'Tickets.date'],
-                    'contain'=>['Tickets'=>['Buses'],'Customers'],
+                    'contain'=>['Tickets'=>['Buses','Routes'],'Customers'],
                     'conditions'=>[
-                            'Tickets.bus_id IN'=>$formData['buses'],
+                            // 'Tickets.bus_id IN'=>$formData['buses'],
                             'TicketOrders.date_create_at >='=>$startDate,
                             'TicketOrders.date_create_at <='=>$endDate
                             ],

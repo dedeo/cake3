@@ -8,13 +8,6 @@ $this->assign('title', $title);
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<?php echo $this->Form->create('report'); ?>
 		<div class="selection-report" style="padding:10px;">
-			<label for="startDate">Bus/Armada:</label>
-			<?php 
-			echo $this->Form->select('buses',$this->Bus->getBusList(),['multiple'=>'true','class'=>'selectpicker'])
-
-			?>
-		</div>
-		<div class="selection-report" style="padding:10px;">
 			<label for="startDate">Date Range:</label>
 			<input type="text" name="daterange" value=""/>
 			<button type='submit' class="btn btn-warning btn-sm pull-right"> Apply</button>
@@ -29,10 +22,11 @@ $this->assign('title', $title);
 				<thead>
 				  <tr class="headings">
 					<th class="column-title">#</th>
+					<th class="column-title">Rute</th>
 					<th class="column-title">Bus</th>
 					<!-- <th class="column-title">Tanggal</th> -->
 					<!-- <th class="column-title">Rute</th> -->
-					<!-- <th class="column-title">Jumlah Penumpang</th> -->
+					<th class="column-title">Terjual/Stock</th>
 					<th class="column-title">Tiket Tanggal</th>
 					<th class="column-title">Pendapatan</th>
 				  </tr>
@@ -42,7 +36,9 @@ $this->assign('title', $title);
 					<?php foreach ($results as $result) { ?>
 					<tr>
 						<td><?= $i ?></td>
+						<td><?= $result->route ?></td>
 						<td><?= $this->Html->link($result->busname,['action'=>'ticketBus',$result->ticket_id]) ?></td>
+						<td><?= ($result->stock - $result->sell).'/'.$result->stock ?></td>
 						<td><?= $result->date ?></td>
 						<td>Rp <?= $result->earning?></td>
 					</tr>
