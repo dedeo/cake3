@@ -399,7 +399,6 @@ p.red-text {
 }
 
 .search-form.search-top {
-	display: none;
 	padding: 20px;
     border: 1px solid #b1b1b1;
     border-top: 0px;
