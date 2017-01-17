@@ -14,6 +14,38 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
 		    <div class="clearfix"></div>
 		  </div>
 
+		<!-- Jadwal Hari ini -->
+		<h4>Jadwal keberangkatan hari ini</h4>
+		<div class="table-responsive">
+		  <table class="table" id="tableTodayRoutes">
+	        <thead>
+	            <tr>
+	                <th scope="col"><?= $this->Paginator->sort('#') ?></th>
+	                <th scope="col"><?= $this->Paginator->sort('route_id','Rute') ?></th>
+	                <th scope="col"><?= $this->Paginator->sort('bus_id','Bus') ?></th>
+	                <th scope="col"><?= $this->Paginator->sort('departure_time','Berangkat') ?></th>
+	                <th scope="col"><?= $this->Paginator->sort('arival_time','Datang') ?></th>
+	                <th scope="col"><?= $this->Paginator->sort('fare','Harga') ?></th>
+	                <th scope="col" class="actions"><?= __('Actions') ?></th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	        	<?php $i=1;?>
+	        	<?php foreach ($todaySchedules as $schedule) { ?>
+	        		<tr>
+	        			<td><?=$i; $i++;?></td>
+	        			<td><?=$schedule->route_name?></td>
+	        			<td><?=$schedule->bus->name?></td>
+	        			<td><?=$this->Time->format($schedule->departure_time,'HH:mm')?></td>
+	        			<td><?=$this->Time->format($schedule->arival_time,'HH:mm')?></td>
+	        			<td><?=$schedule->fare?></td>
+	        		</tr>
+	        	<?php } ?>
+	        </tbody>
+		   </table>
+	    </div>
+
+
 		<div class="table-responsive">
 		  <table class="table" id="tableRoutes">
 	        <thead>

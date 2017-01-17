@@ -23,7 +23,17 @@ class SchedulesController extends AppController
         ];
         $schedules = $this->paginate($this->Schedules);
 
-        $this->set(compact('schedules'));
+        $now = date('w', strtotime('now'));
+
+        $todaySchedules = $this->Schedules->find('all',[
+                'conditions' => ['day'=>$now],
+                'contain'=>['Routes','Buses']
+            ]);
+
+        // debug($todaySchedules->toArray());
+
+
+        $this->set(compact('todaySchedules','schedules'));
         $this->set('_serialize', ['schedules']);
     }
 
