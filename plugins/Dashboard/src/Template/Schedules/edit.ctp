@@ -86,20 +86,8 @@ $this->assign('title', $title);
 								]); ?>
 						</div>
 					</div>
-					<?php echo $this->Form->end(); ?>
-					<div class="form-group">
-						<?php echo $this->Form->create('scheduleId', ['url'=>['controller'=>'Tickets','action'=>'create'],'id'=>'jadwalForm','class'=>'form-horizontal form-label-left','data-parsley-validate']) ?>
-						<input type="hidden" name="scheduleid" value="<?php echo $schedule->id;?>">
-						<label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal tiket berlaku<span class="required">*</span>
-						</label>
-						<div class="col-md-6 col-sm-6 col-xs-12">
-							<input type="text" name="daterangeticket" value="" required />
-						</div>
-						<?php echo $this->Form->end(); ?>
-					</div>
-				
+					<?php echo $this->Form->end(); ?>				
 			</div>
-			<button class="btn btn-warning btn-sm" id="saveNewBtn">Buat Tiket</button>
 		</div>
 	</div>
 </div>

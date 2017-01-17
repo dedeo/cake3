@@ -21,11 +21,11 @@ $gender = ['female'=>'P','male'=>'L'];
 			</div>
 			<div style="display:inline-block;width:100%;">
 				<div style="width:150px;float:left;text-align:left;font-weight:bold;">Kota Asal</div>
-				<div style="width:150px;float:left;text-align:left;clear:right;"><?= ' : ' .$ticket->schedule->route->source?></div>
+				<div style="width:150px;float:left;text-align:left;clear:right;"><?= ' : ' .$this->City->getName($ticket->route->source)?></div>
 			</div>
 			<div style="display:inline-block;width:100%;">
 				<div style="width:150px;float:left;text-align:left;font-weight:bold;">Kota Tujuan</div>
-				<div style="width:150px;float:left;text-align:left;clear:right;"><?= ' : ' .$ticket->schedule->route->destination?></div>
+				<div style="width:150px;float:left;text-align:left;clear:right;"><?= ' : ' .$this->City->getName($ticket->route->destination)?></div>
 			</div>			
 		</div>
 		<div style="display:inline-block;width:50%;float:left;">
@@ -50,8 +50,9 @@ $gender = ['female'=>'P','male'=>'L'];
 		        <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">Kursi</th>
 		        <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">Penumpang</th>
 		        <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">Code Tiket</th>
-		        <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">L/P</th>
+		        <!-- <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">L/P</th> -->
 		        <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">CP</th>
+		        <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">Tujuan</th>
 		        <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">Harga</th>
 		    </tr>
 		</thead>
@@ -60,26 +61,38 @@ $gender = ['female'=>'P','male'=>'L'];
 			$nSeet = $ticket->bus->capacity;
 			$_seets = array_fill(1, $nSeet,null);		//create an empty array seets as much as bus capacity
 
-			foreach ($passengers as $person) {
-				$seet_number = $person->seet_number;
-				$_seets[$seet_number] = $person;
+			$orders = $ticket->ticket_orders;
+			foreach ($orders as $order) {
+				$seet_number = explode(',',$order->sheet);
+
+				foreach ($seet_number as $no ) {
+					$_seets[$no] = [
+								'ticket_code' => $order->ticket_code,
+								'customer' => $order->customer,
+								'destination' => $order->destination,
+								'fare' => $order->fare,
+							];
+				}
+				// $_seets = array_fill_keys($seet_number, $order->customer);
 			}
 			$i = 1;
 			$total = 0;
+			// debug($_seets);
 		    foreach ($_seets as $seet): ?>
 		        <?php if(!empty($seet)): ?>
 		            <tr>
-		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $seet->seet_number ?></td>
-		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $seet->ticket_order->customer->name?></td>
-		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $seet->ticket_order->ticket_code ?></td>
-		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $gender[$seet->gender] ?></td>
-		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $person->ticket_order->customer->phone;?></td>
-		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $seet->ticket_order->fare?></td>
+		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $i ?></td>
+		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $seet['customer']->name?></td>
+		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $seet['ticket_code'] ?></td>
+		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $seet['customer']->phone;?></td>
+		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $this->City->getName($seet['destination'])?></td>
+		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $seet['fare']?></td>
 		            </tr>
-		        <?php $total += $seet->ticket_order->fare; ?>
+		        <?php $total += $seet['fare']; ?>
 		        <?php else:?>
 		            <tr>
-		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?=$i?></td><td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"></td><td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"></td><td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"></td><td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"></td><td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"></td>
+		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?=$i?></td>
+		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"></td><td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"></td><td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"></td><td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"></td><td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"></td>
 		            </tr>
 		        <?php endif ?>
 		    	<?php $i++; ?>

@@ -62,35 +62,6 @@ $this->assign('title', $title);
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Jarak
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                            <?php echo $this->Form->input(
-                                'distance', 
-                                [
-                                    'type'=>'number',
-                                    'label' => false,
-                                    'class'=>'form-control col-md-7 col-xs-12 has-feedback-right'
-                                ]); ?>
-                            <span class="form-control-feedback right" aria-hidden="true">Km</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Tarif Dasar <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback-left">
-                            <span class="form-control-feedback left" aria-hidden="true">Rp</span>
-                            <?php echo $this->Form->input(
-                                'fare', 
-                                [
-                                    'type'=>'number',
-                                    'label' => false,
-                                    'class'=>'form-control col-md-7 col-xs-12 has-feedback-left',
-                                    'required'=>'required'
-                                ]); ?>
-                        </div>
-                    </div>
-                    <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Sub Rute Dari <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">

@@ -22,8 +22,6 @@ $this->assign('title', 'Rute Bus');
 				<th class="column-title"><?= $this->Paginator->sort('name','Nama') ?> </th>
 				<th class="column-title"><?= $this->Paginator->sort('source','Kota Asal') ?> </th>
 				<th class="column-title"><?= $this->Paginator->sort('destination','Kota Tujuan') ?> </th>
-				<th class="column-title"><?= $this->Paginator->sort('fare','Tarif') ?> </th>
-				<!-- <th class="column-title"><?= $this->Paginator->sort('') ?> </th> -->
 				<th class="column-title no-link last"><span class="nobr">Action</span></th>
 			  </tr>
 			</thead>
@@ -32,9 +30,8 @@ $this->assign('title', 'Rute Bus');
 				<tr>
 					<td><?= $this->Number->format($route->id) ?></td>
 					<td><?= $this->Html->link(h($route->name),(['controller'=>'Routes','action'=>'edit',$route->id])) ?></td>
-					<td><?= $route->source ?></td>
-					<td><?= $route->destination ?></td>
-					<td>Rp <?= $route->fare ?></td>
+					<td><?= $this->City->getName($route->source) ?></td>
+					<td><?= $this->City->getName($route->destination) ?></td>
 					<td class="actions">
 				      	<a href=<?= $this->Url->build(['controller'=>'Routes','action'=>'edit',$route->id])?> class="text-general"><i class="fa fa-edit"></i></a>
 						<?= $this->Form->postLink('<i class="fa fa-remove"></i>', ['action' => 'delete', $route->id], ['confirm' => __('Are you sure you want to delete # {0}?', $route->id),'escape'=>false,'class'=>'text-danger']) ?>

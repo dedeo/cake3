@@ -64,14 +64,14 @@ class RoutesController extends AppController
                     'name'=> $city_name[$data['source']].' - '.$city_name[$data['destination']],
                     'source' => $data['source'],
                     'destination' => $data['destination'],
-                    'distance' => $data['distance'],
-                    'fare'  => $data['fare'],
                     'create_at' => date('Y-m-d H:m:s'),
                     'parent_route' => (($data['parent_route']=='')? 0:$data['parent_route'])
                 ];
 
             if(!empty($data['source'])){
                 $route = $this->Routes->patchEntity($route, $rute,['assosiated'=>['RouteDestinations']]);
+
+                debug($route);
 
                 if ($this->Routes->save($route)) {
 

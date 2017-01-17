@@ -23,7 +23,7 @@ class TicketsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Schedules', 'Buses']
+            'contain' => ['Routes','Buses']
         ];
         $tickets = $this->paginate($this->Tickets);
 
@@ -58,11 +58,12 @@ class TicketsController extends AppController
         $ticket = $this->Tickets->newEntity();
         if ($this->request->is('post')) {
             $ticket = $this->Tickets->patchEntity($ticket, $this->request->data);
-            if ($this->Tickets->save($ticket)) {
+            if ($save = $this->Tickets->save($ticket)) {
                 $this->Flash->success(__('The ticket has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             } else {
+                debug($save);
                 $this->Flash->error(__('The ticket could not be saved. Please, try again.'));
             }
         }
