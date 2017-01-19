@@ -6,6 +6,10 @@ body .container.body .right_col {
 	min-height: 500px !important;
 }
 
+table {
+	font-size: 14px;
+}
+
 .message.error {
 	display: inline-block;
 	width: 100%;

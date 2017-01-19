@@ -224,7 +224,7 @@ class RoutesController extends AppController
                 // $route = $this->Routes->patchEntity($route, $data,['assosiated'=>['RouteDestinations']]);
                 $route = $this->Routes->patchEntity($route, $data);
 
-                if ($this->Routes->save($route) {
+                if ($this->Routes->save($route)) {
                     $this->Flash->success(__('The route has been saved.'));
 
                     return $this->redirect(['action' => 'index']);
