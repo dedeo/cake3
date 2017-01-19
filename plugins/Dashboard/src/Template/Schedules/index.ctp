@@ -32,6 +32,7 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
 			                <th scope="col"><?= $this->Paginator->sort('departure_time','Berangkat') ?></th>
 			                <th scope="col"><?= $this->Paginator->sort('arival_time','Datang') ?></th>
 			                <th scope="col"><?= $this->Paginator->sort('fare','Harga') ?></th>
+			                <th scope="col"><?= $this->Paginator->sort('Route.parent_route','Rute Utama') ?></th>
 			            </tr>
 			        </thead>
 			        <tbody>
@@ -44,6 +45,15 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
 			        			<td><?=$this->Time->format($schedule->departure_time,'HH:mm')?></td>
 			        			<td><?=$this->Time->format($schedule->arival_time,'HH:mm')?></td>
 			        			<td><?=$schedule->fare?></td>
+			        			<td>
+			        			<?php
+			        			if($schedule->route->parent_route!=0){
+			        				echo $this->Routes->getLabel($schedule->route->parent_route);
+			        			}else{
+			        				echo '-';
+			        			}
+			        			?>	
+			        			</td>
 			        		</tr>	
 			        	<?php } ?>
 			        </tbody>
@@ -63,6 +73,7 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
 			                <!-- <th scope="col"><?= $this->Paginator->sort('create_at') ?></th> -->
 			                <th scope="col"><?= $this->Paginator->sort('departure_time','Berangkat') ?></th>
 			                <th scope="col"><?= $this->Paginator->sort('arival_time','Datang') ?></th>
+			                <th scope="col"><?= $this->Paginator->sort('Route.parent_route','Rute Utama') ?></th>
 			                <!-- <th scope="col"><?= $this->Paginator->sort('status') ?></th> -->
 			                <th scope="col" class="actions"><?= __('Actions') ?></th>
 			            </tr>
@@ -78,7 +89,15 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
 			                <!-- <td><?= $this->Number->format($schedule->create_at) ?></td> -->
 			                <td><?= $this->Time->format($schedule->departure_time,'HH:mm') ?></td>
 			                <td><?= $this->Time->format($schedule->arival_time,'HH:mm') ?></td>
-			                <!-- <td><?= $this->Number->format($schedule->status) ?></td> -->
+		        			<td>
+		        			<?php
+		        			if($schedule->route->parent_route!=0){
+		        				echo $this->Routes->getLabel($schedule->route->parent_route);
+		        			}else{
+		        				echo '-';
+		        			}
+		        			?>	
+		        			</td>
 							<td class="actions">
 						      	<a href=<?= $this->Url->build(['controller'=>'Schedules','action'=>'edit',$schedule->id])?> class="text-general"><i class="fa fa-edit"></i></a>
 								<?= $this->Form->postLink('<i class="fa fa-remove"></i>', ['action' => 'delete', $schedule->id], ['confirm' => __('Are you sure you want to delete # {0}?', $schedule->id),'escape'=>false,'class'=>'text-danger']) ?>

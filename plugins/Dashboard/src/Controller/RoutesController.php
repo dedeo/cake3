@@ -186,7 +186,7 @@ class RoutesController extends AppController
     public function edit($id = null)
     {
             $route = $this->Routes->get($id, [
-                'contain' => ['RouteDestinations']
+                'contain' => []
             ]);
             $cities = $this->_getCityList();
             $routeList = $this->_getRouteList();
@@ -194,41 +194,37 @@ class RoutesController extends AppController
             if ($this->request->is(['patch', 'post', 'put'])) {
 
                 $data = $this->request->data;
-                debug($data);
-                // die();
 
-                $_destinations = $data['route_destinations'];
-                $destinations = array();
+                // $_destinations = $data['route_destinations'];
+                // $destinations = array();
                 
-                $_cities = $cities->toArray();
+                // $_cities = $cities->toArray();
 
-                $routeName[0] = $data['source'];
+                // $routeName[0] = $data['source'];
 
-                foreach ($_destinations as $dest) {
-                    if(!empty($dest['city']) AND !empty($dest['fare'])){
-                        $city_name = $_cities[$dest['city']];
-                        $destinations[] = [
-                                'id'      => $dest['id'],
-                                'city'      => $dest['city'],
-                                'city_name' => $city_name,
-                                'distance'  => $dest['distance'],
-                                'fare'      => $dest['fare']
-                                ];
-                        $routeName[] = $city_name;
-                    }
-                }
+                // foreach ($_destinations as $dest) {
+                //     if(!empty($dest['city']) AND !empty($dest['fare'])){
+                //         $city_name = $_cities[$dest['city']];
+                //         $destinations[] = [
+                //                 'id'      => $dest['id'],
+                //                 'city'      => $dest['city'],
+                //                 'city_name' => $city_name,
+                //                 'distance'  => $dest['distance'],
+                //                 'fare'      => $dest['fare']
+                //                 ];
+                //         $routeName[] = $city_name;
+                //     }
+                // }
 
-                $rute['name'] = $data['name'];
-                $rute['source'] = $data['source'];
-                $rute['route_destinations'] = $destinations;
+                // $rute['name'] = $data['name'];
+                // $rute['source'] = $data['source'];
+                // $rute['route_destinations'] = $destinations;
 
 
-                $route = $this->Routes->patchEntity($route, $rute,['assosiated'=>['RouteDestinations']]);
+                // $route = $this->Routes->patchEntity($route, $data,['assosiated'=>['RouteDestinations']]);
+                $route = $this->Routes->patchEntity($route, $data);
 
-                if ($this->Routes->save($route,[
-                        'validate' => false,
-                        'assosiated'=>['RouteDestinations']
-                    ])) {
+                if ($this->Routes->save($route) {
                     $this->Flash->success(__('The route has been saved.'));
 
                     return $this->redirect(['action' => 'index']);
