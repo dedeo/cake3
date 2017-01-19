@@ -13,22 +13,7 @@ $this->assign('title', $title);
             </div>
             <div class="x_content">
                 <?php echo $this->Form->create($route, ['id'=>'routesForm','class'=>'form-horizontal form-label-left','data-parsley-validate']) ?>
-                <!-- <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"> -->
-                <!-- 
-                    <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Rute <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?php echo $this->Form->input(
-                                'name', 
-                                [
-                                    'label' => false,
-                                    'class'=>'form-control col-md-7 col-xs-12',
-                                    'required'=>'required',
-                                    'placeholder'=> 'contoh: MAKASAR - SOROWAKO - BONE'
-                                ]); ?>
-                        </div>
-                    </div> -->
+                <?php echo $this->Form->hidden('id')?>
                     <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kota Asal <span class="required">*</span>
                         </label>
