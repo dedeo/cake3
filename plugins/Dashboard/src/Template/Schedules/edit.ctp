@@ -14,6 +14,7 @@ use Cake\Routing\Router;
 			<div class="x_content">
 				<?php echo $this->Flash->render() ?>
 				<?php echo $this->Form->create($schedule, ['id'=>'scheduleForm','class'=>'form-horizontal form-label-left','data-parsley-validate']);
+		            echo $this->Form->hidden('id');
 		            echo $this->Form->hidden('route_name',['id'=>'route-name']);
 		            //echo $this->Form->hidden('class',['id'=>'route-name']);
 				?>
@@ -32,7 +33,6 @@ use Cake\Routing\Router;
 									'required'=>'required',
 									'onChange'=>'routeChange(this)'
 								]); ?>
-							<input type="hidden" name='route_name' id="route_name">
 						</div>
 					</div>
 
@@ -105,13 +105,13 @@ use Cake\Routing\Router;
 					<div class="form-group">
 					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Hari Keberangkatan <span class="required">*</span>
 						</label>
-						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="col-md-3 col-sm-3 col-xs-12">
 							<?php 
 	                            echo $this->Form->select(
 	                                'day',
 	                                $this->MyDate->toOptionsArray(), [
-	                                    'multiple' => 'checkbox',
-	                                    'required'=>'required'
+										'class'=>'form-control col-md-7 col-xs-12',
+										'required'=>'required',
 	                                ]);
 								?>
 						</div>
@@ -128,8 +128,8 @@ use Cake\Routing\Router;
 
 	function routeChange(element){
 		var routeName = element.options[element.selectedIndex].text;
-		$('#route_name').val(routeName);
-		alert(routeName);
+		$('#route-name').val(routeName);
+		// alert(routeName);
 	}
 
 	function getBusType() {

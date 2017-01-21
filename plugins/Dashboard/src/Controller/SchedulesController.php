@@ -66,9 +66,6 @@ class SchedulesController extends AppController
         if ($this->request->is('post')) {
             $dataForm = $this->request->data;
 
-            debug($dataForm);
-            // die();
-
             foreach ($dataForm['day'] as $day => $label) {
                 $datas[]= [
                             'day' => $label,
@@ -116,8 +113,8 @@ class SchedulesController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
 
-            debug($this->request->data);
-            die();
+            // debug($this->request->data);
+            // die();
 
             $schedule = $this->Schedules->patchEntity($schedule, $this->request->data);
             if ($this->Schedules->save($schedule)) {
