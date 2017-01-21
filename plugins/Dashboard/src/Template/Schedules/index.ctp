@@ -79,9 +79,10 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
 			            </tr>
 			        </thead>
 			        <tbody>
+			        	<?php $i=1;?>
 			            <?php foreach ($schedules as $schedule): ?>
 			            <tr>
-			                <td><?= $this->Number->format($schedule->id) ?></td>
+			                <td><?= $this->Number->format($i); $i++; ?></td>
 			                <td><?= $this->MyDate->getLabel($schedule->day) ?></td>
 			                <td><?= $schedule->has('route') ? $this->Html->link($schedule->route->name, ['controller' => 'Schedules', 'action' => 'edit', $schedule->id]) : '' ?></td>
 			                <td><?= $schedule->has('bus') ? $schedule->bus->name : '' ?></td>

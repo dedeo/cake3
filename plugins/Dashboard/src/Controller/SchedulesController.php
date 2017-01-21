@@ -115,6 +115,10 @@ class SchedulesController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+
+            debug($this->request->data);
+            die();
+
             $schedule = $this->Schedules->patchEntity($schedule, $this->request->data);
             if ($this->Schedules->save($schedule)) {
                 $this->Flash->success(__('The schedule has been saved.'));
@@ -124,6 +128,7 @@ class SchedulesController extends AppController
                 $this->Flash->error(__('The schedule could not be saved. Please, try again.'));
             }
         }
+        // $schedule->className = $this->Buses->get($schedule->bus_id)
         $routes = $this->Schedules->Routes->find('list', ['limit' => 200]);
         $buses = $this->Schedules->Buses->find('list', ['limit' => 200]);
         $this->set(compact('schedule', 'routes', 'buses'));

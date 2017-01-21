@@ -112,11 +112,6 @@ use Cake\Routing\Router;
 						</div>
 					</div>
 
-					<div class="form-group">
-					
-					</div>
-					<!-- <div class="ln_solid"></div> -->
-
 				</form>
 			</div>
 		</div>

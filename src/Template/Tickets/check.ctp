@@ -30,7 +30,7 @@
 				<tbody>
 				<tr>
 					<td style="width: 33.33%;">
-						<?=$ticket->ticket->schedule->route->name; ?><br>
+						<?php echo $this->City->getName($ticket->ticket->route->source).' - '.$this->City->getName($ticket->destination); ?><br>
 						<?=$ticket->ticket->bus->plat_no; ?>
 					</td>
 					<td style="width: 33.33%;">
@@ -46,40 +46,20 @@
 		</table>
 		<table class="table" style="border: 0px;font-size: 11px;width:100%;">
 			<thead>
-				<th colspan="3" style="border: 0px;font-size: 11px;background: #d9dfe9;width: 33.33%;text-align:left">Penumpang</th>
-			</thead>
-			<tbody>
-				<?php $penumpang = $ticket->ticket_passengers ?>
-				<?php foreach ($penumpang as $data) { ?>
-					<tr>
-						<td style="width: 33.33%;">
-							<?=$data->name; ?><br>
-						</td>
-						<td style="width: 33.33%;">
-							<?=$data->gender; ?>
-						</td>
-						<td style="width: 33.33%;">
-							Nomor Kursi: #<?=$data->seet_number; ?>
-						</td>
-					</tr>
-				<?php } ?>
-			</tbody>
-		</table>
-		<table class="table" style="border: 0px;font-size: 11px;width:100%;">
-			<thead>
 				<th colspan="3" style="border: 0px;font-size: 11px;background: #d9dfe9;width: 33.33%;text-align:left">Kustomer</th>
 			</thead>
 			<tbody>
 				<tr>
-				<td style="width: 33.33%;">
-					<?=$ticket->customer->name; ?><br>
-				</td>
-				<td style="width: 33.33%;">
-					<?=$ticket->customer->email; ?>
-				</td>
-				<td style="width: 33.33%;">
-					<?=$ticket->customer->no_tlp; ?>
-				</td>
+					<td style="width: 33.33%;">
+						<?=$ticket->customer->name; ?><br>
+						<?php //debug($ticket); ?>
+					</td>
+					<td style="width: 33.33%;">
+						<?=$ticket->customer->phone; ?>
+					</td>
+					<td style="width: 33.33%;">
+						Nomor Kursi: <?php echo $ticket->sheet ?>
+					</td>
 				</tr>
 			</tbody>
 		</table>
