@@ -463,7 +463,7 @@ class TicketsController extends AppController
             if(!empty($code)){
                 $this->loadModel('TicketOrders');
                 $ticket = $this->TicketOrders->findByTicketCode($code)
-                            ->contain(['TicketPassengers','Customers','Tickets'=>['Schedules'=>['Routes'],'Buses']])
+                            ->contain(['Customers','Tickets'=>['Routes','Buses']])
                             ->first();
 
                 if($ticket==null){

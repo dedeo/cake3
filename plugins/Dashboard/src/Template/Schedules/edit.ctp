@@ -1,6 +1,7 @@
 <?php
-$this->Html->addCrumb('Routes', '');
+$this->Html->addCrumb('Schedules', '');
 $this->assign('title', $title);
+use Cake\Routing\Router;
 ?>
 <div class="row">
 	<div class="col-md-12 col-sm-12 col-xs-12">
@@ -11,56 +12,69 @@ $this->assign('title', $title);
 				<div class="clearfix"></div>
 			</div>
 			<div class="x_content">
-				<?php echo $this->Form->create($schedule, ['url'=>['action'=>null],'id'=>'scheduleForm','class'=>'form-horizontal form-label-left','data-parsley-validate']) ?>
-				<!-- <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"> -->
+				<?php echo $this->Flash->render() ?>
+				<?php echo $this->Form->create($schedule, ['id'=>'scheduleForm','class'=>'form-horizontal form-label-left','data-parsley-validate']);
+		            echo $this->Form->hidden('id');
+		            echo $this->Form->hidden('route_name',['id'=>'route-name']);
+		            //echo $this->Form->hidden('class',['id'=>'route-name']);
+				?>
 
 					<div class="form-group">
-						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-							Hari <span class="required">*</span>
-						</label>
-						<div class="col-md-6 col-sm-6 col-xs-12">
-							<?php echo $this->Form->input(
-								'day', 
-								[
-									'options' => $this->MyDate->toOptionsArray(),
-									'label' => false,
-									'class'=>'form-control col-md-7 col-xs-12',
-									'required'=>'required'
-								]); ?>
-							<!-- <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12"> -->
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-							Rute <span class="required">*</span>
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Rute <span class="required">*</span>
 						</label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<?php echo $this->Form->input(
 								'route_id',
 								[
+									'options' => $routes,
+									'empty'=>'- Pulih Rute -',
 									'label' => false,
 									'class'=>'form-control col-md-7 col-xs-12',
-									'required'=>'required'
+									'required'=>'required',
+									'onChange'=>'routeChange(this)'
 								]); ?>
-							<!-- <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12"> -->
 						</div>
 					</div>
+
 					<div class="form-group">
-						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Bus <span class="required">*</span>
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Bus <span class="required">*</span>
 						</label>
-						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="col-md-3 col-sm-3 col-xs-6">
 							<?php echo $this->Form->input(
 								'bus_id', 
 								[
+									'options' => $buses,
+									'empty'=>'- Pulih Bus -',
 									'label' => false,
 									'class'=>'form-control col-md-7 col-xs-12',
-									'required'=>'required'
+									'required'=>'required',
+									'onChange'=>'getBusType()'
 								]); ?>
 							<!-- <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12"> -->
 						</div>
+						<div class="col-md-3 col-sm-3 col-xs-6">
+							<?php echo $this->Form->hidden('class',['id'=>'class'])?> 
+							<p class="form-control-static" id="bus-type-label"><?php echo $this->Bus->getLabel($schedule->class); ?></p>
+						</div>
 					</div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Tarif/Harga <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback-left">
+                            <span class="form-control-feedback left" aria-hidden="true">Rp</span>
+                            <?php echo $this->Form->input(
+                                'fare', 
+                                [
+                                    'type'=>'number',
+                                    'label' => false,
+                                    'class'=>'form-control col-md-7 col-xs-12 has-feedback-left',
+                                    'required'=>'required'
+                                ]); ?>
+                        </div>
+                    </div>
 					<div class="form-group">
-						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jam Keberangkatan <span class="required">*</span>
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jam Keberangkatan <span class="required">*</span>
 						</label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<?php echo $this->Form->time(
@@ -74,7 +88,7 @@ $this->assign('title', $title);
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jam Kedatangan <span class="required">*</span>
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jam Kedatangan <span class="required">*</span>
 						</label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<?php echo $this->Form->time(
@@ -84,24 +98,74 @@ $this->assign('title', $title);
 									'class'=>'form-control col-md-7 col-xs-12',
 									'required'=>'required'
 								]); ?>
+							<!-- <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12"> -->
 						</div>
 					</div>
-					<?php echo $this->Form->end(); ?>				
+
+					<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Hari Keberangkatan <span class="required">*</span>
+						</label>
+						<div class="col-md-3 col-sm-3 col-xs-12">
+							<?php 
+	                            echo $this->Form->select(
+	                                'day',
+	                                $this->MyDate->toOptionsArray(), [
+										'class'=>'form-control col-md-7 col-xs-12',
+										'required'=>'required',
+	                                ]);
+								?>
+						</div>
+					</div>
+
+				</form>
 			</div>
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+
+	getBusType();
+
+	function routeChange(element){
+		var routeName = element.options[element.selectedIndex].text;
+		$('#route-name').val(routeName);
+		// alert(routeName);
+	}
+
+	function getBusType() {
+	    var bus=$("#bus-id").val();
+
+	    $.ajax({
+	    	type: "POST",
+	    	url: "<?php echo Router::url(array('controller'=>'Buses','action'=>'getBusType','_ext'=>'json'));?>",
+	    	dataType: "json",
+	    	async: false,
+	    	data: 'id='+bus,
+	    	success: function(data){
+	    		$('#class').val(data.data.type);
+	    		$('#bus-type-label').text(data.data.label);
+	    		// alert(data.data.type);
+	    	},
+	    	error: function(data){
+	    		alert(data);
+	    	}
+	    });
+	}
+
+</script>
+
 <?php 
 $this->Html->scriptStart(['block'=>true]); ?>
-	$(document).ready(function() {
-		$('input[name="daterangeticket"]').daterangepicker();
-	});
-
 	$( "#saveBtn" ).click(function() {
 	  $( "#scheduleForm" ).submit();
 	});
-	$( "#saveNewBtn").click(function() {
-	  $( "#jadwalForm").submit();
+	$( "#saveNewBtn" ).click(function(e) {
+	  // $( "form" ).submit();
+	  var data = $("form").serialize();
+	  // alert( "Data Loaded: " + data );
+	  e.preventDefault();
+	  $('#scheduleForm').attr('action',"/dashboard/schedules/edit/new");
+	  $( "#scheduleForm" ).submit();
 	});
 
 <?php $this->Html->scriptEnd();

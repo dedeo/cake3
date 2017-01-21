@@ -27,9 +27,10 @@ $this->assign('title', 'Rute Bus');
 			  </tr>
 			</thead>
 			<tbody>
+				<?php $i = 1; ?>
 				<?php foreach ($routes as $route): ?>
 				<tr>
-					<td><?= $this->Number->format($route->id) ?></td>
+					<td><?= $this->Number->format($i); $i++; ?></td>
 					<td><?= $this->Html->link(h($route->name),(['controller'=>'Routes','action'=>'edit',$route->id])) ?></td>
 					<td><?= $this->City->getName($route->source) ?></td>
 					<td><?= $this->City->getName($route->destination) ?></td>
