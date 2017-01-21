@@ -47,13 +47,12 @@ $gender = ['female'=>'P','male'=>'L'];
 	<table id="tableRoutes" style="width:100%;border-collapse:collapse;box-sizing: border-box;color:#000;">
 		<thead>
 		    <tr>
-		        <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">Kursi</th>
-		        <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">Penumpang</th>
-		        <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">Code Tiket</th>
-		        <!-- <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">L/P</th> -->
-		        <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">CP</th>
-		        <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">Tujuan</th>
-		        <th scope="col" style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;">Harga</th>
+		        <th scope="col" style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;">Kursi</th>
+		        <th scope="col" style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;">Penumpang</th>
+		        <th scope="col" style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;">Code Tiket</th>
+		        <th scope="col" style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;">CP</th>
+		        <th scope="col" style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;">Tujuan</th>
+		        <th scope="col" style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;">Harga</th>
 		    </tr>
 		</thead>
 		<tbody>
@@ -81,25 +80,25 @@ $gender = ['female'=>'P','male'=>'L'];
 		    foreach ($_seets as $seet): ?>
 		        <?php if(!empty($seet)): ?>
 		            <tr>
-		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $i ?></td>
-		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $seet['customer']->name?></td>
-		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $seet['ticket_code'] ?></td>
-		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $seet['customer']->phone;?></td>
-		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $this->City->getName($seet['destination'])?></td>
-		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?= $seet['fare']?></td>
+		                <td style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;"><?= $i ?></td>
+		                <td style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;"><?= $seet['customer']->name?></td>
+		                <td style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;"><?= $seet['ticket_code'] ?></td>
+		                <td style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;"><?= $seet['customer']->phone;?></td>
+		                <td style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;"><?= $this->City->getName($seet['destination'])?></td>
+		                <td style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;"><?= $seet['fare']?></td>
 		            </tr>
 		        <?php $total += $seet['fare']; ?>
 		        <?php else:?>
 		            <tr>
-		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"><?=$i?></td>
-		                <td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"></td><td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"></td><td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"></td><td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"></td><td style="padding:10px;text-align:left;font-size:13px;border:1px solid #000;"></td>
+		                <td style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;"><?=$i?></td>
+		                <td style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;"></td><td style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;"></td><td style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;"></td><td style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;"></td><td style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;"></td>
 		            </tr>
 		        <?php endif ?>
 		    	<?php $i++; ?>
 		    <?php endforeach; ?>
 		    <tr>
-		    	<td colspan="5" style="padding:10px;text-align:left;font-size:15px;border:1px solid #000;"><strong>Total</strong></td>
-		    	<td style="padding:10px;text-align:left;font-size:15px;border:1px solid #000;"><strong>Rp <?php echo $total;?></strong></td>
+		    	<td colspan="5" style="padding:5px;text-align:left;font-size:14px;border:1px solid #000;"><strong>Total</strong></td>
+		    	<td style="padding:5px;text-align:left;font-size:14px;border:1px solid #000;"><strong>Rp <?php echo $total;?></strong></td>
 		    </tr>
 		</tbody>
 	</table>
