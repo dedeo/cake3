@@ -18,9 +18,11 @@ class RoutesController extends AppController
      */
     public function index()
     {
-        $routes = $this->paginate($this->Routes);
+        $this->loadModel('Cities');
+        $routes = $this->Routes->find('all');
+        $cities = $this->Cities->find('all');
 
-        $this->set(compact('routes'));
+        $this->set(compact('routes','cities'));
         $this->set('_serialize', ['routes']);
     }
 

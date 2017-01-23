@@ -10,6 +10,7 @@ class ReportsController extends AppController
 
     public function initialize(){
     	parent::initialize();
+        $this->loadModel('TicketOrders');
     }
 
     public function index()
@@ -17,59 +18,85 @@ class ReportsController extends AppController
 
     }
 
-    // public function busEarning()
-    // {
-    //     $this->set('title','Laporan Pendapatan Bus/Armada');
-    //     $results = null;
+    public function busEarning()
+    {
+        $this->set('title','Laporan Pendapatan Bus/Armada');
+        $results = null;
+        $options = [];
 
-    //     if($this->request->is('post')){
+        if(!$this->request->is('post')){
+            $curentYear = date('Y', strtotime('now'));
+            $current = strtotime('this month');
+            $last = strtotime('last month');
 
-    //         $formData = $this->request->data;
+            $d1 = 19;//date('d', strtotime('19'));
+            $m1 = date('m', $last);
+            $y1 = date('Y', $last);
 
-    //         if(empty($formData['buses']) || empty($formData['daterange']==null)){
-    //             $this->Flash->error(__('Bus atau tanggal belum dipilih'));
-    //             return $this->redirect(['action'=>'busEarning']);
-    //         }
+            $d2 = 20;//date('d', strtotime('19'));
+            $m2 = date('m', $current);
+            $y2 = date('Y', $current);
 
-    //         // formData = 
-    //         // 'buses' => [
-    //         //  (int) 0 => '1',
-    //         //  (int) 1 => '2',
-    //         //  (int) 2 => '3'
-    //         // ],
-    //         // 'daterange' => '12/01/2016 - 12/29/2016'
+            $startDate = date('Y-m-d', strtotime($d1.'-'.$m1.'-'.$y1));
+            $endDate = date('Y-m-d', strtotime($d2.'-'.$m2.'-'.$y2));
 
-    //         $tglrange = split(' - ', $formData['daterange']);
 
-    //         // if($tglrange[0]==$tglrange[1]){
-    //             $startDate = date('Y-m-d', strtotime($tglrange[0]));
-    //             $endDate = date('Y-m-d', strtotime($tglrange[1]));
-    //         // }else{
-    //         //  $startDate = date('Y-m-d 00:00:00', strtotime($tglrange[0]));
-    //         //  $endDate = date('Y-m-d 23:59:59', strtotime($tglrange[1]));             
-    //         // }
+            $options['conditions'] = [
+                            'TicketOrders.date_create_at >='=>$startDate,
+                            'TicketOrders.date_create_at <='=>$endDate
+                        ];
+            $options['group'] = ['Buses.name'];
 
-    //         $ticketModel = TableRegistry::get('TicketOrders');
-    //         $results = $ticketModel->find('all',[
-    //                 // 'contain'=>['Tickets'=>['Schedules'=>['Buses']]]
-    //                 // 'contain'=>['Tickets.Schedules.Buses'=> function ($q) {
-    //                       //       return $q->where(['Buses.id' => $formData['buses']]);
-    //                 //      }]
-    //                 'fields' => [
-    //                         'earning'=>'sum(TicketOrders.total)',
-    //                         'busname'=>'Buses.name',
-    //                         'date'=>'TicketOrders.date_create_at'],
-    //                 'contain'=>['Tickets'=>['Schedules'=>['Buses']]],
-    //                 'conditions'=>[
-    //                         'Schedules.bus_id IN'=>$formData['buses'],
-    //                         'TicketOrders.date_create_at >='=>$startDate,
-    //                         'TicketOrders.date_create_at <='=>$endDate
-    //                         ],
-    //                 'group' =>['TicketOrders.date_create_at']
-    //             ]);
-    //     }
-    //     $this->set(compact('results'));
-    // }
+        }else{
+
+            $formData = $this->request->data;
+            debug($formData);
+            // die();
+
+            if(empty($formData['busid']) || empty($formData['daterange']==null)){
+                $this->Flash->error(__('Bus atau tanggal belum dipilih'));
+                return $this->redirect(['action'=>'busEarning']);
+            }
+
+            // 'daterange' => '12/01/2016 - 12/29/2016'
+            $tglrange = split(' - ', $formData['daterange']);
+
+            $startDate = date('Y-m-d', strtotime($tglrange[0]));
+            $endDate = date('Y-m-d', strtotime($tglrange[1]));
+
+            $options['conditions'] = [
+                            'Tickets.bus_id'=>$formData['busid'],            
+                            'TicketOrders.date_create_at >='=>$startDate,
+                            'TicketOrders.date_create_at <='=>$endDate
+                        ];
+            $options['group'] = ['Buses.name'];
+
+        }
+
+        $results = $this->TicketOrders->find('all',[
+                    // 'contain'=>['Tickets.Schedules.Buses'=> function ($q) {
+                          //       return $q->where(['Buses.id' => $formData['buses']]);
+                    //      }]
+                    // 'fields' => [
+                    //         'earning'=>'sum(TicketOrders.total)',
+                    //         'busname'=>'Buses.name',
+                    //         'date'=>'TicketOrders.date_create_at'],
+                    'contain'=>['Tickets'=>['Buses']],
+                    // 'conditions'=>[
+                    //         // 'Tickets.bus_id'=>$formData['buses'],
+                    //         'TicketOrders.date_create_at >='=>$startDate,
+                    //         'TicketOrders.date_create_at <='=>$endDate
+                    //         ],
+                    // 'group' =>['TicketOrders.date_create_at']
+                    $options
+            ]);
+
+        // debug($results->toArray());
+        // debug($results);
+        // die();
+
+        $this->set(compact('results'));
+    }
 
     public function ticketBus($ticketId=null){
         if($ticketId){

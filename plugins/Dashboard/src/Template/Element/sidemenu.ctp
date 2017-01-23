@@ -24,6 +24,7 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <h3>General</h3>
+                
                 <ul class="nav side-menu">
                   <li><?= $this->Html->link(
                     $this->Html->tag('i','',['class'=>'fa fa-home']).' Home',
@@ -61,18 +62,30 @@
                     ?>
                   </li>
 
-                  <li><?= $this->Html->link(
-                    $this->Html->tag('i','',['class'=>'fa fa-list']).' Report',
-                    ['controller'=>'Reports','action'=>'ticketSales'],
-                    ['escape'=>false])
-                    ?>
+                  <li><a class=""><i class="fa fa-list"></i> Laporan</a>
+                    <ul class="nav child_menu">
+                      <li><?= $this->Html->link(
+                        $this->Html->tag('i','',['class'=>'fa fa-list']).' Penjualan',
+                        ['controller'=>'Reports','action'=>'ticketSales'],
+                        ['escape'=>false])
+                        ?>
+                      </li>
+                      <li><?= $this->Html->link(
+                        $this->Html->tag('i','',['class'=>'fa fa-list']).' Pendapatan Bus',
+                        ['controller'=>'Reports','action'=>'busEarning'],
+                        ['escape'=>false])
+                        ?>
+                      </li>
+                    </ul>
                   </li>
                   
                   <li><?= $this->Html->link(
                     $this->Html->tag('i','',['class'=>'fa fa-user-secret']).' User',
                     ['controller'=>'Users','action'=>'index'],
                     ['escape'=>false])
-                    ?></li>
+                    ?>
+                  </li>
+                  </li>
                 </ul>
               </div>
             </div>
