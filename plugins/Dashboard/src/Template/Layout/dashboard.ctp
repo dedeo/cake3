@@ -21,6 +21,10 @@
   );
   echo $this->fetch('css');
 
+  echo $this->Html->script([
+      'Dashboard.jquery.min',
+      // 'Dashboard.jquery.datatable'
+      ]);
 
   ?>
   </head>
@@ -57,7 +61,6 @@
   <?php
   echo $this->Html->script(
     [
-      'Dashboard.jquery.min',
       'Dashboard.bootstrap.min',
       'Dashboard.fastclick',      
       'Dashboard.nprogress',

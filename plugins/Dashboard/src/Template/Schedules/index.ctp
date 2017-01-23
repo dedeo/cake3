@@ -15,14 +15,17 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
 		  </div>
 
 		<ul class="nav nav-tabs">
-			<li class="active"><a data-toggle="tab" href="#menu1">List All</a></li>
-		  	<li><a data-toggle="tab" href="#hariIni">Hari ini</a></li>
+			<li class="active">
+				<a data-toggle="tab" href="#hariIni">Hari ini</a></li>
+		  	<li><a data-toggle="tab" href="#listAll">Time Table</a></li>
 		</ul>
 		<div class="tab-content">
-			<div id="hariIni" class="tab-pane fade">
+			<div id="hariIni" class="tab-pane fade in active">
 				<!-- Jadwal Hari ini -->
-				<h4>Jadwal keberangkatan hari ini ( <?php echo date("d M y",strtotime('now')); ?> )</h4>
+				<?php $today = $this->request->session()->read('Config.time'); ?>
+				<?php //die();?>
 				<div class="table-responsive">
+				<h4>Keberangkatan hari ini: <?php echo $this->MyDate->getLabel(date('w',$today)).', '. date("d M y",$today); ?></h4>
 				  <table class="table" id="tableTodayRoutes">
 			        <thead>
 			            <tr>
@@ -60,7 +63,7 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
 				   </table>
 			    </div>
 			</div>
-			<div id="menu1" class="tab-pane fade in active">
+			<div id="listAll" class="tab-pane fade">
 				<div class="table-responsive">
 				  <table class="table" id="tableRoutes">
 			        <thead>
@@ -70,11 +73,9 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
 			                <th scope="col"><?= $this->Paginator->sort('route_id','Rute') ?></th>
 			                <th scope="col"><?= $this->Paginator->sort('bus_id','Bus') ?></th>
 			                <th scope="col"><?= $this->Paginator->sort('fare','Harga') ?></th>
-			                <!-- <th scope="col"><?= $this->Paginator->sort('create_at') ?></th> -->
 			                <th scope="col"><?= $this->Paginator->sort('departure_time','Berangkat') ?></th>
 			                <th scope="col"><?= $this->Paginator->sort('arival_time','Datang') ?></th>
 			                <th scope="col"><?= $this->Paginator->sort('Route.parent_route','Rute Utama') ?></th>
-			                <!-- <th scope="col"><?= $this->Paginator->sort('status') ?></th> -->
 			                <th scope="col" class="actions"><?= __('Actions') ?></th>
 			            </tr>
 			        </thead>
@@ -87,7 +88,6 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
 			                <td><?= $schedule->has('route') ? $this->Html->link($schedule->route->name, ['controller' => 'Schedules', 'action' => 'edit', $schedule->id]) : '' ?></td>
 			                <td><?= $schedule->has('bus') ? $schedule->bus->name : '' ?></td>
 			                <td><?= $this->Number->format($schedule->fare) ?></td>
-			                <!-- <td><?= $this->Number->format($schedule->create_at) ?></td> -->
 			                <td><?= $this->Time->format($schedule->departure_time,'HH:mm') ?></td>
 			                <td><?= $this->Time->format($schedule->arival_time,'HH:mm') ?></td>
 		        			<td>
@@ -122,17 +122,3 @@ $this->assign('title', 'Jadwal Keberangkatan Bus');
 	</div>
 	</div>
 </div>
-
-<?php
-// $this->Html->script(
-// 	[
-// 	    'jquery.min.js',
-// 	    'bootstrap.min.js',
-// 	    'fastclick.js',
-// 	    'nprogress.js',
-// 	    'icheck.min.js',
-// 	    'custom.min.js',
-// 	],
-// 	['block'=>true]
-// );
-?>
