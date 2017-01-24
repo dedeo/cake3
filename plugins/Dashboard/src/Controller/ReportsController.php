@@ -25,6 +25,7 @@ class ReportsController extends AppController
         $options = [];
 
         if(!$this->request->is('post')){
+
             $curentYear = date('Y', strtotime('now'));
             $current = strtotime('this month');
             $last = strtotime('last month');
@@ -41,7 +42,12 @@ class ReportsController extends AppController
             $endDate = date('Y-m-d', strtotime($d2.'-'.$m2.'-'.$y2));
 
 
-            $options['conditions'] = [
+            $options['fields']      = [
+                            'earning'=>'sum(TicketOrders.total)',
+                            'busname'=>'Buses.name',
+                    ];
+            $options['contain']     =['Tickets'=>['Buses']];
+            $options['conditions']  = [
                             'TicketOrders.date_create_at >='=>$startDate,
                             'TicketOrders.date_create_at <='=>$endDate
                         ];
@@ -49,11 +55,10 @@ class ReportsController extends AppController
 
         }else{
 
+            //filter data aktif
             $formData = $this->request->data;
-            debug($formData);
-            // die();
 
-            if(empty($formData['busid']) || empty($formData['daterange']==null)){
+            if(empty($formData['busid']) || empty($formData['daterange'])){
                 $this->Flash->error(__('Bus atau tanggal belum dipilih'));
                 return $this->redirect(['action'=>'busEarning']);
             }
@@ -64,32 +69,21 @@ class ReportsController extends AppController
             $startDate = date('Y-m-d', strtotime($tglrange[0]));
             $endDate = date('Y-m-d', strtotime($tglrange[1]));
 
-            $options['conditions'] = [
+            $options['fields']      = [
+                            'earning'=>'TicketOrders.total',
+                            'busname'=>'Buses.name',
+                    ];
+            $options['contain']     =['Tickets'=>['Buses']];
+            $options['conditions']  = [
                             'Tickets.bus_id'=>$formData['busid'],            
                             'TicketOrders.date_create_at >='=>$startDate,
                             'TicketOrders.date_create_at <='=>$endDate
                         ];
-            $options['group'] = ['Buses.name'];
+            // $options['group'] = ['Buses.name'];
 
         }
 
-        $results = $this->TicketOrders->find('all',[
-                    // 'contain'=>['Tickets.Schedules.Buses'=> function ($q) {
-                          //       return $q->where(['Buses.id' => $formData['buses']]);
-                    //      }]
-                    // 'fields' => [
-                    //         'earning'=>'sum(TicketOrders.total)',
-                    //         'busname'=>'Buses.name',
-                    //         'date'=>'TicketOrders.date_create_at'],
-                    'contain'=>['Tickets'=>['Buses']],
-                    // 'conditions'=>[
-                    //         // 'Tickets.bus_id'=>$formData['buses'],
-                    //         'TicketOrders.date_create_at >='=>$startDate,
-                    //         'TicketOrders.date_create_at <='=>$endDate
-                    //         ],
-                    // 'group' =>['TicketOrders.date_create_at']
-                    $options
-            ]);
+        $results = $this->TicketOrders->find('all', $options);
 
         // debug($results->toArray());
         // debug($results);

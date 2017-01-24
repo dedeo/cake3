@@ -26,11 +26,12 @@ $this->assign('title', 'Laporan Pendapatan Tiap Bus');
                     <div class="controls">
                       <div class="input-prepend input-group">
                         <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-                        <input type="text" style="width: 200px" name="daterange" id="daterange" class="form-control active" value="03/18/2013 - 03/23/2013">
+                        <input type="text" style="width: 200px" name="daterange" id="daterange" class="form-control active" value="">
                       </div>
                     </div>
                   </div>
 					<a href='#' class="btn btn-primary btn-sm pull-right"> Cetak</a>
+					<a href='bus-earning' class="btn btn-success btn-sm pull-right"> Reset</a>
 					<button class="btn btn-general btn-sm pull-right" type="submit"> Tampilkan</a>
                 <?php echo $this->Form->end(); ?>
 			</div>
@@ -49,10 +50,22 @@ $this->assign('title', 'Laporan Pendapatan Tiap Bus');
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                    	<td colspan="3">Belum ada data</td>
-                    </tr>
-                  </tbody>
+					<?php $i=1;?>
+					<?php $sum=0?>
+					<?php foreach ($results as $result) { ?>
+					<tr>
+						<td><?= $i ?></td>
+						<td><?= $result->busname ?></td>
+						<td><?= $result->date ?></td>
+						<td>Rp <?= $total = $result->earning; $sum +=$total;?></td>
+					</tr>
+					<?php $i++;?>
+					<?php }?>
+					<tr>
+						<td colspan="3">Total Pendapatan</td>
+						<td>Rp <?= $sum ?></td>
+					</tr>
+				  </tbody>
                 </table>
 			</div>			  
 		  </div>
@@ -63,6 +76,7 @@ $this->assign('title', 'Laporan Pendapatan Tiap Bus');
 	echo $this->Html->script([
 		'Dashboard.jquery.dataTables.min',
 		'Dashboard.dataTables.bootstrap.min',
+		'Dashboard.dataTables.custom',		
 		'Dashboard.dataTables.buttons.min'],['block'=>'script']);
 ?>
 <?php $this->Html->scriptStart(['block'=>true]);?>

@@ -120,6 +120,7 @@ $this->assign('title', 'Rute Bus');
 	echo $this->Html->script([
 		'Dashboard.jquery.dataTables.min',
 		'Dashboard.dataTables.bootstrap.min',
+		'Dashboard.dataTables.custom',		
 		'Dashboard.dataTables.buttons.min'],['block'=>'script']);
 ?>
 <?php $this->Html->scriptStart(['block'=>true]);?>
