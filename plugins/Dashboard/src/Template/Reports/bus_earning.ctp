@@ -55,11 +55,11 @@ $this->assign('title', 'Laporan Pendapatan Tiap Bus');
 					<?php foreach ($results as $result) { ?>
 					<tr>
 						<td><?= $i ?></td>
-						<td><?= $result->ticket->bus->name ?></td>
-						<td><?= $this->MyDate->formatDate($result->departure_date,'full') ?></td>
+						<td><?= $result->busname ?></td>
+						<td><?= $this->MyDate->formatDate($result->date,'full') ?></td>
 						<td style="text-align: right;">
 							<?php 
-							$total = $result->total; 
+							$total = $result->earning; 
 							$sum +=$total;?>
 						<?php echo number_format($total);?></td>
 					</tr>

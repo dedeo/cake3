@@ -30,7 +30,7 @@ class ReportsController extends AppController
             $current = strtotime('this month');
             $last = strtotime('last month');
 
-            $d1 = 19;//date('d', strtotime('19'));
+            $d1 = 21;//date('d', strtotime('19'));
             $m1 = date('m', $last);
             $y1 = date('Y', $last);
 
@@ -46,11 +46,23 @@ class ReportsController extends AppController
             //                 'busname'=>'Buses.name',
             //                 'departure_date'=>'TicketOrders.departure_date',
             //         ];
-            $options['contain']     =['Tickets'=>['Buses']];
+            $options['fields']      = [
+                                        'id'=>'TicketOrders.id',
+                                        'ticket_id'=>'TicketOrders.ticket_id',
+                                        'earning'=>'sum(TicketOrders.total)',
+                                        'route'=>'Routes.name',
+                                        'stock'=>'Buses.capacity',
+                                        'sell'=>'Tickets.stock',
+                                        'busname'=>'Buses.name',
+                                        'date'=>'Tickets.date'
+                                        ];
+            $options['contain']     = ['Tickets'=>['Buses','Routes'],'Customers'];
             $options['conditions']  = [
-                            'TicketOrders.departure_date >='=>$startDate,
-                            'TicketOrders.departure_date <='=>$endDate
-                        ];
+                                        // 'Tickets.bus_id'=>$formData['buses'],
+                                        'TicketOrders.departure_date >='=>$startDate,
+                                        'TicketOrders.departure_date <='=>$endDate
+                                        ];
+            $options['group']       = ['date', 'busname'];
             // $options['group'] = ['Buses.name'];
 
         }else{
@@ -74,17 +86,36 @@ class ReportsController extends AppController
             //                 'busname'=>'Buses.name',
             //                 'departure_date'=>'TicketOrders.departure_date',
             //         ];
-            $options['contain']     =['Tickets'=>['Buses']];
+            // $options['contain']     =['Tickets'=>['Buses']];
+            // $options['conditions']  = [
+            //                 'Tickets.bus_id'=>$formData['busid'],            
+            //                 'TicketOrders.departure_date >='=>$startDate,
+            //                 'TicketOrders.departure_date <='=>$endDate
+            //             ];
+            $options['fields']      = [
+                                        'id'=>'TicketOrders.id',
+                                        'ticket_id'=>'TicketOrders.ticket_id',
+                                        'earning'=>'sum(TicketOrders.total)',
+                                        'route'=>'Routes.name',
+                                        'stock'=>'Buses.capacity',
+                                        'sell'=>'Tickets.stock',
+                                        'busname'=>'Buses.name',
+                                        'date'=>'Tickets.date'
+                                        ];
+            $options['contain']     = ['Tickets'=>['Buses','Routes'],'Customers'];
             $options['conditions']  = [
-                            'Tickets.bus_id'=>$formData['busid'],            
-                            'TicketOrders.departure_date >='=>$startDate,
-                            'TicketOrders.departure_date <='=>$endDate
-                        ];
+                                        'Tickets.bus_id'=>$formData['buses'],
+                                        'TicketOrders.departure_date >='=>$startDate,
+                                        'TicketOrders.departure_date <='=>$endDate
+                                        ];
+            $options['group']       = ['date', 'busname'];
             // $options['group'] = ['Buses.name'];
 
         }
 
         $results = $this->TicketOrders->find('all', $options);
+
+
 
         // debug($results->toArray());
         // debug($results);
