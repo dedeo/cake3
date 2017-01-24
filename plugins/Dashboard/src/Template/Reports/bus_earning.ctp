@@ -30,9 +30,9 @@ $this->assign('title', 'Laporan Pendapatan Tiap Bus');
                       </div>
                     </div>
                   </div>
-					<a href='#' class="btn btn-primary btn-sm pull-right"> Cetak</a>
-					<a href='bus-earning' class="btn btn-success btn-sm pull-right"> Reset</a>
-					<button class="btn btn-general btn-sm pull-right" type="submit"> Tampilkan</a>
+					<a href='#' class="btn btn-primary btn-sm pull-right" onclick="reportPrint()"> Print</a>
+					<a href='bus-earning' class="btn btn-warning btn-sm pull-right"> Reset</a>
+					<button class="btn btn-success btn-sm pull-right" type="submit"> Tampilkan</a>
                 <?php echo $this->Form->end(); ?>
 			</div>
 		</div>
@@ -42,11 +42,14 @@ $this->assign('title', 'Laporan Pendapatan Tiap Bus');
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="x_panel">
 		  <div class="x_content">
-			<div class="table-responsive">
-				<table class="table" id="busReportTable">
+			<div id="printArea" class="table-responsive" style="display:inline-block;margin-bottom:20px;color:#000;width:100%;">
+				<table class="table" id="busReportTable" style="width:100%;border-collapse:collapse;box-sizing: border-box;color:#000;">
                   <thead>
                     <tr>
-                      <th>#</th><th>Bus</th><th>Tgl Keberangkatan</th><th>Pendapatan</th>
+                      <th style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;">#</th>
+                      <th style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;">Bus</th>
+                      <th style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;">Tgl Keberangkatan</th>
+                      <th style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;">Pendapatan</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -54,10 +57,10 @@ $this->assign('title', 'Laporan Pendapatan Tiap Bus');
 					<?php $sum=0?>
 					<?php foreach ($results as $result) { ?>
 					<tr>
-						<td><?= $i ?></td>
-						<td><?= $result->busname ?></td>
-						<td><?= $this->MyDate->formatDate($result->date,'full') ?></td>
-						<td style="text-align: right;">
+						<td style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;"><?= $i ?></td>
+						<td style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;"><?= $result->busname ?></td>
+						<td style="padding:5px;text-align:left;font-size:12px;border:1px solid #000;"><?= $this->MyDate->formatDate($result->date,'full') ?></td>
+						<td style="padding:5px;text-align:right;font-size:12px;border:1px solid #000;">
 							<?php 
 							$total = $result->earning; 
 							$sum +=$total;?>
@@ -66,8 +69,8 @@ $this->assign('title', 'Laporan Pendapatan Tiap Bus');
 					<?php $i++;?>
 					<?php }?>
 					<tr>
-						<td style="text-align: right;" colspan="3">Total Pendapatan :</td>
-						<td style="text-align: right;"><strong>Rp <?= number_format($sum) ?></strong></td>
+						<td style="padding:5px;text-align:right;font-size:12px;border:1px solid #000;" colspan="3">Total Pendapatan :</td>
+						<td style="padding:5px;text-align:right;font-size:12px;border:1px solid #000;"><strong>Rp <?= number_format($sum) ?></strong></td>
 					</tr>
 				  </tbody>
                 </table>
@@ -76,6 +79,8 @@ $this->assign('title', 'Laporan Pendapatan Tiap Bus');
 		</div>
 	</div>
 </div>
+
+<iframe id="ifmcontentstoprint" style="height: 0px; width: 0px; display: none"></iframe>
 <?php 
 	echo $this->Html->script([
 		'Dashboard.jquery.dataTables.min',
@@ -83,12 +88,7 @@ $this->assign('title', 'Laporan Pendapatan Tiap Bus');
 		'Dashboard.dataTables.custom',		
 		'Dashboard.dataTables.buttons.min'],['block'=>'script']);
 ?>
-<?php $this->Html->scriptStart(['block'=>true]);?>
-	$(document).ready(function() {
-		$('input[name="daterange"]').daterangepicker();
-		$('#busReportTable').dataTable();
-	});
-
+<script type="text/javascript">
 	function reportPrint(){
 		var content = document.getElementById("printArea");
 		var pri = document.getElementById("ifmcontentstoprint").contentWindow;
@@ -98,4 +98,10 @@ $this->assign('title', 'Laporan Pendapatan Tiap Bus');
 		pri.focus();
 		pri.print();
 	}
+</script>
+<?php $this->Html->scriptStart(['block'=>true]);?>
+	$(document).ready(function() {
+		$('input[name="daterange"]').daterangepicker();
+		$('#busReportTable').dataTable();
+	});
 <?php $this->Html->scriptEnd(); ?>

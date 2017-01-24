@@ -6,7 +6,7 @@ $this->assign('title', $title);
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <button class="btn btn-warning btn-sm pull-right" onclick="newRoute()" id="saveBtn">Simpan</button>
+                <button class="btn btn-success btn-sm pull-right" onclick="newRoute()" id="saveBtn">Simpan</button>
                 <!-- <a href='#' class="btn btn-general btn-sm pull-right" id="saveNewBtn">Simpan Sebagai Baru</a> -->
                 <a href=<?= $this->Url->build(['controller'=>'Routes','action'=>'index'])?> class="btn btn-general btn-sm pull-right"><i class="fa fa-arrow-left"></i> Kembali</a>
                 <div class="clearfix"></div>

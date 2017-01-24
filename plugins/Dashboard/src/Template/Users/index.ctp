@@ -2,7 +2,7 @@
     <?= $this->Html->link(__('Add New User'), ['action' => 'add'], ['class'=>'btn btn-warning btn-sm pull-right']) ?>
 </nav>
 <div class="users index large-9 medium-8 columns content">
-    <table cellpadding="0" cellspacing="0" style="table-layout:fixed; width:100%;">
+    <table cellpadding="0" cellspacing="0" style="table-layout:fixed; width:100%;" class="table"> 
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>

@@ -7,7 +7,20 @@ body .container.body .right_col {
 }
 
 table {
-	font-size: 14px;
+	font-size: 13px;
+	margin-top: 20px;
+}
+
+.table>thead>tr>th {
+	border-bottom: 1px solid #ddd;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+	border: 1px solid #ddd !important;
+}
+
+.dataTables_length {
+	text-transform: capitalize;
 }
 
 .message.error {
@@ -33,4 +46,44 @@ select[name='departure_time[hour]'], select[name='departure_time[minute]'], sele
 
 select[name='departure_time[hour]'], select[name='arival_time[hour]'] {
 	margin-right: 5px;
+}
+
+.table-responsive {
+	padding: 10px;
+}
+
+.pagination {
+    margin: 0px;
+}
+
+#tableCities {
+	width: 100% !important;
+}
+
+.dataTables_filter input {
+	margin-left: 5px;
+}
+
+.dataTables_length select {
+	margin: 0px 5px;
+}
+
+.dataTables_wrapper {
+	margin-top: 20px;
+}
+
+.x_title {
+	border-bottom: 1px solid #E6E9ED;
+}
+
+.x_content h4 {
+	font-size: 14px;
+}
+
+.tambah-kota button {
+	margin-top: 10px;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+	color: #f00;
 }

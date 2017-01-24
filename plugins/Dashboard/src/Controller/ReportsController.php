@@ -76,7 +76,7 @@ class ReportsController extends AppController
             }
 
             // 'daterange' => '12/01/2016 - 12/29/2016'
-            $tglrange = split(' - ', $formData['daterange']);
+            $tglrange = explode(' - ', $formData['daterange']);
 
             $startDate = date('Y-m-d', strtotime($tglrange[0]));
             $endDate = date('Y-m-d', strtotime($tglrange[1]));
@@ -104,7 +104,7 @@ class ReportsController extends AppController
                                         ];
             $options['contain']     = ['Tickets'=>['Buses','Routes'],'Customers'];
             $options['conditions']  = [
-                                        'Tickets.bus_id'=>$formData['buses'],
+                                        'Tickets.bus_id'=>$formData['busid'],
                                         'TicketOrders.departure_date >='=>$startDate,
                                         'TicketOrders.departure_date <='=>$endDate
                                         ];

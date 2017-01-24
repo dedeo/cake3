@@ -7,7 +7,7 @@ $this->assign('title', 'List Armada');
 	<div class="x_panel">
 	  <div class="x_content">
 		  <div class="x_title">
-	      	<a href=<?= $this->Url->build(['controller'=>'Buses','action'=>'add'])?> class="btn btn-warning btn-sm pull-right"> Tambah Armada</a>
+	      	<a href=<?= $this->Url->build(['controller'=>'Buses','action'=>'add'])?> class="btn btn-success btn-sm pull-right"> Tambah Armada</a>
 		    <div class="clearfix"></div>
 		  </div>
 

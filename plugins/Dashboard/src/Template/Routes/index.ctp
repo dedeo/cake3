@@ -12,12 +12,11 @@ $this->assign('title', 'Rute Bus');
 				<a data-toggle="tab" href="#routesList">Daftar Rute Bus</a></li>
 		  	<li><a data-toggle="tab" href="#cityList">Daftar Kota</a></li>
 		</ul>
-		<br>
 		<div class="tab-content">
 			<div id="routesList" class="tab-pane fade in active">
 				<div class="x_panel">
 					<div class="x_title">
-						<a href=<?= $this->Url->build(['controller'=>'Routes','action'=>'add'])?> class="btn btn-warning btn-sm pull-right"> Tambah Rute Bus</a>
+						<a href=<?= $this->Url->build(['controller'=>'Routes','action'=>'add'])?> class="btn btn-success btn-sm pull-right"> Tambah Rute Bus</a>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
@@ -103,7 +102,7 @@ $this->assign('title', 'Rute Bus');
 								<form>
 								<div class="form-group">
 							 		<input type="text" name="name" class="form-control">
-							 		<button>Simpan</button>
+							 		<button class="btn btn-success btn-sm pull-right" style="margin-top:10px;">Simpan</button>
 								</div>
 								</form>
 							</div>
