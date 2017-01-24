@@ -18,10 +18,12 @@ class SchedulesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
+        // $this->paginate = [
+        //     'contain' => ['Routes', 'Buses']
+        // ];
+        $schedules = $this->Schedules->find('all', [
             'contain' => ['Routes', 'Buses']
-        ];
-        $schedules = $this->paginate($this->Schedules);
+            ]);
 
         $now = date('w', strtotime('now'));
 
