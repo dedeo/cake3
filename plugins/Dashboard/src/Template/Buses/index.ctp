@@ -14,12 +14,12 @@ $this->assign('title', 'List Armada');
 		<div class="table-responsive">
 		  <table class="table" id="tableBuses">
 			<thead>
-			  <tr class="headings">
-				<th class="column-title"><?= $this->Paginator->sort('id') ?> </th>
-				<th class="column-title"><?= $this->Paginator->sort('name') ?> </th>
-				<th class="column-title"><?= $this->Paginator->sort('Tipe') ?> </th>
-				<th class="column-title"><?= $this->Paginator->sort('capacity','Kapasitas') ?> </th>
-				<th class="column-title"><?= $this->Paginator->sort('status') ?> </th>
+			  <tr>
+				<th class="column-title">#</th>
+				<th class="column-title">Plat No</th>
+				<th class="column-title">Tipe/Class</th>
+				<th class="column-title">Kapasitas</th>
+				<!-- <th class="column-title">Status</th> -->
 				<th class="column-title no-link last"><span class="nobr">Action</span></th>
 			  </tr>
 			</thead>
@@ -30,7 +30,7 @@ $this->assign('title', 'List Armada');
 					<td><?= $this->Html->link(h($bus->name),(['controller'=>'Buses','action'=>'edit',$bus->id])) ?></td>
 					<td><?= $this->Bus->getLabel($bus->class); ?></td>
 					<td><?= $bus->capacity; ?></td>
-					<td><?= $this->Number->format($bus->status) ?></td>
+					<!-- <td><?php //echo $this->Number->format($bus->status) ?></td> -->
 					<td class="actions">
 				      	<a href=<?= $this->Url->build(['controller'=>'Buses','action'=>'edit',$bus->id])?> class="text-general"><i class="fa fa-edit"></i></a>
 						<?= $this->Form->postLink('<i class="fa fa-remove"></i>', ['action' => 'delete', $bus->id], ['confirm' => __('Are you sure you want to delete # {0}?', $bus->id),'escape'=>false,'class'=>'text-danger']) ?>
@@ -42,27 +42,22 @@ $this->assign('title', 'List Armada');
 		</div>
 	  </div>
 	</div>
-	<div class="paginator">
-		<ul class="pagination">
-			<?= $this->Paginator->prev('< ' . __('previous')) ?>
-			<?= $this->Paginator->numbers() ?>
-			<?= $this->Paginator->next(__('next') . ' >') ?>
-		</ul>
-		<p><?= $this->Paginator->counter() ?></p>
-	</div>
 	</div>
 </div>
 
-<?php
-// $this->Html->script(
-// 	[
-// 	    'jquery.min.js',
-// 	    'bootstrap.min.js',
-// 	    'fastclick.js',
-// 	    'nprogress.js',
-// 	    'icheck.min.js',
-// 	    'custom.min.js',
-// 	],
-// 	['block'=>true]
-// );
+<?php 
+	echo $this->Html->script([
+		'Dashboard.jquery.dataTables.min',
+		'Dashboard.dataTables.bootstrap.min',
+		'Dashboard.dataTables.buttons.min'],['block'=>'script']);
 ?>
+<?php $this->Html->scriptStart(['block'=>true]);?>
+	$(document).ready(function() {
+		$('#tableBuses').dataTable({
+			"columnDefs": [
+			    { "width": "5%", "targets": 0 }
+			  ],
+			"autoWidth": false
+			});
+	});
+<?php $this->Html->scriptEnd(); ?>
