@@ -46,7 +46,7 @@ $this->assign('title', 'Laporan Pendapatan Tiap Bus');
 				<table class="table" id="busReportTable">
                   <thead>
                     <tr>
-                      <th>#</th><th>Bus</th><th>Jalur</th><th>Pendapatan</th>
+                      <th>#</th><th>Bus</th><th>Tgl Keberangkatan</th><th>Pendapatan</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -56,14 +56,18 @@ $this->assign('title', 'Laporan Pendapatan Tiap Bus');
 					<tr>
 						<td><?= $i ?></td>
 						<td><?= $result->busname ?></td>
-						<td><?= $result->date ?></td>
-						<td>Rp <?= $total = $result->earning; $sum +=$total;?></td>
+						<td><?= $this->MyDate->formatDate($result->departure_date,'full') ?></td>
+						<td style="text-align: right;">
+							<?php 
+							$total = $result->earning; 
+							$sum +=$total;?>
+						<?php echo number_format($total);?></td>
 					</tr>
 					<?php $i++;?>
 					<?php }?>
 					<tr>
-						<td colspan="3">Total Pendapatan</td>
-						<td>Rp <?= $sum ?></td>
+						<td style="text-align: right;" colspan="3">Total Pendapatan :</td>
+						<td style="text-align: right;"><strong>Rp <?= number_format($sum) ?></strong></td>
 					</tr>
 				  </tbody>
                 </table>

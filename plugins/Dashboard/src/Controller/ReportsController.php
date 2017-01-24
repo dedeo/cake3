@@ -41,10 +41,10 @@ class ReportsController extends AppController
             $startDate = date('Y-m-d', strtotime($d1.'-'.$m1.'-'.$y1));
             $endDate = date('Y-m-d', strtotime($d2.'-'.$m2.'-'.$y2));
 
-
             $options['fields']      = [
                             'earning'=>'sum(TicketOrders.total)',
                             'busname'=>'Buses.name',
+                            'departure_date'=>'TicketOrders.departure_date',
                     ];
             $options['contain']     =['Tickets'=>['Buses']];
             $options['conditions']  = [
@@ -70,8 +70,9 @@ class ReportsController extends AppController
             $endDate = date('Y-m-d', strtotime($tglrange[1]));
 
             $options['fields']      = [
-                            'earning'=>'TicketOrders.total',
+                            'earning'=>'sum(TicketOrders.total)',
                             'busname'=>'Buses.name',
+                            'departure_date'=>'TicketOrders.departure_date',
                     ];
             $options['contain']     =['Tickets'=>['Buses']];
             $options['conditions']  = [
@@ -79,7 +80,7 @@ class ReportsController extends AppController
                             'TicketOrders.date_create_at >='=>$startDate,
                             'TicketOrders.date_create_at <='=>$endDate
                         ];
-            // $options['group'] = ['Buses.name'];
+            $options['group'] = ['Buses.name'];
 
         }
 
