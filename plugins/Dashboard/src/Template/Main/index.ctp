@@ -1,13 +1,13 @@
 <?php $this->assign('title', 'Dashboard'); ?>
 <!-- top tiles -->
 <div class="row tile_count" >
-  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+  <div class="col-md-6 col-sm-4 col-xs-6 tile_stats_count">
     <span class="count_top"><i class="fa fa-money"></i> Total Penjualan</span>
     <div class="count"><?php echo $ticketorderTotal; ?></div>
     <span class="count_bottom">Bulan <?php echo $this->Time->format($timeToday,'MMMM'); ?></span>
     <!-- <span class="count_bottom"><i class="green">4% </i> From last Week</span> -->
   </div>
-  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+  <div class="col-md-6 col-sm-4 col-xs-6 tile_stats_count">
     <span class="count_top"><i class="fa fa-user"></i> Total Pembeli</span>
     <div class="count green"><?php echo $ticketorderPasseger; ?></div>
     <span class="count_bottom">Bulan <?php echo $this->Time->format($timeToday,'MMMM'); ?></span>

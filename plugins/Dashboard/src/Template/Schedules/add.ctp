@@ -7,7 +7,7 @@ use Cake\Routing\Router;
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="x_panel">
 			<div class="x_title">
-				<a href='#' class="btn btn-warning btn-sm pull-right" id="saveBtn">Simpan</a>
+				<a href='#' class="btn btn-success btn-sm pull-right" id="saveBtn">Simpan</a>
 				<a href=<?= $this->Url->build(['controller'=>'Schedules','action'=>'index'])?> class="btn btn-general btn-sm pull-right"><i class="fa fa-arrow-left"></i> Kembali</a>
 				<div class="clearfix"></div>
 			</div>

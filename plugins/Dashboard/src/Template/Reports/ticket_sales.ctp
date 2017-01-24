@@ -10,7 +10,7 @@ $this->assign('title', $title);
 		<div class="selection-report" style="padding:10px;">
 			<label for="startDate">Date Range:</label>
 			<input type="text" name="daterange" value=""/>
-			<button type='submit' class="btn btn-warning btn-sm"> Apply</button>
+			<button type='submit' class="btn btn-success btn-sm"> Tampilkan</button>
 			<a href="#" onclick="reportPrint()" class="btn btn-warning btn-sm pull-right"> Print</a>
 		</div>
 		<?php echo $this->Form->end(); ?>	
