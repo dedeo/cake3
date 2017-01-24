@@ -49,15 +49,11 @@ $this->assign('title', 'List Armada');
 	echo $this->Html->script([
 		'Dashboard.jquery.dataTables.min',
 		'Dashboard.dataTables.bootstrap.min',
+		'Dashboard.dataTables.custom',
 		'Dashboard.dataTables.buttons.min'],['block'=>'script']);
 ?>
 <?php $this->Html->scriptStart(['block'=>true]);?>
 	$(document).ready(function() {
-		$('#tableBuses').dataTable({
-			"columnDefs": [
-			    { "width": "5%", "targets": 0 }
-			  ],
-			"autoWidth": false
-			});
+		$('#tableBuses').dataTable();
 	});
 <?php $this->Html->scriptEnd(); ?>
