@@ -45,6 +45,7 @@ class ReportsController extends AppController
             $options['fields']      = [
                             'earning'=>'sum(TicketOrders.total)',
                             'busname'=>'Buses.name',
+                            'departure_date'=>'TicketOrders.departure_date',
                     ];
             $options['contain']     =['Tickets'=>['Buses']];
             $options['conditions']  = [
@@ -69,10 +70,10 @@ class ReportsController extends AppController
             $startDate = date('Y-m-d', strtotime($tglrange[0]));
             $endDate = date('Y-m-d', strtotime($tglrange[1]));
 
-            $options['fields']      = [
-                            'earning'=>'TicketOrders.total',
-                            'busname'=>'Buses.name',
-                    ];
+            // $options['fields']      = [
+            //                 'earning'=>'TicketOrders.total',
+            //                 'busname'=>'Buses.name',
+            //         ];
             $options['contain']     =['Tickets'=>['Buses']];
             $options['conditions']  = [
                             'Tickets.bus_id'=>$formData['busid'],            
