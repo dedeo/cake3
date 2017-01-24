@@ -41,17 +41,17 @@ class ReportsController extends AppController
             $startDate = date('Y-m-d', strtotime($d1.'-'.$m1.'-'.$y1));
             $endDate = date('Y-m-d', strtotime($d2.'-'.$m2.'-'.$y2));
 
-            $options['fields']      = [
-                            'earning'=>'sum(TicketOrders.total)',
-                            'busname'=>'Buses.name',
-                            'departure_date'=>'TicketOrders.departure_date',
-                    ];
+            // $options['fields']      = [
+            //                 'earning'=>'sum(TicketOrders.total)',
+            //                 'busname'=>'Buses.name',
+            //                 'departure_date'=>'TicketOrders.departure_date',
+            //         ];
             $options['contain']     =['Tickets'=>['Buses']];
             $options['conditions']  = [
-                            'TicketOrders.date_create_at >='=>$startDate,
-                            'TicketOrders.date_create_at <='=>$endDate
+                            'TicketOrders.departure_date >='=>$startDate,
+                            'TicketOrders.departure_date <='=>$endDate
                         ];
-            $options['group'] = ['Buses.name'];
+            // $options['group'] = ['Buses.name'];
 
         }else{
 
@@ -69,18 +69,18 @@ class ReportsController extends AppController
             $startDate = date('Y-m-d', strtotime($tglrange[0]));
             $endDate = date('Y-m-d', strtotime($tglrange[1]));
 
-            $options['fields']      = [
-                            'earning'=>'sum(TicketOrders.total)',
-                            'busname'=>'Buses.name',
-                            'departure_date'=>'TicketOrders.departure_date',
-                    ];
+            // $options['fields']      = [
+            //                 'earning'=>'sum(TicketOrders.total)',
+            //                 'busname'=>'Buses.name',
+            //                 'departure_date'=>'TicketOrders.departure_date',
+            //         ];
             $options['contain']     =['Tickets'=>['Buses']];
             $options['conditions']  = [
                             'Tickets.bus_id'=>$formData['busid'],            
-                            'TicketOrders.date_create_at >='=>$startDate,
-                            'TicketOrders.date_create_at <='=>$endDate
+                            'TicketOrders.departure_date >='=>$startDate,
+                            'TicketOrders.departure_date <='=>$endDate
                         ];
-            $options['group'] = ['Buses.name'];
+            // $options['group'] = ['Buses.name'];
 
         }
 
@@ -153,8 +153,8 @@ class ReportsController extends AppController
                     'contain'=>['Tickets'=>['Buses','Routes'],'Customers'],
                     'conditions'=>[
                             // 'Tickets.bus_id IN'=>$formData['buses'],
-                            'TicketOrders.date_create_at >='=>$startDate,
-                            'TicketOrders.date_create_at <='=>$endDate
+                            'TicketOrders.departure_date >='=>$startDate,
+                            'TicketOrders.departure_date <='=>$endDate
                             ],
                     'group' =>['date', 'busname']
                 ]);
