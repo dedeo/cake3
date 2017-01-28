@@ -22,7 +22,7 @@
 					</td>
 					<td style="width: 33.33%;">
 						Keberangkatan: <?php echo date('d M Y',strtotime($ticket->departure_date)) ?><br>
-						<?php //$ticket->departure_time->i18nFormat('HH:mm:ss') ?>
+						<?php echo date('H:m:s', strtotime($ticket->departure_date)) ?>
 					</td>
 					<td style="width: 33.33%;">
 						Tiba: <?php echo date('d M Y', strtotime($ticket->arival_date)); ?><br>
@@ -33,7 +33,7 @@
 		</table>
 		<table class="table" style="border: 0px;font-size: 11px;width:100%;">
 			<thead>
-				<th colspan="3" style="border: 0px;font-size: 11px;background: #d9dfe9;width: 33.33%;text-align:left">Kustomer</th>
+				<th colspan="3" style="border: 0px;font-size: 11px;background: #d9dfe9;width: 33.33%;text-align:left">Nama</th>
 			</thead>
 			<tbody>
 				<tr>
