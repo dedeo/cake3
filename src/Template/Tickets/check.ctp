@@ -31,22 +31,23 @@
 				<tr>
 					<td style="width: 33.33%;">
 						<?php echo $this->City->getName($ticket->ticket->route->source).' - '.$this->City->getName($ticket->destination); ?><br>
-						<?=$ticket->ticket->bus->plat_no; ?>
+						<?=$ticket->ticket->bus->plat_no; ?><br>
+						
+						<?=$this->Bus->getLabel($ticket->ticket->bus->class);?>
 					</td>
 					<td style="width: 33.33%;">
 						Keberangkatan: <?=$ticket->departure_date->i18nFormat('d MMM Y') ?><br>
 						<?=$ticket->departure_time->i18nFormat('HH:mm:ss') ?>
 					</td>
 					<td style="width: 33.33%;">
-						Tiba: <?=$ticket->arival_date->i18nFormat('d MMM Y') ?><br>
-						<?=$ticket->arival_time->i18nFormat('HH:mm:ss') ?>
+						Tiba: <?=$ticket->arival_time->i18nFormat('HH:mm:ss') ?>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 		<table class="table" style="border: 0px;font-size: 11px;width:100%;">
 			<thead>
-				<th colspan="3" style="border: 0px;font-size: 11px;background: #d9dfe9;width: 33.33%;text-align:left">Kustomer</th>
+				<th colspan="3" style="border: 0px;font-size: 11px;background: #d9dfe9;width: 33.33%;text-align:left">Nama</th>
 			</thead>
 			<tbody>
 				<tr>
@@ -81,23 +82,14 @@
 			</tbody>
 		</table>
 		<div class="perhatian-info" style="font-size:10px;background:#d9dfe9;padding:10px 15px;margin-top:10px">
-			PERHATIAN</br>
-			1.	Barang-barang Penumpang diluar tanggungjawab kami,kecuali barang kiriman</br>
-			2.	Dilarang merokok diatas bus</br>
-			3.	Jagalah kebersihan diatas bus</br>
-			4.	Penumpang yang ketinggalan bus tiketnya tidak berlaku lagi</br>
-			5.	Pemberangkatan bus sewaktu-waktu dapat berubah</br>
-			6.	Cek ulang tanggal yang tertulis pada tiket anda</br>
-		</div>
-		<div class="perhatian-info" style="font-size:10px;background:#d9dfe9;padding:10px 15px;margin-top:10px">
 			KETENTUAN PERATURAN TIKET</br>
 			1.	Tanggal keberangkatan yang berlaku adalah yang TERTULIS SESUAI pada lembaran tiket</br>
 			2.	Tiket TIDAK DAPAT dialihkan pemakaiannya dari daerah atau dari kota lain</br>
 			3.	Pembelian tiket dihari keberangkatan 14.00-22.00 tidak dapat dibatalkan atau ditunda lagi</br>
 			4.	Setiap penumpang hanya berhak membawa barang bawaan berupa 1(satu) dos &amp; 2 (dua) tas pakaian, selebihnya akan dikenakan biaya tambahan (Charge) sesuai kesepakatan.</br>
-			5.	Tempat dududk diatas bus tidak dapat dibeli untuk dipergunakan mendudukkan binatang atau barang barang lainnya</br>
-			6.	Pembelian tiket dari kota/daerah lain dapat dilayani dengan pembayran tunai</br>
-			7.	Setelah pembayaran dan mengambil tiket penumpang MENYATAKAN STUJUH &amp; TIDAK KEBERATAN atas semua ketentuan yang ada.</br>
+			5.	Tempat duduk diatas bus tidak dapat dibeli untuk dipergunakan meletakkan binatang atau barang barang lainnya</br>
+			6.	Pembelian tiket dari kota/daerah lain dapat dilayani dengan pembayaran tunai</br>
+			7.	Setelah pembayaran dan mengambil tiket penumpang MENYATAKAN SETUJUH &amp; TIDAK KEBERATAN atas semua ketentuan yang ada.</br>
 		</div>
 	</div>
 	<button class="print-ticket" onclick="ticketPrint()" style="width: 40%;border-radius: 0px;background: #5bc0de;color: #fff;text-align: center;font-size: 16px;text-transform: uppercase;margin-top: 15px;padding: 8px 0px;border-style: none;max-width: 300px;display: none;float:left">Print</button>

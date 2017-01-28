@@ -18,15 +18,16 @@
 				<tr>
 					<td style="width: 33.33%;">
 						Tujuan: <?=$this->City->getName($ticket->destination); ?><br>
-						<?=$ticket->ticket->bus->plat_no; ?>
+						<?=$ticket->ticket->bus->plat_no; ?><br>
+						
+						<?=$this->Bus->getLabel($ticket->ticket->bus->class);?>
 					</td>
 					<td style="width: 33.33%;">
-						Keberangkatan: <?php echo date('d M Y',strtotime($ticket->departure_date)) ?><br>
-						<?php echo date('H:m:s', strtotime($ticket->departure_date)) ?>
+						Keberangkatan: <?=$ticket->departure_date->i18nFormat('d MMM Y') ?><br>
+						<?=$ticket->departure_time->i18nFormat('HH:mm:ss') ?>
 					</td>
 					<td style="width: 33.33%;">
-						Tiba: <?php echo date('d M Y', strtotime($ticket->arival_date)); ?><br>
-						<?php echo date('H:m:s', strtotime($ticket->arival_time)) ?>
+						Tiba: <?=$ticket->arival_time->i18nFormat('HH:mm:ss') ?>
 					</td>
 				</tr>
 			</tbody>
@@ -68,9 +69,9 @@
 			2.	Tiket TIDAK DAPAT dialihkan pemakaiannya dari daerah atau dari kota lain</br>
 			3.	Pembelian tiket dihari keberangkatan 14.00-22.00 tidak dapat dibatalkan atau ditunda lagi</br>
 			4.	Setiap penumpang hanya berhak membawa barang bawaan berupa 1(satu) dos &amp; 2 (dua) tas pakaian, selebihnya akan dikenakan biaya tambahan (Charge) sesuai kesepakatan.</br>
-			5.	Tempat dududk diatas bus tidak dapat dibeli untuk dipergunakan mendudukkan binatang atau barang barang lainnya</br>
-			6.	Pembelian tiket dari kota/daerah lain dapat dilayani dengan pembayran tunai</br>
-			7.	Setelah pembayaran dan mengambil tiket penumpang MENYATAKAN STUJUH &amp; TIDAK KEBERATAN atas semua ketentuan yang ada.</br>
+			5.	Tempat duduk diatas bus tidak dapat dibeli untuk dipergunakan meletakkan binatang atau barang barang lainnya</br>
+			6.	Pembelian tiket dari kota/daerah lain dapat dilayani dengan pembayaran tunai</br>
+			7.	Setelah pembayaran dan mengambil tiket penumpang MENYATAKAN SETUJUH &amp; TIDAK KEBERATAN atas semua ketentuan yang ada.</br>
 		</div>
 	</div>
 	<button class="print-ticket" onclick="ticketPrint()" style="width: 40%;border-radius: 0px;background: #5bc0de;color: #fff;text-align: center;font-size: 16px;text-transform: uppercase;margin-top: 15px;padding: 8px 0px;border-style: none;max-width: 300px;display: none;float:left">Print</button>
