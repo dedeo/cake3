@@ -87,3 +87,19 @@ select[name='departure_time[hour]'], select[name='arival_time[hour]'] {
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
 	color: #f00;
 }
+
+.side-nav {
+	width: 100%;
+	list-style-type: none;
+	padding-left: 0px;
+}
+
+fieldset label {
+ width: 100%;
+}
+
+fieldset input, fieldset select {
+	height: 35px;
+	padding: 0px 5px;
+	margin-bottom: 10px;
+}
