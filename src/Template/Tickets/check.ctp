@@ -39,9 +39,6 @@
 						Keberangkatan: <?=$ticket->departure_date->i18nFormat('d MMM Y') ?><br>
 						<?=$ticket->departure_time->i18nFormat('HH:mm:ss') ?>
 					</td>
-					<td style="width: 33.33%;">
-						Tiba: <?=$ticket->arival_time->i18nFormat('HH:mm:ss') ?>
-					</td>
 				</tr>
 			</tbody>
 		</table>
