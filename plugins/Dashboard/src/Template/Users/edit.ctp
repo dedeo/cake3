@@ -4,10 +4,11 @@
         <li><?= $this->Form->postLink(
                 __('Delete'),
                 ['action' => 'delete', $user->id],
+                ['class' => 'btn btn-danger btn-sm'],
                 ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]
             )
         ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => 'btn btn-success btn-sm']) ?></li>
     </ul>
 </nav>
 <div class="users form large-9 medium-8 columns content">
@@ -20,6 +21,6 @@
             echo $this->Form->input('group_id');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-danger btn-sm']) ?>
     <?= $this->Form->end() ?>
 </div>

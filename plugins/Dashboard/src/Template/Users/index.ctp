@@ -22,7 +22,6 @@
                 <td><?= h($user->created) ?></td>
                 <td><?= h($user->modified) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>|
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>|
                     <?= $this->Form->postLink('<i class="fa fa-remove"></i>', ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id),'escape'=>false,'class'=>'text-danger']) ?>
                 </td>
