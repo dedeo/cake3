@@ -17,7 +17,6 @@
 			<li><span>Wasuponda</span> : 085 255 506 959</li>
 			<li><span>Malili</span> : 081 354 730 353</li>
 			<li><span>Mangkutana</span> : 085 343 725 757</li>
-			<li><span>Kalaena Kiri</span> : 081 355 722 850</li>
 			<li><span>Bone Bone</span> : 081 355 645 870</li>
 			<li><span>Sukamaju</span> : 081 236 438 701 / 081 242 331 452 </li>
 			<li><span>Masamba</span> : 081 343 566 222</li>

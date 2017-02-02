@@ -32,10 +32,7 @@ $(document).ready(function(){
 	/*end Home Slider*/
 
 	/*Date picker search*/
-	$( "#tanggal-berangkat" ).datepicker({
-      minDate: 0,
-      maxDate: 31
-  });
+	$( "#tanggal-berangkat" ).datepicker();
 
   /*top menu toggle*/
   $('.toogle-menu-a').click(function(){

@@ -8,7 +8,7 @@ class BusHelper extends Helper
     private $_buses = null;
 
 	private $types = [
-        'hight_class'=>'Hight Class Bus',
+        'hight_class'=>'High Class Bus',
         'big_top'=>'Big Top',
         'sleeper_seat'=>'Sleeper Seat',
 	];
