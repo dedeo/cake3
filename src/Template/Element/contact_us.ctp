@@ -20,7 +20,7 @@
 			<li><span>Bone Bone</span> : 081 355 645 870</li>
 			<li><span>Sukamaju</span> : 081 236 438 701 / 081 242 331 452 </li>
 			<li><span>Masamba</span> : 081 343 566 222</li>
-			<li><span>Tolada</span> : 081 354 096 566</li>
+			<li><span>Salulemo</span> : 081 343 644 999 / 081 241 256 500</li>
 			<li><span>Seriti</span> : 085 256 694 946</li>
 			<li><span>Lamasi</span> : 081 347 268 322 / 085 242 542 738</li>
 			<li><span>Batusitanduk</span> : 085 241 555 608</li>
